@@ -100,6 +100,9 @@ CREATE TABLE NOTICE (
   PRIMARY KEY (no)
 );
 
+ALTER TABLE notice 
+ADD category VHARCHAR2(45) DEFAULT 'notice' NOT NULL
+ADD CONSTRAINT notice_category_ck CHECK (category IN ('notice','event'));
 
 -- -----------------------------------------------------
 -- Table `FREPLY`
