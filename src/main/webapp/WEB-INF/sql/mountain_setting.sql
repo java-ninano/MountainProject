@@ -117,7 +117,8 @@ CREATE SEQUENCE seq_freply;
 CREATE TABLE FREPLY (
   no NUMBER,
   reply VARCHAR2(500) NOT NULL,
-  regdate VARCHAR2(45) DEFAULT sysdate NULL,
+  replyer VARCHAR2(45) NOT NULL,
+  regdate VARCHAR2(45) DEFAULT sysdate NOT NULL,
   board_no NUMBER NOT NULL,
   PRIMARY KEY (no)
 );
@@ -132,7 +133,8 @@ CREATE SEQUENCE seq_nreply;
 CREATE TABLE NREPLY (
   no NUMBER,
   reply VARCHAR2(500) NOT NULL,
-  regdate VARCHAR2(45) DEFAULT sysdate NULL,
+  replyer VARCHAR2(45) NOT NULL,
+  regdate VARCHAR2(45) DEFAULT sysdate NOT NULL,
   notice_no NUMBER NOT NULL,
   PRIMARY KEY (no)
 );
