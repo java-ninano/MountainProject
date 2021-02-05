@@ -15,6 +15,10 @@ CREATE TABLE MEMBER (
   PRIMARY KEY (no)
 );
 
+ALTER TABLE member
+ADD manager NUMBER(1) DEFAULT 0 NOT NULL
+ADD CONSTRAINT member_manager_ck CHECK (manager IN (0, 1));
+
 -- -----------------------------------------------------
 -- Table `MOUNTAIN`
 -- -----------------------------------------------------
