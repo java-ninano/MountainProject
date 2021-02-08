@@ -17,9 +17,11 @@
 		<property name="password" value="Fivefivefive5"></property>
 		<property name="maximumPoolSize" value="2"></property>
 	</bean>
+	
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close"> <!-- DBCP, 빈 사라질 때 close() -->
 		<constructor-arg ref="hikariConfig"></constructor-arg>
 	</bean>
+	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property> <!-- injection, mybatis는 conn 열고 닫고, datasource(CP)에 의존 -->
 	</bean>
