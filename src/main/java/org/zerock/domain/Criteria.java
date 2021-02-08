@@ -14,7 +14,7 @@ public class Criteria {
 	private String keyword;
 	
 	public Criteria() {
-    this(1, 10); //기본값으로 설정
+    this(1, 10); 
    }
    
    public Criteria(int pageNum, int amount) {

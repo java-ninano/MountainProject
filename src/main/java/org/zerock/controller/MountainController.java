@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/mountain/*")
+@RequestMapping("/*")
 @Log4j
 public class MountainController {
 
@@ -46,14 +46,13 @@ public class MountainController {
 	}
 	
 	@PostMapping("/register")
-	public String register(MountainVO mountain, RedirectAttributes rttr) {
+	public void register(MountainVO mountain, RedirectAttributes rttr) {
 		
 		service.register(mountain);
 		
 		rttr.addFlashAttribute("result", mountain.getNo());
 		rttr.addFlashAttribute("message", mountain.getNo() + "번 산 정보가 등록되었습니다.");
 		
-	    return "redirect:/register/list";
 	}
 	
 	@GetMapping({"/get", "/modify"})
@@ -67,7 +66,7 @@ public class MountainController {
 	}
 	
 	@PostMapping("/modify")
-	public String modify(MountainVO mountain, Criteria cri, RedirectAttributes rttr) {
+	public void modify(MountainVO mountain, Criteria cri, RedirectAttributes rttr) {
 		if(service.modify(mountain)) {
 			rttr.addFlashAttribute("result", "success");
 			rttr.addFlashAttribute("message", mountain.getNo() + "번 산 정보가 수정되었습니다.");
@@ -79,22 +78,22 @@ public class MountainController {
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 
-		return "redirect:/mountain/list";
+		
 	}
 	
 	@PostMapping("/modify2")
-	public String modify2(MountainVO mountain, RedirectAttributes rttr) {
+	public void modify2(MountainVO mountain, RedirectAttributes rttr) {
 		if(service.modify(mountain)) {
 			rttr.addFlashAttribute("result","success");
 			rttr.addAttribute("no", mountain.getNo());
 			rttr.addAttribute("a", "a");
 			rttr.addFlashAttribute("b", "b");
 		}
-		return "redirect:/mountain/get";
+		
 	}
 	
 	@PostMapping("/remove")
-	public String remove(Long no,
+	public void remove(Long no,
 			Criteria cri, RedirectAttributes rttr) {
 		
 		if(service.remove(no)) {
@@ -105,8 +104,6 @@ public class MountainController {
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-		
-		return "redirect:/mountain/list";
 
 		
 	}
