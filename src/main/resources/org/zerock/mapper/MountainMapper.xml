@@ -4,16 +4,44 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.MountainMapper">
 
-
-
-<insert id="insertSelectKey">
-		<selectKey keyProperty="no" order="BEFORE" resultType="long">
-		select seq_board.nextval from dual
-		</selectKey>
+<select id="getList" resultType="org.zerock.domain.MountainVO">
+<![CDATA[
+		select * from mountain where no > 0
+]]>		
+		
+	</select>
 	
-		insert into tbl_board (no, mName, mLoc , height, status)
-		values (#{no }, #{mName}, #{mLoc}, #{height}, #{status})
-	</insert>
-	
+<insert id="insert">
+insert into mountain (no, mName, mLoc, height, status)
+values(seq_mountain.nextval, #{mName}, #{mLoc}, #{height}, #{status})
+</insert>
+
+ <insert id="insertSelectKey">
+<selectKey keyProperty="no" order="BEFORE" resultType="long">
+select seq_mountain.nextval from dual
+</selectKey>
+
+insert into mountain (no, mName, mLoc, height,status)
+values (#{no},  #{mName},#{mLoc}, #{height}, #{status} )
+</insert> 
+<!--  
+<select id="read" resultType="org.zerock.domain.MountainVO">
+select * from mountain where no = #{no}
+</select>
+-->
+<delete id="delete">
+delete from mountain where no = #{no}
+</delete>
+
+<update id="update">
+update mountain 
+set 
+   mName = #{mName},
+    mLoc = #{mLoc},
+    height=#{height},
+    status=#{status}
+    where no = #{no}
+   
+</update>
 	
 </mapper>	
