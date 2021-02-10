@@ -7,8 +7,22 @@
 <select id="getList" resultType="org.zerock.domain.MountainVO">
 <![CDATA[
 		select * from mountain where no > 0
-]]>		
-		
+]]>			
+	</select>
+	
+	<select id="getListWithPaging" resultType="org.zerock.domain.MountainVO">
+	<![CDATA[
+	SELECT 
+	no, mName, mLoc,height,status
+	FROM 
+	(
+	SELECT
+	 ROW_NUMBER() OVER (ORDER BY no DESC) rn,
+	no, mName, mLoc, height, status
+	FROM
+	mountain
+	
+	]]>
 	</select>
 	
 <insert id="insert">
@@ -24,11 +38,11 @@ select seq_mountain.nextval from dual
 insert into mountain (no, mName, mLoc, height,status)
 values (#{no},  #{mName},#{mLoc}, #{height}, #{status} )
 </insert> 
-<!--  
+
 <select id="read" resultType="org.zerock.domain.MountainVO">
 select * from mountain where no = #{no}
 </select>
--->
+
 <delete id="delete">
 delete from mountain where no = #{no}
 </delete>
