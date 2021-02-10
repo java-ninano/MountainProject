@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.FreeBoardMapper">
+	<sql id="fcriteria">
+		<where>
+			<foreach item="type" collection="typeArr" separator="OR">
+				<choose>
+					<when test="type == 'T'.toString()"> title LIKE
+						'%' || #{keyword} || '%' </when>
+					<when test="type == 'C'.toString()"> content
+						LIKE '%' || #{keyword} || '%' </when>
+					<when test="type == 'W'.toString()">
+						member_no LIKE '%' || #{keyword} || '%' </when>
+				</choose>
+			</foreach>
+		</where>
+	</sql>
+
+	<select id="getList" resultType="org.zerock.domain.freeboard.FreeBoardVO">
+<![CDATA[
+		select * from FreeBoard where no > 0
+]]>
+
+	</select>
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="no" order="BEFORE" resultType="long">
+			select seq_freeboard.nextval FROM dual
+		</selectKey>
+
+		INSERT INTO FreeBoard (no ,title, content, member_no)
+		VALUES (#{no},
+		#{title}, #{content}, #{member_no} )
+
+	</insert>
+	<select id="get" resultType="org.zerock.domain.freeboard.FreeBoardVO">
+		select * from FreeBoard where no =
+		#{no}
+	</select>
+	<delete id="delete">
+		delete from FreeBoard where no = #{no}
+	</delete>
+	<update id="update">
+		UPDATE FreeBoard
+		SET
+		title = #{title},
+		content =
+		#{content},
+		member_no = #{member_no}
+		WHERE
+		no = #{no}
+	</update>
+
+
+	<!-- <update id="updateCnt"> UPDATE FreeBoard SET cnt = cnt + #{amount} 
+		WHERE no = #{no} </update> -->
+
+	<select id="getListWithPaging"
+		resultType="org.zerock.domain.freeboard.FreeBoardVO"> 
+		<![CDATA[ 
+			select 
+			no, title, content, regdate, cnt, member_no
+			from
+				(
+				select /*+INDEX_ASC(Freeboard pk_freeboardno)*/ 
+					rownum rn, no, title, content, regdate, cnt, member_no
+				from
+					FreeBoard
+					
+					]]>
+		<include refid="fcriteria"></include>
+			
+<![CDATA[
+	 )
+	WHERE
+	 rn BETWEEN (#{pageNum} - 1) * #{amount} + 1 AND #{pageNum} * #{amount}
+]]>		
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		SELECT count(*) FROM
+		FreeBoard
+		<include refid="fcriteria"></include>
+	</select><!-- resultType을 int로반환 -->
+
+
+</mapper>
+
+
+
+

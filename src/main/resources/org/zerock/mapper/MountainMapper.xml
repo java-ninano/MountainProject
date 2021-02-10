@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.MountainMapper">
+
+<select id="getList" resultType="org.zerock.domain.mountain.MountainVO">
+<![CDATA[
+		select * from mountain where no > 0
+]]>			
+	</select>
+	
+	<select id="getListWithPaging" resultType="org.zerock.domain.mountain.MountainVO">
+	<![CDATA[
+	SELECT 
+	no, mName, mLoc,height,status
+	FROM 
+	(
+	SELECT
+	 ROW_NUMBER() OVER (ORDER BY no DESC) rn,
+	no, mName, mLoc, height, status
+	FROM
+	mountain
+	
+	]]>
+	</select>
+	
+<insert id="insert">
+insert into mountain (no, mName, mLoc, height, status)
+values(seq_mountain.nextval, #{mName}, #{mLoc}, #{height}, #{status})
+</insert>
+
+ <insert id="insertSelectKey">
+<selectKey keyProperty="no" order="BEFORE" resultType="long">
+select seq_mountain.nextval from dual
+</selectKey>
+
+insert into mountain (no, mName, mLoc, height,status)
+values (#{no},  #{mName},#{mLoc}, #{height}, #{status} )
+</insert> 
+
+<select id="read" resultType="org.zerock.domain.mountain.MountainVO">
+select * from mountain where no = #{no}
+</select>
+
+<delete id="delete">
+delete from mountain where no = #{no}
+</delete>
+
+<update id="update">
+update mountain 
+set 
+   mName = #{mName},
+    mLoc = #{mLoc},
+    height=#{height},
+    status=#{status}
+    where no = #{no}
+   
+</update>
+	
+</mapper>	

@@ -27,7 +27,7 @@ DROP TABLE MOUNTAIN;
 CREATE SEQUENCE seq_mountain;
 CREATE TABLE MOUNTAIN (
   no NUMBER,
-  mName VARCHAR2(45) NOT NULL,
+  mName VARCHAR2(45) NOT NULL UNIQUE,
   mLoc VARCHAR2(200) NOT NULL,
   height NUMBER DEFAULT 0 NOT NULL,
   status NUMBER(1) DEFAULT 0 NOT NULL,
@@ -54,6 +54,10 @@ CREATE TABLE FREEBOARD (
   PRIMARY KEY (no)
 );
 
+CREATE INDEX pk_freeboard ON Freeboard(no);
+
+ALTER TABLE freeboard
+ADD user_nickname VARCHAR2(45);
 
 -- -----------------------------------------------------
 -- Table `COURSE`
@@ -108,6 +112,12 @@ ALTER TABLE notice
 ADD category VHARCHAR2(45) DEFAULT 'notice' NOT NULL
 ADD CONSTRAINT notice_category_ck CHECK (category IN ('notice','event'));
 
+CREATE VIEW NoticeInfo 
+AS
+SELECT n.no, n.category, n.title, n.content, n.regdate, n.cnt, n.member_no, m.nickname
+FROM notice n, member m
+WHERE n.member_no = m.no;
+
 -- -----------------------------------------------------
 -- Table `FREPLY`
 -- -----------------------------------------------------
@@ -135,6 +145,7 @@ CREATE TABLE NREPLY (
   reply VARCHAR2(500) NOT NULL,
   replyer VARCHAR2(45) NOT NULL,
   regdate DATE DEFAULT sysdate NOT NULL,
+  updatedate DATE DEFAULT sysdate NOT NULL,
   notice_no NUMBER NOT NULL,
   PRIMARY KEY (no)
 );
@@ -176,6 +187,28 @@ CREATE TABLE RESTAURANT (
   mountain_no NUMBER NOT NULL,
   PRIMARY KEY (no)
 );
+
+-- likecnt 추가
+ALTER TABLE restaurant 
+ADD (likecnt NUMBER DEFAULT 0 NOT NULL, dislikecnt NUMBER DEFAULT 0 NOT NULL);
+
+-- like table
+CREATE SEQUENCE seq_res_like;
+CREATE TABLE res_like(
+no NUMBER PRIMARY KEY NOT NULL,
+likeno NUMBER(1) DEFAULT 0 NOT NULL,
+dislikeno NUMBER(1) DEFAULT 0 NOT NULL,
+userno NUMBER NOT NULL,
+resno NUMBER NOT NULL
+);
+
+-- restaurant view
+
+CREATE VIEW res_view 
+AS
+SELECT r.no, r.mountain_no, r.rname, r.rloc, r.contact, r.menu, r.description, r.likecnt, r.dislikecnt, m.mname 
+FROM restaurant r, mountain m 
+WHERE r.mountain_no = m.no;
 
 
 -- -----------------------------------------------------
