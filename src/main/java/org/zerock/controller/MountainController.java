@@ -36,6 +36,7 @@ public class MountainController {
 		rttr.addFlashAttribute("result",mountain.getNo());
 		rttr.addFlashAttribute("confirm", mountain.getNo() + "글 등록 성공!");
 		
+		//등록이 끝난 후 목록으로
 		return "redirect: mountain/list";
 	}
 	

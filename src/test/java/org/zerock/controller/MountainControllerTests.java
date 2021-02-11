@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -51,6 +52,20 @@ public class MountainControllerTests {
 		ModelAndView mv = mockMvc.perform(MockMvcRequestBuilders.get("/*/list"))
 				.andReturn()
 				.getModelAndView();
+	}
+	
+	@Test
+	public void testRegister() throws Exception {
+	 MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/*/register")
+			 .param("mName", "관악산")
+			 .param("mLoc", " 서울시 관악구, 금천구에서 경기도 안양시, 과천시까지 걸쳐있는 산")
+			 .param("height", "632")
+			 .param("status", "0"))
+			 .andReturn();
+		
+	 log.info(result);
+	 
+	
 	}
 	
 }
