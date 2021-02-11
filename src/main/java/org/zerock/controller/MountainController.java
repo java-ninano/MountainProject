@@ -3,6 +3,8 @@ package org.zerock.controller;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,16 +39,18 @@ public class MountainController {
 		return "redirect: mountain/list";
 	}
 	
-/*
+
 	// 산 리스트
 	@GetMapping("/list")
-	public String list(@ModelAttribute("cri")Criteria cri , Model model) {
-		List<MountainVO> list = service.getList(cri);
-		return null;
+	public void list(Model model) {
+		
+		log.info("list");
+		
+		model.addAttribute("list", service.getList());
 		
 		
 	}
-	
+	/*
 	// 산읽기(코스/명소/축제/맛집)
 	public String read() {
 		return "";
