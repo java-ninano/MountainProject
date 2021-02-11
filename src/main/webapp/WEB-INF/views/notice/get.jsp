@@ -10,7 +10,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 var result = '${result }';
@@ -76,8 +75,28 @@ var no = '${notice.no }';
 			  </div>
 			  <button id="deleteBtn" class="btn btn-danger float-right">삭제</button>
 			</form>	
-			<a id="modifyBtn" class="btn btn-primary float-right mr-1">수정</a>
-			<a href="${root }/notice/list" class="btn btn-success">목록</a>
+			
+			<input type="hidden" id="keyword" value="${cri.keyword }" />
+			<input type="hidden" id="curPage" value="${cri.curPage }" />
+			<input type="hidden" id="amount" value="${cri.amount }" />			
+			
+			<c:url var="modUrl" value="/notice/modify">
+				<c:param name="no" value="${notice.no }"></c:param>
+				<c:param name="category" value="${cri.category }"></c:param>
+				<c:param name="keyword" value="${cri.keyword }"></c:param>
+				<c:param name="curPage" value="${cri.curPage }"></c:param>
+				<c:param name="amount" value="${cri.amount }"></c:param>
+			</c:url>
+			<a id="modifyBtn" href="${modUrl }" class="btn btn-primary float-right mr-1">수정</a>
+			
+			<c:url var="listUrl" value="/notice/list">
+				<c:param name="no" value="${notice.no }"></c:param>
+				<c:param name="category" value="${cri.category }"></c:param>
+				<c:param name="keyword" value="${cri.keyword }"></c:param>
+				<c:param name="curPage" value="${cri.curPage }"></c:param>
+				<c:param name="amount" value="${cri.amount }"></c:param>
+			</c:url>
+			<a href="${listUrl }" class="btn btn-success">목록</a>
 		</div>
 	</div>
 	

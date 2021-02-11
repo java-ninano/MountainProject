@@ -10,7 +10,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<!-- <script src="https://kit.fontawesome.com/a076d05399.js"></script> -->
+<script src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" data-auto-replace-svg="nest"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 var root = '${root}';	
@@ -29,10 +30,21 @@ var isManager = ('${authUser.manager}' == 1);
 			<h3 class="text-center">공지/이벤트</h3>
 			<br>
 			
-			<%-- search --%>
-			<form class="form-inline my-2 float-right">
-		      <input class="form-control mr-sm-2" type="search" placeholder="Search">
-		      <button class="btn btn-outline-success my-2" type="submit"><i class="fas fa-search"></i></button>
+			<%-- search : category, title, content --%>
+			<form action="${root }/notice/list" class="form-inline my-2 float-right">
+			  <div class="form-group">
+			  	<c:if test="${pages.cri.category eq 'notice' }"><c:set var="notice" value="selected" /></c:if>
+			  	<c:if test="${pages.cri.category eq 'event' }"><c:set var="event" value="selected" /></c:if>
+		        <select name="category" class="form-control">
+		          <option value="" selected >전체</option>
+		          <option value="notice" ${notice }>공지</option>
+		          <option value="event" ${event }>이벤트</option>
+		        </select>
+		      </div>
+		      <input class="form-control mr-sm-1" type="search" name="keyword" value="${pages.cri.keyword }" placeholder="Search">
+		      <input type="hidden" name="curPage" value="1">
+		      <input type="hidden" name="amount" value="${pages.cri.amount }">
+		      <button class="btn btn-outline-success my-2"><i class="fas fa-search"></i></button>
 		    </form>
 			<br>
 			
@@ -61,7 +73,14 @@ var isManager = ('${authUser.manager}' == 1);
 						<c:when test="${notice.category eq 'notice' }"><c:set var="category" value="공지" /></c:when>
 						<c:when test="${notice.category eq 'event' }"><c:set var="category" value="이벤트" /></c:when>
 					</c:choose>
-				    <tr class="list-item">
+					<c:url var="getUrl" value="/notice/get">
+						<c:param name="no" value="${notice.no }"></c:param>
+						<c:param name="category" value="${pages.cri.category }"></c:param>
+						<c:param name="keyword" value="${pages.cri.keyword }"></c:param>
+						<c:param name="curPage" value="${pages.cri.curPage }"></c:param>
+						<c:param name="amount" value="${pages.cri.amount }"></c:param>
+					</c:url>
+				    <tr class="list-item" onclick="location='${getUrl}'">
 				      <th scope="row" class="no">${notice.no }</th>
 				      <td>${category }</td>
 				      <td>${notice.title }</td>

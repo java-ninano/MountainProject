@@ -18,8 +18,8 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeMapper mapper;
 	
 	@Override
-	public int getTotal() {
-		return mapper.getTotalCount();
+	public int getTotal(NCriteria cri) {
+		return mapper.getTotalCount(cri);
 	}
 	
 	@Override

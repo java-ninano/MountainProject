@@ -1,5 +1,10 @@
 $(function(){
 	
+	var category = $('#p-category').val();
+	var keyword = $('#p-keyword').val();
+	var curPage = $('#p-curPage').val();
+	var amount = $('#p-amount').val();
+	
 	$('#modifyBtn').click(function(e){
 		e.preventDefault();
 		
@@ -16,7 +21,10 @@ $(function(){
 			data: JSON.stringify(notice)	// '{}'
 		}).done(function(data, status, xhr){
 	    	//console.log(data);// = xhr.responseText
-			location.replace(root + '/notice/get?no=' + no);
+			location.replace(root + '/notice/get?no=' + no
+				+ '&category=' + category + '&keyword=' + keyword
+				+ '&curPage=' + curPage + '&amount=' + amount
+			);
 	    }).fail(function(e){
 	    	console.log(e);
 	    });
@@ -24,6 +32,10 @@ $(function(){
 	});
 	
 	$('#cancelyBtn').click(function(){
-		location.replace(root + '/notice/get?no=' + no);
+		location.replace(root + '/notice/get?no=' + no
+				+ '&category=' + category + '&keyword=' + keyword
+				+ '&curPage=' + curPage + '&amount=' + amount
+		);
 	});
+	
 });

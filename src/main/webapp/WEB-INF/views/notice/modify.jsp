@@ -15,7 +15,6 @@ var root = '${root}';
 var no = ${notice.no};// 수정했음
 //var notice = '${notice.json}';// 이걸 넘기면 안 되네.,.? 수정된 내용을 넘겨야 하는데
 </script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script src="${root }/resources/js/notice/modify.js"></script>
 <link rel="stylesheet" type="text/css" href="${root }/resources/css/font.css">
 <title>Insert title here</title>
@@ -61,6 +60,11 @@ var no = ${notice.no};// 수정했음
 			  <button id="modifyBtn" type="submit" class="btn btn-success float-right">수정</button>
 			</form>	
 		    <button id="cancelyBtn" class="btn btn-secondary  float-right mr-1">취소</button>
+		    
+		    <input type="hidden" id="p-category" value="${cri.category }">
+		    <input type="hidden" id="p-keyword" value="${cri.keyword }">
+		    <input type="hidden" id="p-curPage" value="${cri.curPage }">
+		    <input type="hidden" id="p-amount" value="${cri.amount }">
 		</div>
 	</div>
 </div>

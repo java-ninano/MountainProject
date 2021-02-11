@@ -20,6 +20,6 @@
 	width: 10%;
 }
 
-.list-item {
+.list-item, h3 {
 	cursor: pointer;
 }

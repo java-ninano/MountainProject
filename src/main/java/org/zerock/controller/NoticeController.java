@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.member.MemberVO;
 import org.zerock.domain.notice.NCriteria;
@@ -70,7 +71,7 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/get")
-	public void get(Long no, Model model) {
+	public void get(Long no, Model model, @ModelAttribute("cri") NCriteria cri) {
 		NoticeVO notice = service.getWithCnt(no);
 		model.addAttribute("notice", notice);
 		// /notice/get.jsp
@@ -86,7 +87,7 @@ public class NoticeController {
 	}*/
 	
 	@GetMapping("/modify")
-	public void modify(Long no, Model model) {
+	public void modify(Long no, Model model, @ModelAttribute("cri") NCriteria cri) {
 		NoticeVO notice = service.get(no);
 		model.addAttribute("notice", notice);
 		// /notice/modify.jsp
@@ -137,7 +138,7 @@ public class NoticeController {
 		List<NoticeVO> list = service.getList(cri);// amount: 10개씩만 갖고 오기
 		model.addAttribute("list", list);// disaptcherServlet이 모델 관리, jsp한테 넘겨줌
 		
-		int total = service.getTotal();
+		int total = service.getTotal(cri);
 		model.addAttribute("pages", new NPageDTO(total, cri));
 	}
 	

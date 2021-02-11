@@ -13,12 +13,12 @@ $(function(){
 		$('#newNoticeBtn').show();
 	}
 	
-	$('.list-item').click(function(){
+/*	$('.list-item').click(function(){
 		var no =$(this).find('.no').text();
 		
 		location.href = root + '/notice/get?no=' + no;
 	});
-	
+*/
 
 	function showModal(result){
 		if(result == 'delSuccess') {
@@ -31,4 +31,9 @@ $(function(){
 			
 		}
 	};
+	
+	$('h3').click(function(){
+		location.href = root + '/notice/list';
+	});
+	
 });

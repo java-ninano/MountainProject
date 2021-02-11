@@ -7,7 +7,7 @@ import org.zerock.domain.notice.NoticeVO;
 
 public interface NoticeService {
 
-	public int getTotal();
+	public int getTotal(NCriteria cri);
 	
 	public void register(NoticeVO notice);
 	

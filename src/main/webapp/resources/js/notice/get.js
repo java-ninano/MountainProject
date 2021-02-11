@@ -35,6 +35,12 @@ $(function(){
 	$('#deleteBtn').click(function(e){
 		e.preventDefault();
 		
+		var category = $('#category').val();
+		var keyword = $('#keyword').val();
+		var curPage = $('#curPage').val();
+		var amount = $('#amount').val();
+		
+		
 		swal({
 		  title: "Are you sure?",
 		  text: "게시글을 삭제하시겠습니까?",
@@ -50,7 +56,10 @@ $(function(){
 		    	method: 'delete'
 		    }).done(function(data, status, xhr){
 		    	//console.log(data);// = xhr.responseText
-				location.replace(root + '/notice/list');
+				location.replace(root + '/notice/list?'
+				+ 'category=' + category + '&keyword=' + keyword
+				+ '&curPage=' + curPage + '&amount=' + amount
+				);
 		    }).fail(function(e){
 		    	console.log(e);
 		    });
@@ -60,9 +69,13 @@ $(function(){
 		
 	});
 	
-	$('#modifyBtn').click(function(){
+/*	$('#modifyBtn').click(function(){
 		location.replace(root + '/notice/modify?no='+ no);
 	});
-	
+*/	
+
+	$('h3').click(function(){
+		location.href = root + '/notice/list';
+	});
 	
 });
