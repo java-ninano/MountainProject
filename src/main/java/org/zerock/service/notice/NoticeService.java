@@ -19,7 +19,7 @@ public interface NoticeService {
 	
 	public boolean modify(NoticeVO notice);
 	
-	public boolean delete(Long no);
+	public boolean remove(Long no);
 	
 	public List<NoticeVO> getList();
 

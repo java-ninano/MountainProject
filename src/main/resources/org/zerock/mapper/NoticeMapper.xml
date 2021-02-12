@@ -27,8 +27,8 @@
 		<selectKey keyProperty="no" order="BEFORE" resultType="long">
 			SELECT seq_notice.nextval FROM dual
 		</selectKey>
-		INSERT INTO notice (no, category, title, content, member_no)
-		VALUES (#{no}, #{category}, #{title}, #{content}, #{member_no})
+		INSERT INTO notice (no, category, title, content, member_no, reply)
+		VALUES (#{no}, #{category}, #{title}, #{content}, #{member_no}, #{reply})
 	</insert>
 
 	<select id="read" resultType="org.zerock.domain.notice.NoticeVO">
@@ -43,8 +43,10 @@
 
 	<update id="update">
 		UPDATE notice
-		SET category = #{category}, title =
-		#{title}, content = #{content}
+		SET category = #{category}, 
+			title = #{title}, 
+			content = #{content},
+			reply = #{reply}
 		WHERE no = #{no}
 	</update>
 
@@ -63,10 +65,10 @@
 	<select id="getListWithPaging" resultType="org.zerock.domain.notice.NoticeVO">
    <![CDATA[
    	  SELECT 
-   	  	  no, category, title, content, regdate, cnt, member_no, nickname
+   	  	  no, category, title, content, regdate, cnt, member_no, nickname, reply
 	  FROM (
 		  SELECT ROW_NUMBER() OVER (ORDER BY no DESC) rn,
-			     no, category, title, content, regdate, cnt, member_no, nickname
+			     no, category, title, content, regdate, cnt, member_no, nickname, reply
 	  	  FROM noticeInfo
    ]]>
    

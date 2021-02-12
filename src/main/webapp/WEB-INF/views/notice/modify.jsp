@@ -57,6 +57,12 @@ var no = ${notice.no};// 수정했음
 			    <label for="content">내용</label>
 			    <textarea class="form-control" name="content" id="content" rows="10">${notice.content }</textarea>
 			  </div>
+			  <div class="form-group form-check">
+			  	<c:if test="${notice.reply == 0}"><c:set var="checked" value="checked" /></c:if>
+			    <input type="checkbox" class="form-check-input" id="replyCheck" value="${notice.reply }" ${checked }>
+			    <label class="form-check-label" for="replyCheck">댓글 금지</label>
+			  </div>
+<%-- 			  <input type="hidden" name="reply" id="reply" value="${notice.reply }"> --%>
 			  <button id="modifyBtn" type="submit" class="btn btn-success float-right">수정</button>
 			</form>	
 		    <button id="cancelyBtn" class="btn btn-secondary  float-right mr-1">취소</button>

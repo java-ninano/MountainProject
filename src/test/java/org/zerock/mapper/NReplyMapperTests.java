@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.zerock.domain.notice.NReplyVO;
+import org.zerock.domain.nreply.NReplyVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -31,8 +31,8 @@ public class NReplyMapperTests {
 		
 		NReplyVO reply = new NReplyVO();
 		reply.setReply("댓글rrrr");
-		reply.setReplyer("은디2");
 		reply.setNotice_no(242);
+		reply.setMember_no(6);
 				
 		mapper.insertSelectKey(reply);
 		int after = mapper.getTotalCount();
@@ -48,7 +48,7 @@ public class NReplyMapperTests {
 	@Test
 	public void testUpdate() {
 		NReplyVO reply = new NReplyVO();
-		//reply.setNo(1);
+		reply.setNo(1);
 		reply.setReply("첫댓 수정");
 		
 		mapper.update(reply);
@@ -59,8 +59,8 @@ public class NReplyMapperTests {
 	public void testDelete() {
 		NReplyVO reply = new NReplyVO();
 		reply.setReply("댓글rrr");
-		reply.setReplyer("은디아님");
 		reply.setNotice_no(242);
+		reply.setMember_no(6);
 				
 		mapper.insertSelectKey(reply);
 		int before = mapper.getTotalCount();

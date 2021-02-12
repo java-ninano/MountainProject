@@ -14,7 +14,8 @@
 <script>
 var result = '${result }';
 var logined = ('${authUser}' != 0);// T, F
-var isManager = ('${authUser.manager}' == 1);
+var isManager = ('${authUser.manager}' == 1);// T, F
+var canReply = ('${notice.reply}' == 1);// T, F
 
 var root = '${root}';
 var no = '${notice.no }';
@@ -30,7 +31,7 @@ var no = '${notice.no }';
 		<div class="col-12 col-md-6 offset-md-3">
 			<h3 class="text-center">공지/이벤트</h3>
 			<br>
-			<form id="deleteForm" action="${root }/notice/delete?no=${notice.no}" method="post">
+			<form id="removeForm" action="${root }/notice/remove?no=${notice.no}" method="post">
 			<%--
 			  <div class="form-group">
 			    <label for="no">글 번호</label>
@@ -73,7 +74,7 @@ var no = '${notice.no }';
 			    <label for="content">내용</label>
 			    <textarea class="form-control" name="content" id="content" rows="10" readonly>${notice.content }</textarea>
 			  </div>
-			  <button id="deleteBtn" class="btn btn-danger float-right">삭제</button>
+			  <button id="removeBtn" class="btn btn-danger float-right">삭제</button>
 			</form>	
 			
 			<input type="hidden" id="keyword" value="${cri.keyword }" />
@@ -101,16 +102,29 @@ var no = '${notice.no }';
 	</div>
 	
 	<hr>
-	<%-- Reply --%>
+	<%-- new Reply --%>
 	<div class="row m-3">
 		<div class="col-md-8 offset-md-2">
-			<form method="post" id="replyForm">
+			<form id="replyForm" action="${root }/nreplies/new" method="post">
 			  <div class="d-flex justify-content-between align-items-center">
-				<label for="content">${authUser.nickname }</label>
+				<label for="reply">${authUser.nickname }</label>
 				<input type="text" class="form-control mx-1" name="reply" id="reply">
+				<input type="hidden" name="notice_no" value="${notice.no }">
+				<input type="hidden" name="member_no" value="${authUser.no }">
+				
+				<input type="hidden" id="keyword" value="${cri.keyword }" />
+				<input type="hidden" id="curPage" value="${cri.curPage }" />
+				<input type="hidden" id="amount" value="${cri.amount }" />
+				
 				<button class="btn btn-light float-right" id="newReplyBtn">등록</button>
 			  </div>
 			</form>
+		</div>
+	</div>
+	<%-- Reply List --%>
+	<div class="row m-3" id="replyList">
+		<div class="col-md-8 offset-md-2">
+		
 		</div>
 	</div>
 </div>

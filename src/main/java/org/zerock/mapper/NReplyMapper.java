@@ -2,13 +2,13 @@ package org.zerock.mapper;
 
 import java.util.List;
 
-import org.zerock.domain.notice.NReplyVO;
+import org.zerock.domain.nreply.NReplyVO;
 
 public interface NReplyMapper {
 	
 	public int getTotalCount();
 	
-	public void insertSelectKey(NReplyVO reply);
+	public int insertSelectKey(NReplyVO reply);
 	
 	public NReplyVO read(Long no);
 	

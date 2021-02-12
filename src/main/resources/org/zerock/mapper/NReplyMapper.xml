@@ -14,12 +14,12 @@
 		<selectKey keyProperty="no" order="BEFORE" resultType="long">
 			SELECT seq_nreply.nextval FROM dual
 		</selectKey>
-		INSERT INTO nreply (no, reply, replyer, notice_no)
-		VALUES (#{no}, #{reply}, #{replyer}, #{notice_no})
+		INSERT INTO nreply (no, reply, notice_no, member_no)
+		VALUES (#{no}, #{reply}, #{notice_no}, #{member_no})
 	</insert>
 	
-	<select id="read" resultType="org.zerock.domain.notice.NReplyVO">
-		SELECT * FROM nreply WHERE no = #{no}
+	<select id="read" resultType="org.zerock.domain.nreply.NReplyVO">
+		SELECT * FROM nreplyInfo WHERE no = #{no}
 	</select>
 	
 	<update id="update">
@@ -32,9 +32,9 @@
 		DELETE nreply WHERE no = #{no}
 	</delete>
 	
-	<select id="getList" resultType="org.zerock.domain.notice.NReplyVO">
+	<select id="getList" resultType="org.zerock.domain.nreply.NReplyVO">
 	<![CDATA[
-		SELECT * FROM nreply
+		SELECT * FROM nreplyInfo
 		WHERE no > 0
 		ORDER BY no DESC
 	]]>

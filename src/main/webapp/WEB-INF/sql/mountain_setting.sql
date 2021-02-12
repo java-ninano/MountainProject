@@ -114,9 +114,13 @@ ADD CONSTRAINT notice_category_ck CHECK (category IN ('notice','event'));
 
 CREATE VIEW NoticeInfo 
 AS
-SELECT n.no, n.category, n.title, n.content, n.regdate, n.cnt, n.member_no, m.nickname
+SELECT n.no, n.category, n.title, n.content, n.regdate, n.cnt, n.member_no, m.nickname, n.reply
 FROM notice n, member m
 WHERE n.member_no = m.no;
+
+-- 댓글 가능 여부
+ALTER TABLE notice
+ADD reply NUMBER(1) DEFAULT 1 NOT NULL CHECK (reply IN (0, 1));
 
 -- -----------------------------------------------------
 -- Table `FREPLY`
@@ -143,12 +147,18 @@ CREATE SEQUENCE seq_nreply;
 CREATE TABLE NREPLY (
   no NUMBER,
   reply VARCHAR2(500) NOT NULL,
-  replyer VARCHAR2(45) NOT NULL,
   regdate DATE DEFAULT sysdate NOT NULL,
   updatedate DATE DEFAULT sysdate NOT NULL,
   notice_no NUMBER NOT NULL,
+  member_no NUMBER NOT NULL,
   PRIMARY KEY (no)
 );
+
+CREATE VIEW nreplyInfo
+AS
+SELECT n.no, n.reply, m.nickname replyer, n.regdate, n.updatedate, n.notice_no, n.member_no
+FROM nreply n JOIN member m
+ON n.member_no = m.no;
 
 
 -- -----------------------------------------------------

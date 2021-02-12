@@ -1,4 +1,4 @@
-package org.zerock.domain.notice;
+package org.zerock.domain.nreply;
 
 import java.util.Date;
 
@@ -12,4 +12,5 @@ public class NReplyVO {
 	private Date regdate;
 	private Date updatedate;// 몇 분 전 수정 -> 몇 시간 전 수정
 	private long notice_no;
+	private long member_no;
 }

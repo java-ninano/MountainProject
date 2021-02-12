@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="${root }/resources/js/notice/register.js"></script>
 <link rel="stylesheet" type="text/css" href="${root }/resources/css/font.css">
 <title>Insert title here</title>
 </head>
@@ -19,7 +20,7 @@
 		<div class="col-12 col-md-6 offset-md-3">
 			<h3 class="text-center">새 공지/이벤트</h3>
 			<br>
-			<form method="post">
+			<form id="registerForm" method="post">
 			  <div class="form-group">
 			    <label for="category">분류</label>
 			    <select class="form-control" name="category" id="category">
@@ -38,13 +39,20 @@
 			  </div>
 			  <div class="form-group">
 			    <label for="title">제목</label>
+			    <small class="text-danger" id="titleNull">제목을 입력해주세요.</small>
 			    <input type="text" class="form-control" name="title" id="title" value="${notice.title }">
 			  </div>
 			  <div class="form-group">
 			    <label for="content">내용</label>
+			    <small class="text-danger" id="contentNull">내용을 입력해주세요.</small>
 			    <textarea class="form-control" name="content" id="content" rows="10">${notice.content }</textarea>
 			  </div>
-			  <input type="submit" class="btn btn-success float-right" value="등록">
+			  <div class="form-group form-check">
+			    <input type="checkbox" class="form-check-input" id="replyCheck" value="${notice.reply }">
+			    <label class="form-check-label" for="replyCheck">댓글 금지</label>
+			  </div>
+			  <input type="hidden" name="reply" id="reply" value="1">
+			  <input type="submit" class="btn btn-success float-right" id="submitBtn" value="등록">
 			</form>	
 			<a href="javascript:history.back()" class="btn btn-danger float-right mr-1">취소</a>
 		</div>

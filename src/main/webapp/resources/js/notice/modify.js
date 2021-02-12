@@ -8,11 +8,17 @@ $(function(){
 	$('#modifyBtn').click(function(e){
 		e.preventDefault();
 		
+		var reply = 1;
+		if ($('#replyCheck').is(':checked')){
+			reply = 0;
+		}
+		
 		var notice = {
 			no: no,
 			category: $('#category').val(),
 			title: $('#title').val(),
-			content: $('#content').val()
+			content: $('#content').val(),
+			reply: reply
 		};
 		
 		$.ajax(root + '/notice/modify?no=' + no, {

@@ -69,7 +69,7 @@ public class NoticeServiceTests {
 		NCriteria cri = new NCriteria();
 		int before = service.getTotal(cri);
 		
-		service.delete(vo.getNo());
+		service.remove(vo.getNo());
 		
 		int after = service.getTotal(cri);
 		

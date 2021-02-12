@@ -2,7 +2,7 @@ $(function(){
 	
 	showModal(result);
 	
-	$('#deleteBtn').hide();
+	$('#removeBtn').hide();
 	$('#modifyBtn').hide();
 
 	$('#newReplyBtn').hide();
@@ -10,15 +10,21 @@ $(function(){
 	$('#reply').attr('readonly', true);
 	
 	
-	if(logined) {
-		if(isManager) {/* 관리자 */
-			$('#deleteBtn').show();
-			$('#modifyBtn').show();
+	if(canReply) {
+		if(logined) {
+			$('#newReplyBtn').show();
+			$('#reply').removeAttr('placeholder');
+			$('#reply').removeAttr('readonly');
 		}
-		
-		$('#newReplyBtn').show();
-		$('#reply').removeAttr('placeholder');
-		$('#reply').removeAttr('readonly');	
+		$('#replyList').show();
+	} else {
+		$('#reply').attr('placeholder', '해당 게시물에 댓글을 달 수 없습니다.');
+		$('#replyList').hide();
+	}
+	
+	if(logined && isManager) {/* 관리자 */
+		$('#removeBtn').show();
+		$('#modifyBtn').show();
 	}
 	
 	function showModal(result){
@@ -32,7 +38,7 @@ $(function(){
 		}
 	};
 	
-	$('#deleteBtn').click(function(e){
+	$('#removeBtn').click(function(e){
 		e.preventDefault();
 		
 		var category = $('#category').val();
@@ -50,9 +56,9 @@ $(function(){
 		})
 		.then((isConfirm) => {
 		  if (isConfirm) {
-		    //$('#deleteForm').submit();
+		    //$('#removeForm').submit();
 		    
-		    $.ajax(root + '/notice/delete/' + no, {// 페이지 이동하지 않고 처리한 다음
+		    $.ajax(root + '/notice/remove/' + no, {// 페이지 이동하지 않고 처리한 다음
 		    	method: 'delete'
 		    }).done(function(data, status, xhr){
 		    	//console.log(data);// = xhr.responseText

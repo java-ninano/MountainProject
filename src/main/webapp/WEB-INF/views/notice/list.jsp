@@ -83,7 +83,9 @@ var isManager = ('${authUser.manager}' == 1);
 				    <tr class="list-item" onclick="location='${getUrl}'">
 				      <th scope="row" class="no">${notice.no }</th>
 				      <td>${category }</td>
-				      <td>${notice.title }</td>
+				      <td>${notice.title } 
+				      	<c:if test="${notice.reply eq 1 }"><small class="text-success">0</small></c:if> <%-- 댓글 개수 --%>
+				      </td>
 				      <td>${regdate }</td>
 				      <td>${notice.cnt }</td>
 				    </tr>
@@ -104,16 +106,28 @@ var isManager = ('${authUser.manager}' == 1);
 			    <c:if test="${!pages.prev }">
 			    	<c:set var="prev" value="disabled" />
 			    </c:if>
+ 				<c:url var="prevUrl" value="/notice/list">
+					<c:param name="category" value="${pages.cri.category }"></c:param>
+					<c:param name="keyword" value="${pages.cri.keyword }"></c:param>
+					<c:param name="curPage" value="${pages.startPage-1 }"></c:param>
+					<c:param name="amount" value="${pages.cri.amount }"></c:param>
+				</c:url>
 			    <li class="page-item ${prev }">
-			      <a class="page-link" href="${root }/notice/list?curPage=${pages.startPage-1 }&amount=10">Previous</a>
+			      <a class="page-link" href="${prevUrl }">Previous</a>
 			    </li>
 			    
 			    <c:forEach var="pageNum" begin="${pages.startPage }" end="${pages.endPage }">
 			    	<c:if test="${pageNum eq pages.cri.curPage }">
 			    		<c:set var="active" value="active" />
 			    	</c:if>
+				    <c:url var="paegUrl" value="/notice/list">
+						<c:param name="category" value="${pages.cri.category }"></c:param>
+						<c:param name="keyword" value="${pages.cri.keyword }"></c:param>
+						<c:param name="curPage" value="${pageNum }"></c:param>
+						<c:param name="amount" value="${pages.cri.amount }"></c:param>
+					</c:url>
 				    <li class="page-item ${active }">
-				    	<a class="page-link" href="${root }/notice/list?curPage=${pageNum }&amount=10">${pageNum }</a>
+				    	<a class="page-link" href="${pageUrl }">${pageNum }</a>
 				    </li>			    
 				    <c:remove var="active" />
 			    </c:forEach>
@@ -121,8 +135,14 @@ var isManager = ('${authUser.manager}' == 1);
 			    <c:if test="${!pages.next }">
 			    	<c:set var="next" value="disabled" />
 			    </c:if>
+			    <c:url var="nextUrl" value="/notice/list">
+					<c:param name="category" value="${pages.cri.category }"></c:param>
+					<c:param name="keyword" value="${pages.cri.keyword }"></c:param>
+					<c:param name="curPage" value="${pages.endPage+1 }"></c:param>
+					<c:param name="amount" value="${pages.cri.amount }"></c:param>
+				</c:url>
 			    <li class="page-item ${next }">
-			      <a class="page-link" href="${root }/notice/list?curPage=${pages.endPage+1 }&amount=10">Next</a>
+			      <a class="page-link" href="${nextUrl }">Next</a>
 			    </li>
 			  </ul>
 			</nav>

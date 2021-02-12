@@ -3,7 +3,7 @@ package org.zerock.service.nreply;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.zerock.domain.notice.NReplyVO;
+import org.zerock.domain.nreply.NReplyVO;
 import org.zerock.mapper.NReplyMapper;
 
 import lombok.AllArgsConstructor;
@@ -20,8 +20,8 @@ public class NReplyServiceImpl implements NReplyService {
 	}
 	
 	@Override
-	public void register(NReplyVO reply) {
-		mapper.insertSelectKey(reply);
+	public int register(NReplyVO reply) {
+		return mapper.insertSelectKey(reply);
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class NReplyServiceImpl implements NReplyService {
 	}
 	
 	@Override
-	public boolean delete(Long no) {
+	public boolean remove(Long no) {
 		return mapper.delete(no) == 1;
 	}
 	

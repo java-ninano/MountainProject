@@ -52,7 +52,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public boolean delete(Long no) {
+	public boolean remove(Long no) {
 		return mapper.delete(no) == 1;
 	}
 	
