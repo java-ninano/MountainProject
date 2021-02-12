@@ -41,6 +41,11 @@ public class MountainController {
 		return "redirect: mountain/list";
 	}
 	
+	// 산등록
+	@GetMapping("/register")
+	public void register() {
+		
+	}
 
 	// 산 리스트
 	@GetMapping("/list")

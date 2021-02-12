@@ -33,9 +33,21 @@
       <th>status</th>
     </tr>
   </thead>
+ <tbody>
+ <c:forEach items="${list}" var="mountain">
+ <tr>
  
-    
+
+ <td><c:out value="${mountain.no }" /></td>
+ <td><c:out value="${mountain.MName }"  /></td>
+ <td><c:out value="${mountain.MLoc }"/></td>
+ <td><c:out value="${mountain.height }"/></td>
+ <td><c:out value="${mountain.status }" /></td>
+
  
+ 
+ </c:forEach>
+ </tbody>
 </table>
 </div>
 </div>
