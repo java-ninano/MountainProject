@@ -16,12 +16,14 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
+
+
 <title>Insert title here</title>
 </head>
 <body>
 	<div class="container-sm">
 		<div class="row">
-			<div class="col-lg-12 col-12 offset-lg-3">
+			<div class="col-lg-12 col-12 offset-lg-1">
 			
 			<form method="post">
 				<h1 class="page-header">Mountain Register</h1> <hr>
@@ -32,32 +34,33 @@
         
         
         <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Mountain Name</label>
+    <label for="input1" class="col-sm-2 col-form-label">Mountain Name</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3">
+      <input name="mName" type="text" class="form-control" id="input1" 
+      placeholder="산 이름을 입력하세요.">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Location</label>
+    <label for="input2" class="col-sm-2 col-form-label">Location</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword3">
+      <input name="mLoc"type="text" class="form-control" id="input2"
+      placeholder="산 위치를 입력하세요">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Height</label>
+    <label for="input3" class="col-sm-2 col-form-label">Height</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3">
+      <input name="height" type="number" class="form-control" id="input3"
+      placeholder="산의 높이를 입력하세요">
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Status</label>
+    <label for="input4" class="col-sm-2 col-form-label">Status</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3">
+      <input name="status" type="number" class="form-control" id="input4"
+      placeholder="산의 입산 여부를 입력하세요">
     </div>
   </div>
-  
-  
-  
   
   <div class="form-group row">
     <div class="col-sm-2">Checkbox</div>
@@ -65,7 +68,7 @@
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="gridCheck1">
         <label class="form-check-label" for="gridCheck1">
-          Example checkbox
+         Check it if you're done
         </label>
       </div>
     </div>
