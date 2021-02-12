@@ -17,4 +17,6 @@ public interface MountainService {
 	public List<MountainVO> getList();
 
 	
+
+	
 }

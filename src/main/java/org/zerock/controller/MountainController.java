@@ -7,8 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.FestivalVO;
 import org.zerock.domain.MountainVO;
 import org.zerock.service.MountainService;
 
@@ -51,19 +52,56 @@ public class MountainController {
 		
 		
 	}
+	
+	// 산 조회
+	@GetMapping("/get")
+	public void get(Long no, Model model) {
+		log.info("/get");
+		model.addAttribute("mountain", service.get(no));
+	}
 	/*
-	// 산읽기(코스/명소/축제/맛집)
-	public String read() {
-		return "";
-	}
 	// 산 수정
-	public String update() {
-		return "";
+	@GetMapping("/modify")
+		public String modify(Long no, Model model) {
+		    MountainVO vo = service.get(no);
+		    model.addAttribute("mountain", vo);
+			return "redirect:mountain/list";
+		}
+	*/
+	
+	// 산 수정(post)
+	@PostMapping("/modify")
+	public String modify(MountainVO mountain, RedirectAttributes rttr) {
+		log.info("modify:" + mountain);
+		
+		if(service.modify(mountain)) {
+			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("message", "수정 완료");
+		}
+		
+		return "redirect:mountain/list";
 	}
+	
+	// 산읽기(/명소/축제)
+	@PostMapping("/read")
+	public void read(FestivalVO festival, Long no, Model model) {
+		
+		log.info("/read");
+		model.addAttribute("mountain",service.get(no));
+	}
+	
+	
 	// 산 삭제
-	public String delete() {
-		return "";
+	@PostMapping("/remove")
+	public String remove(Long no, RedirectAttributes rttr) {
+		
+		if(service.remove(no) ) {
+			rttr.addAttribute("result", "success");
+			rttr.addFlashAttribute("message", "삭제 완료");
+			
+		}
+		return "redirect:mountain/list ";
 	}
 
-	*/
+	
 }
