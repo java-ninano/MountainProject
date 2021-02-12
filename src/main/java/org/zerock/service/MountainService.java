@@ -2,6 +2,7 @@ package org.zerock.service;
 
 import java.util.List;
 
+import org.zerock.domain.FestivalVO;
 import org.zerock.domain.MountainVO;
 
 public interface MountainService {
@@ -15,6 +16,8 @@ public interface MountainService {
 	public boolean remove(Long no);
 	
 	public List<MountainVO> getList();
+
+	
 
 	
 

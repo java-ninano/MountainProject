@@ -53,7 +53,7 @@ public class MountainController {
 		
 	}
 	
-	// 산 조회
+	// 산 조회 
 	@GetMapping("/get")
 	public void get(Long no, Model model) {
 		log.info("/get");
@@ -67,8 +67,17 @@ public class MountainController {
 		    model.addAttribute("mountain", vo);
 			return "redirect:mountain/list";
 		}
-	*/
 	
+	
+	// 산읽기(/명소/축제)
+		@PostMapping("/read")
+		public void read(FestivalVO festival, Model model) {
+			
+			log.info("/read");
+			model.addAttribute("mountain", service.getList());
+			
+		}
+	*/
 	// 산 수정(post)
 	@PostMapping("/modify")
 	public String modify(MountainVO mountain, RedirectAttributes rttr) {
@@ -80,14 +89,6 @@ public class MountainController {
 		}
 		
 		return "redirect:mountain/list";
-	}
-	
-	// 산읽기(/명소/축제)
-	@PostMapping("/read")
-	public void read(FestivalVO festival, Long no, Model model) {
-		
-		log.info("/read");
-		model.addAttribute("mountain",service.get(no));
 	}
 	
 	

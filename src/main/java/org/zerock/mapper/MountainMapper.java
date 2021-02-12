@@ -3,6 +3,7 @@ package org.zerock.mapper;
 import java.util.List;
 
 import org.zerock.domain.Criteria;
+import org.zerock.domain.FestivalVO;
 import org.zerock.domain.MountainVO;
 
 public interface MountainMapper {
@@ -20,5 +21,7 @@ public interface MountainMapper {
 	public List<MountainVO> getListWithPaging(Criteria cri);
 
 	public MountainVO read(Long no);
+
+	
 	
 }
