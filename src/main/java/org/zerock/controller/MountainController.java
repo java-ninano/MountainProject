@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.domain.FestivalVO;
 import org.zerock.domain.MountainVO;
 import org.zerock.service.MountainService;
 
@@ -19,7 +18,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/*")
+@RequestMapping("/board/*")
 @Log4j
 public class MountainController {
 
@@ -38,7 +37,7 @@ public class MountainController {
 		rttr.addFlashAttribute("confirm", mountain.getNo() + "글 등록 성공!");
 		
 		//등록이 끝난 후 목록으로
-		return "redirect: mountain/list";
+		return "redirect:/board/list";
 	}
 	
 	// 산등록
@@ -93,7 +92,7 @@ public class MountainController {
 			rttr.addFlashAttribute("message", "수정 완료");
 		}
 		
-		return "redirect:mountain/list";
+		return "redirect:/board/list";
 	}
 	
 	
@@ -106,7 +105,7 @@ public class MountainController {
 			rttr.addFlashAttribute("message", "삭제 완료");
 			
 		}
-		return "redirect:mountain/list ";
+		return "redirect:/board/list ";
 	}
 
 	
