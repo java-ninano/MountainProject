@@ -22,12 +22,12 @@ public class NReplyMapperTests {
 	
 	@Test
 	public void testGetTotalCount() {
-		log.info("총 댓글 수: " + mapper.getTotalCount());
+		log.info("총 댓글 수: " + mapper.getTotalCount(342L));
 	}
 	
 	@Test
 	public void testInsertSelectKey() {
-		int before = mapper.getTotalCount();
+		int before = mapper.getTotalCount(342L);
 		
 		NReplyVO reply = new NReplyVO();
 		reply.setReply("댓글rrrr");
@@ -35,7 +35,7 @@ public class NReplyMapperTests {
 		reply.setMember_no(6);
 				
 		mapper.insertSelectKey(reply);
-		int after = mapper.getTotalCount();
+		int after = mapper.getTotalCount(342L);
 		
 		assertEquals(before + 1, after);
 	}
@@ -63,17 +63,17 @@ public class NReplyMapperTests {
 		reply.setMember_no(6);
 				
 		mapper.insertSelectKey(reply);
-		int before = mapper.getTotalCount();
+		int before = mapper.getTotalCount(342L);
 		
 		mapper.delete(reply.getNo());
-		int after = mapper.getTotalCount();
+		int after = mapper.getTotalCount(342L);
 		
 		assertEquals(before-1, after);
 	}
 	
 	@Test
 	public void testGetList() {
-		log.info(mapper.getList());
+		log.info(mapper.getList(342L));
 	}
 
 }

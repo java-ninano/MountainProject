@@ -4,10 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.NReplyMapper"> <!-- interface -->
 	<select id="getTotalCount" resultType="int">
-	<![CDATA[
 		SELECT count(*) FROM nreply
-		WHERE no > 0 
-	]]>
+		WHERE notice_no = #{notice_no} 
 	</select>
 	
 	<insert id="insertSelectKey">
@@ -35,7 +33,7 @@
 	<select id="getList" resultType="org.zerock.domain.nreply.NReplyVO">
 	<![CDATA[
 		SELECT * FROM nreplyInfo
-		WHERE no > 0
+		WHERE notice_no = #{notice_no}
 		ORDER BY no DESC
 	]]>
 	</select>

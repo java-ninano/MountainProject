@@ -15,8 +15,8 @@ public class NReplyServiceImpl implements NReplyService {
 	private NReplyMapper mapper;
 	
 	@Override
-	public int getTotal() {
-		return mapper.getTotalCount();
+	public int getTotal(Long notice_no) {
+		return mapper.getTotalCount(notice_no);
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class NReplyServiceImpl implements NReplyService {
 	}
 	
 	@Override
-	public List<NReplyVO> getList() {
-		return mapper.getList();
+	public List<NReplyVO> getList(Long notice_no) {
+		return mapper.getList(notice_no);
 	}
 }

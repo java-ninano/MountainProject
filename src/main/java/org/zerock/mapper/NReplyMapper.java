@@ -6,7 +6,7 @@ import org.zerock.domain.nreply.NReplyVO;
 
 public interface NReplyMapper {
 	
-	public int getTotalCount();
+	public int getTotalCount(Long notice_no);
 	
 	public int insertSelectKey(NReplyVO reply);
 	
@@ -16,7 +16,7 @@ public interface NReplyMapper {
 	
 	public int delete(Long no);
 	
-	public List<NReplyVO> getList();
+	public List<NReplyVO> getList(Long notice_no);
 	
 	// 10개씩 댓글 로딩하려면 스크롤이 바닥쳤을 때 ajax로 10개 추가 로딩해야 함,,,ㅎ,,,,
 }

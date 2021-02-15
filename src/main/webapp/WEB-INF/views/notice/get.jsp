@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" data-auto-replace-svg="nest"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 var result = '${result }';
@@ -109,22 +110,61 @@ var no = '${notice.no }';
 			  <div class="d-flex justify-content-between align-items-center">
 				<label for="reply">${authUser.nickname }</label>
 				<input type="text" class="form-control mx-1" name="reply" id="reply">
-				<input type="hidden" name="notice_no" value="${notice.no }">
-				<input type="hidden" name="member_no" value="${authUser.no }">
-				
+				<input type="hidden" name="notice_no" id="notice_no" value="${notice.no }">
+				<input type="hidden" name="member_no" id="member_no" value="${authUser.no }">
+				<%--
 				<input type="hidden" id="keyword" value="${cri.keyword }" />
 				<input type="hidden" id="curPage" value="${cri.curPage }" />
 				<input type="hidden" id="amount" value="${cri.amount }" />
-				
-				<button class="btn btn-light float-right" id="newReplyBtn">등록</button>
+				 --%>
 			  </div>
 			</form>
+			<button class="btn btn-light float-right" id="newReplyBtn">등록</button>
 		</div>
 	</div>
 	<%-- Reply List --%>
 	<div class="row m-3" id="replyList">
 		<div class="col-md-8 offset-md-2">
-		
+			<table class="table">
+			  <tbody id="replyTable">
+			  
+			  <!--
+			 
+			    <tr>
+			      <td>
+			      	<div>닉네임<small class="float-right">5일 전</small></div>
+			      	<div>댓글 ㅇ어쩌고 저쩌고</div>
+			      	<div> <%-- 대댓글존 --%>
+			      		<hr>
+		      			<div><i class="fas fa-reply mr-2" data-fa-transform="rotate-180" style="color:lightgrey"></i>미요<small class="float-right">5일 전</small></div>
+		      			<div>대댓글임</div>
+			      		<hr>
+			      		<div><i class="fas fa-reply" data-fa-transform="rotate-180" style="color:lightgrey"></i>하이<small class="float-right">4일 전</small></div>
+		      			<div>나도임</div>
+			      	</div>
+			      </td>
+			    </tr>
+			    
+			    <tr>
+			      <td>
+			      	<div>닉네임<small class="float-right">3시간 전</small></div>
+			      	<div>댓글 ㅇ어쩌고 저쩌고</div>
+			      	<div> <%-- 대댓글존 --%>
+			      		<hr>
+		      			<div><i class="fas fa-reply" data-fa-transform="rotate-180" style="color:lightgrey"></i>미요<small class="float-right">3시간 전</small></div>
+		      			<div>대댓글임</div>
+		      			<div class="ml-2">
+		      				<hr>
+				      		<div><i class="fas fa-reply" data-fa-transform="rotate-180" style="color:lightgrey"></i>하이<small class="float-right">1시간 전</small></div>
+			      			<div>나는 대대댓글</div>		      			
+		      			</div>
+			      	</div>
+			      </td>
+			    </tr>
+			      -->
+			      
+			  </tbody>
+			</table>
 		</div>
 	</div>
 </div>
