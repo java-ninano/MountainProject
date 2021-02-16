@@ -107,9 +107,9 @@ $(function(){
 				$('#replyTable').append(
 					 '<tr>'
 					+	'<td>'
+					+	  '<div><strong>' + item.replyer + '</strong><small class="float-right">' + diff + '</small></div>'
 					+	  '<div><input type="text" name="reply" value="' + item.reply + '" class="form-control replies" readonly>'
 					+	  '<input type="hidden" name="no" value="' + item.no + '" class="reply_no"></div>'
-					+	  '<div><strong>' + item.replyer + '</strong><small class="float-right">' + diff + '</small></div>'
 					+	  '<div>'
 					+		'<i class="fas fa-ellipsis-h"></i>'
 					+		'<a class="modReplyBtn mx-2"><small>수정</small></a>'
@@ -169,7 +169,7 @@ $(function(){
 	
 	// Reply Modify
 	var replyVal;
-	$('.modReplyBtn').click(function(){// 나중에 append된 코드에 적용이 안 되네 후
+	$(document).on('click','.modReplyBtn',function() {// 동적 생성 태그에 이벤트 적용 : on
 		var replies = $(this).closest('td').find('.replies');
 		replyVal = replies.val();
 		$('.replies').attr('readonly', true);
@@ -179,13 +179,13 @@ $(function(){
 	});
 	
 	
-	$('.submitReplyBtn').click(function(){
+	$(document).on('click','.submitReplyBtn',function() {
 		var data = {
 			no: Number($(this).closest('td').find('.reply_no').val()),
 			reply: $(this).closest('td').find('.replies').val()
 		};
-		console.log(data);
-		console.log(data.no);
+		//console.log(data);
+		//console.log(data.no);
 	
 		$.ajax(root + '/nreplies/' + data.no, {
 			type: 'POST',
@@ -203,7 +203,7 @@ $(function(){
 	
 	
 	// Reply Remove
-	$('.delReplyBtn').click(function(){
+	$(document).on('click','.delReplyBtn',function() {
 		var reply_no = Number($(this).closest('td').find('.reply_no').val());
 		
 		$.ajax(root + '/nreplies/' + reply_no, {
