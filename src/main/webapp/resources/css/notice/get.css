@@ -25,3 +25,24 @@
 h3 {
 	cursor: pointer;
 }
+
+
+/* NReply */
+.fa-ellipsis-h {
+	color: lightgrey;
+}
+
+.modReplyBtn, .delReplyBtn, .cancelReplyBtn, .submitReplyBtn {
+	color: black;
+}
+
+.fa-ellipsis-h, .modReplyBtn, .delReplyBtn, .cancelReplyBtn, .submitReplyBtn {
+	cursor: pointer;
+}
+
+.form-control.replies {
+	border: none;
+	box-shadow: none;
+	background-color: transparent;
+	padding: 0;
+}
