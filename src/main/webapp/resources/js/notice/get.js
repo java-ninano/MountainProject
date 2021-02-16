@@ -112,18 +112,17 @@ $(function(){
 					+	  '<input type="hidden" name="no" value="' + item.no + '" class="reply_no"></div>'
 					+	  '<div>'
 					+		'<i class="fas fa-ellipsis-h"></i>'
-					+		'<a class="modReplyBtn mx-2"><small>수정</small></a>'
-					+		'<a class="delReplyBtn"><small>삭제</small></a>'
-					+		'<a class="cancelReplyBtn ml-2"><small>취소</small></a>'
-					+		'<a class="submitReplyBtn ml-2"><small>등록</small></a>'
+					+		'<a class="modReplyBtn btn1 mx-2"><small>수정</small></a>'
+					+		'<a class="delReplyBtn btn1"><small>삭제</small></a>'
+					+		'<a class="cancelReplyBtn btn2 ml-2"><small>취소</small></a>'
+					+		'<a class="submitReplyBtn btn2 ml-2"><small>등록</small></a>'
 					+	  '</div>'
 					+	'</td>'
 					+ '</tr>'
 				
 				);
 				
-				//$('.modReplyBtn').hide();
-				//$('.delReplyBtn').hide();
+				$('td a').hide();
 	
 			});
 			
@@ -133,11 +132,10 @@ $(function(){
 	
 	getReplyList();
 	
-	
-	
-	$('.fa-ellipsis-h').click(function(){// 나중에 append된 코드에 적용이 안 되네 후
-		$(this).next().show();
-		$(this).next().next().show();
+	$(document).on('click', '.fa-ellipsis-h', function() {
+		$('.btn1').toggle(10);
+		//$(this).siblings('.btn1').toggle(10);
+		//$(this).siblings().filter('.btn1').toggle(10);
 	});
 	
 	// Reply Register
@@ -169,17 +167,20 @@ $(function(){
 	
 	// Reply Modify
 	var replyVal;
-	$(document).on('click','.modReplyBtn',function() {// 동적 생성 태그에 이벤트 적용 : on
+	$(document).on('click', '.modReplyBtn', function() {// 동적 생성 태그에 이벤트 적용 : on
 		var replies = $(this).closest('td').find('.replies');
 		replyVal = replies.val();
+		
 		$('.replies').attr('readonly', true);
-		//$(this).closest('td').find('.replies').removeAttr('readonly');
 		replies.removeAttr('readonly');
 		replies.focus();
+		
+		$('.btn1').hide();
+		$('.btn2').show();
 	});
 	
 	
-	$(document).on('click','.submitReplyBtn',function() {
+	$(document).on('click', '.submitReplyBtn', function() {
 		var data = {
 			no: Number($(this).closest('td').find('.reply_no').val()),
 			reply: $(this).closest('td').find('.replies').val()
@@ -202,8 +203,15 @@ $(function(){
 	});
 	
 	
+	$(document).on('click', '.cancelReplyBtn', function() {
+		$(this).closest('td').find('.replies').val(replyVal);
+	
+		$('.btn1').show();
+		$('.btn2').hide();
+	});
+	
 	// Reply Remove
-	$(document).on('click','.delReplyBtn',function() {
+	$(document).on('click', '.delReplyBtn', function() {
 		var reply_no = Number($(this).closest('td').find('.reply_no').val());
 		
 		$.ajax(root + '/nreplies/' + reply_no, {
