@@ -84,7 +84,7 @@ var isManager = ('${authUser.manager}' == 1);
 				      <th scope="row" class="no">${notice.no }</th>
 				      <td>${category }</td>
 				      <td>${notice.title } 
-				      	<c:if test="${notice.reply eq 1 }"><small class="text-success">0</small></c:if> <%-- 댓글 개수 --%>
+				      	<c:if test="${notice.reply eq 1 }"><small class="text-success">${notice.replycnt }</small></c:if> <%-- 댓글 개수 --%>
 				      </td>
 				      <td>${regdate }</td>
 				      <td>${notice.cnt }</td>

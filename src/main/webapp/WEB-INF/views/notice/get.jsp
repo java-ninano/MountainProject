@@ -31,6 +31,7 @@ var user_no = '${authUser.no}';
 <div class="container-sm my-5">
 	<div class="row">
 		<div class="col-12 col-md-6 offset-md-3">
+<!-- 		<div class="col-12 col-md-8 offset-md-2"> -->
 			<h3 class="text-center">공지/이벤트</h3>
 			<br>
 			<form id="removeForm" action="${root }/notice/remove?no=${notice.no}" method="post">
@@ -113,14 +114,9 @@ var user_no = '${authUser.no}';
 				<input type="text" class="form-control mx-1" name="reply" id="reply">
 				<input type="hidden" name="notice_no" id="notice_no" value="${notice.no }">
 				<input type="hidden" name="member_no" id="member_no" value="${authUser.no }">
-				<%--
-				<input type="hidden" id="keyword" value="${cri.keyword }" />
-				<input type="hidden" id="curPage" value="${cri.curPage }" />
-				<input type="hidden" id="amount" value="${cri.amount }" />
-				 --%>
+				<button class="btn btn-light float-right" id="newReplyBtn">등록</button>
 			  </div>
 			</form>
-			<button class="btn btn-light float-right" id="newReplyBtn">등록</button>
 		</div>
 	</div>
 	<%-- Reply List --%>

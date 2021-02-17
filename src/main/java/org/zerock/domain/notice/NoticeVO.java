@@ -17,7 +17,7 @@ public class NoticeVO {
 	private long member_no;
 	private int reply;// can reply (0, 1)
 	private String nickname;// 추가 view: noticeInfo
-	//private int replycnt;
+	private int replycnt;
 	
 	public String getJson() {// java object -> json
 		return (new GsonBuilder()

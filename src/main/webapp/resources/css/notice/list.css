@@ -23,3 +23,16 @@
 .list-item, h3 {
 	cursor: pointer;
 }
+
+.page-item.active .page-link {
+	background-color: green;
+	border-color: green;
+}
+
+.page-item a {
+	color: green;
+}
+
+.page-link:hover {
+	color: green;
+}

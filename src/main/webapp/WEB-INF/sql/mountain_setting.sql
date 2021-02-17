@@ -114,13 +114,17 @@ ADD CONSTRAINT notice_category_ck CHECK (category IN ('notice','event'));
 
 CREATE VIEW noticeInfo 
 AS
-SELECT n.no, n.category, n.title, n.content, n.regdate, n.cnt, n.member_no, m.nickname, n.reply
+SELECT n.no, n.category, n.title, n.content, n.regdate, n.cnt, n.member_no, m.nickname, n.reply, n.replycnt
 FROM notice n, member m
 WHERE n.member_no = m.no;
 
 -- 댓글 가능 여부
 ALTER TABLE notice
 ADD reply NUMBER(1) DEFAULT 1 NOT NULL CHECK (reply IN (0, 1));
+
+-- 댓글 개수
+ALTER TABLE notice
+ADD replycnt NUMBER DEFAULT 0 NOT NULL;
 
 -- -----------------------------------------------------
 -- Table `FREPLY`

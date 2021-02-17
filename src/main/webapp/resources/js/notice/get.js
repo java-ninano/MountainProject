@@ -138,7 +138,9 @@ $(function(){
 	
 	
 	// Reply Register
-	$('#newReplyBtn').click(function(){
+	$('#newReplyBtn').click(function(e){
+		e.preventDefault();
+		
 		var data = {
 			reply: $('#reply').val(),
 			notice_no: Number($('#notice_no').val()), // string으로 들어가는데 흠
@@ -165,10 +167,9 @@ $(function(){
 	
 	
 	// Reply Modify
-	var member_no = Number($(this).closest('td').find('.member_no').val());
-	
 	var replyVal;
 	$(document).on('click', '.modReplyBtn', function() {// 동적 생성 태그에 이벤트 적용 : on
+		var member_no = Number($(this).closest('td').find('.member_no').val());
 		if (user_no != member_no){
 			swal({
 			  title: "Not permission",
@@ -225,6 +226,19 @@ $(function(){
 
 	// Reply Remove
 	$(document).on('click', '.delReplyBtn', function() {
+		var reply_no = Number($(this).closest('td').find('.reply_no').val());
+		var member_no = Number($(this).closest('td').find('.member_no').val());
+		
+		if (user_no != member_no){
+			swal({
+			  title: "Not permission",
+			  text: "권한이 없습니다.",
+			  icon: "warning",
+			  button: "close",
+			});
+			return ;
+		}
+		
 		swal({
 			  title: "Are you sure?",
 			  text: "댓글을 삭제하시겠습니까?",
@@ -234,17 +248,6 @@ $(function(){
 		})
 		.then((isConfirm) => {
 		  if (isConfirm) {
-			var reply_no = Number($(this).closest('td').find('.reply_no').val());
-			
-			if (user_no != member_no){
-				swal({
-				  title: "Not permission",
-				  text: "권한이 없습니다.",
-				  icon: "warning",
-				  button: "close",
-				});
-				return ;
-			}
 			
 			$.ajax(root + '/nreplies/' + reply_no, {
 				type: 'DELETE'
