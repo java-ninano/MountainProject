@@ -112,7 +112,7 @@ ALTER TABLE notice
 ADD category VHARCHAR2(45) DEFAULT 'notice' NOT NULL
 ADD CONSTRAINT notice_category_ck CHECK (category IN ('notice','event'));
 
-CREATE VIEW NoticeInfo 
+CREATE VIEW noticeInfo 
 AS
 SELECT n.no, n.category, n.title, n.content, n.regdate, n.cnt, n.member_no, m.nickname, n.reply
 FROM notice n, member m
@@ -220,6 +220,9 @@ SELECT r.no, r.mountain_no, r.rname, r.rloc, r.contact, r.menu, r.description, r
 FROM restaurant r, mountain m 
 WHERE r.mountain_no = m.no;
 
+-- filename 추가
+ALTER TABLE restaurant 
+ADD (filename VARCHAR2(200));
 
 -- -----------------------------------------------------
 -- Table `PLACE`

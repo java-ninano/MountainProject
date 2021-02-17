@@ -12,7 +12,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="${root }/resources/js/notice/register.js"></script>
 <link rel="stylesheet" type="text/css" href="${root }/resources/css/font.css">
-<title>Insert title here</title>
+<title>산산산</title>
 </head>
 <body>
 <div class="container-sm my-5">

@@ -21,7 +21,7 @@ var isManager = ('${authUser.manager}' == 1);
 <script src="${root }/resources/js/notice/list.js"></script>
 <link rel="stylesheet" type="text/css" href="${root }/resources/css/font.css">
 <link rel="stylesheet" type="text/css" href="${root }/resources/css/notice/list.css">
-<title>Insert title here</title>
+<title>산산산</title>
 </head>
 <body>
 <div class="container-sm my-5">
@@ -120,7 +120,7 @@ var isManager = ('${authUser.manager}' == 1);
 			    	<c:if test="${pageNum eq pages.cri.curPage }">
 			    		<c:set var="active" value="active" />
 			    	</c:if>
-				    <c:url var="paegUrl" value="/notice/list">
+				    <c:url var="pageUrl" value="/notice/list">
 						<c:param name="category" value="${pages.cri.category }"></c:param>
 						<c:param name="keyword" value="${pages.cri.keyword }"></c:param>
 						<c:param name="curPage" value="${pageNum }"></c:param>
@@ -128,7 +128,7 @@ var isManager = ('${authUser.manager}' == 1);
 					</c:url>
 				    <li class="page-item ${active }">
 				    	<a class="page-link" href="${pageUrl }">${pageNum }</a>
-				    </li>			    
+				    </li>	    
 				    <c:remove var="active" />
 			    </c:forEach>
 			    

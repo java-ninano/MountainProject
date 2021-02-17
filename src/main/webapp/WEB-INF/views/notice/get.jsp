@@ -20,11 +20,12 @@ var canReply = ('${notice.reply}' == 1);// T, F
 
 var root = '${root}';
 var no = '${notice.no }';
+var user_no = '${authUser.no}';
 </script>
 <script src="${root }/resources/js/notice/get.js"></script>
 <link rel="stylesheet" type="text/css" href="${root }/resources/css/font.css">
 <link rel="stylesheet" type="text/css" href="${root }/resources/css/notice/get.css">
-<title>Insert title here</title>
+<title>산산산</title>
 </head>
 <body>
 <div class="container-sm my-5">

@@ -21,6 +21,7 @@ import org.zerock.domain.notice.NCriteria;
 import org.zerock.domain.notice.NPageDTO;
 import org.zerock.domain.notice.NoticeVO;
 import org.zerock.service.notice.NoticeService;
+import org.zerock.service.nreply.NReplyService;
 
 import lombok.AllArgsConstructor;
 
@@ -30,6 +31,7 @@ import lombok.AllArgsConstructor;
 public class NoticeController {
 
 	private NoticeService service;
+	private NReplyService replyService;
 	
 	/* session-member test
 	@GetMapping("/register")
@@ -132,7 +134,7 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/list")
-	public void list(Model model, @ModelAttribute("cri") NCriteria cri) {// cri -> setter()		
+	public void list(Model model, @ModelAttribute("cri") NCriteria cri) {// cri -> setter()	
 		List<NoticeVO> list = service.getList(cri);// amount: 10개씩만 갖고 오기
 		model.addAttribute("list", list);// disaptcherServlet이 모델 관리, jsp한테 넘겨줌
 		

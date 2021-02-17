@@ -93,7 +93,8 @@ $(function(){
 			$('#replyTable').empty();// 하위 요소 제거
 			
 			var now = new Date();
-			$.each(data, function(i, item){// (index, element)
+			now.setHours(now.getHours() - 9);
+			$.each(data, function(i, item){// reply list, (index, element)
 				var diff = (now.getTime() - item.updatedate)/(1000*60*60);// 시간 단위
 				
 				if(diff < 1) {// 1시간 미만
@@ -110,6 +111,7 @@ $(function(){
 					+	  '<div><strong>' + item.replyer + '</strong><small class="float-right">' + diff + '</small></div>'
 					+	  '<div><input type="text" name="reply" value="' + item.reply + '" class="form-control replies" readonly>'
 					+	  '<input type="hidden" name="no" value="' + item.no + '" class="reply_no"></div>'
+					+	  '<input type="hidden" value="' + item.member_no + '" class="member_no"></div>'
 					+	  '<div>'
 					+		'<i class="fas fa-ellipsis-h"></i>'
 					+		'<a class="modReplyBtn btn1 mx-2"><small>수정</small></a>'
@@ -122,21 +124,18 @@ $(function(){
 				
 				);
 				
-				$('td a').hide();
-	
+				$('#replyTable tr').last().find(".fa-ellipsis-h").click(function() {
+					$(this).siblings('.btn1').toggle(10);
+				});
+				
 			});
-			
+				$('td a').hide();			
 		});
 	};
 	
 	
 	getReplyList();
 	
-	$(document).on('click', '.fa-ellipsis-h', function() {
-		$('.btn1').toggle(10);
-		//$(this).siblings('.btn1').toggle(10);
-		//$(this).siblings().filter('.btn1').toggle(10);
-	});
 	
 	// Reply Register
 	$('#newReplyBtn').click(function(){
@@ -166,8 +165,21 @@ $(function(){
 	
 	
 	// Reply Modify
+	var member_no = Number($(this).closest('td').find('.member_no').val());
+	
 	var replyVal;
 	$(document).on('click', '.modReplyBtn', function() {// 동적 생성 태그에 이벤트 적용 : on
+		if (user_no != member_no){
+			swal({
+			  title: "Not permission",
+			  text: "권한이 없습니다.",
+			  icon: "warning",
+			  button: "close",
+			});
+			return ;
+		}
+	
+	
 		var replies = $(this).closest('td').find('.replies');
 		replyVal = replies.val();
 		
@@ -209,21 +221,43 @@ $(function(){
 		$('.btn1').show();
 		$('.btn2').hide();
 	});
-	
+
+
 	// Reply Remove
 	$(document).on('click', '.delReplyBtn', function() {
-		var reply_no = Number($(this).closest('td').find('.reply_no').val());
-		
-		$.ajax(root + '/nreplies/' + reply_no, {
-			type: 'DELETE'
-		}).done(function(data){
-			console.log("success: " + data);
+		swal({
+			  title: "Are you sure?",
+			  text: "댓글을 삭제하시겠습니까?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+		})
+		.then((isConfirm) => {
+		  if (isConfirm) {
+			var reply_no = Number($(this).closest('td').find('.reply_no').val());
 			
-			getReplyList();	
+			if (user_no != member_no){
+				swal({
+				  title: "Not permission",
+				  text: "권한이 없습니다.",
+				  icon: "warning",
+				  button: "close",
+				});
+				return ;
+			}
 			
-		}).fail(function(err){
-			console.log(err);
-		});
+			$.ajax(root + '/nreplies/' + reply_no, {
+				type: 'DELETE'
+			}).done(function(data){
+				console.log("success: " + data);
+				
+				getReplyList();	
+				
+			}).fail(function(err){
+				console.log(err);
+			});		  
+		  }
+		})
 	});
 	
 	
