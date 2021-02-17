@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="m" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%-- <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %> --%>
@@ -32,7 +33,7 @@
 	});
 </script>
 
-<title>Insert title here</title>
+<title>~~~서울특별시 산 정보 웹사이트 입니다~~~</title>
 
 <style>/* css */
 h5 {
@@ -44,9 +45,10 @@ h5 {
 
 </head>
 <body>
+	<m:topNav />
 	<p id="text"></p>
 	<div class="container mt-5 ">
-		<h5>글쓰기</h5>
+		<h5>글 수정</h5>
 	</div>
 
 	<div class="container-sm">
@@ -77,16 +79,17 @@ h5 {
 					</div>
 
 					<div class="form-group">
-						<label for="writer">작성자</label>
-						<%--     <input type="text" class="form-control" name="writer" id="writer" value=${user.name } readonly="readonly">  --%>
+						<label for="writer">작성자</label> <input type="text"
+							class="form-control" name="writer" id="writer"
+							value="${freeboard.user_nickname}" readonly="readonly">
 					</div>
 
 
 					<input type="hidden" value="${cri.pageNum }" name="pageNum" /> <input
 						type="hidden" value="${cri.amount }" name="amount" />
-					<%-- <input
-						type="hidden" value="${cri.keyword }" name="keyword" /> <input
-						type="hidden" value="${cri.type }" name="type" /> --%>
+					<!-- 조회페이지에서의 검색처리  -->
+					<input type="hidden" value="${cri.keyword }" name="keyword" /> <input
+						type="hidden" value="${cri.type }" name="type" />
 
 					<button type="submit" class="btn btn-outline-success">수정</button>
 					<button id="remove-btn" type="submit"

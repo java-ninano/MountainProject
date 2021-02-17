@@ -2,11 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <%-- <%@ taglib prefix="u" tagdir="/WEB-INF/tags"%> --%>
 
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+var manager = '${authUser.manager}';
+</script>
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -17,7 +21,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
 <style type="text/css">
 .address-form #sample3_address {
 	width: 370px;
@@ -39,7 +42,8 @@
 		<div class="row">
 			<div class="col-1 col-md-2"></div>
 			<div class="col-10 col-md-8">
-				<form action="${root }/restaurant/register" method="post">
+				<form action="${root }/restaurant/register" method="post" name="register">
+				<h1>${authUser.manager }</h1>
 					<div class="form-group">
 						<label for="input1">산</label> <select name="mname"
 							class="custom-select my-1 mr-sm-2 bd-highlight"
@@ -54,14 +58,14 @@
 					</div>
 					<div class="form-group">
 						<label for="input2">상호</label> <input type="text"
-							class="form-control" id="input2" name="rname">
+							class="form-control" id="input2" name="rname" required placeholder="상호를 작성하세요">
 					</div>
 					<div class="form-group address-form">
 						<label for="input3">지역</label>
 						<p>
 							<input type="hidden" id="sample3_postcode" placeholder="우편번호">
 							<input type="text" name="address1" id="sample3_address"
-								placeholder="주소"> <input type="text" name="address2"
+								required placeholder="주소를 작성하세요"> <input type="text" name="address2"
 								id="sample3_detailAddress" placeholder="상세주소"> <input
 								type="hidden" name="address3" id="sample3_extraAddress"
 								placeholder="참고항목"> <input type="button"
@@ -81,17 +85,34 @@
 					</div>
 					<div class="form-group">
 						<label for="input4">연락처</label> <input type="text"
-							class="form-control" id="input4" name="contact">
+							class="form-control" id="input4" name="contact" required placeholder="연락처를 작성하세요">
 					</div>
 					<div class="form-group">
 						<label for="input5">메뉴</label> <input type="text"
-							class="form-control" id="input5" name="menu">
+							class="form-control" id="input5" name="menu" required placeholder="메뉴를 작성하세요">
 					</div>
 					<div class="form-group">
-						<label for="input6">설명</label> <input type="text"
-							class="form-control" id="input6" name="description">
+						<label for="input6">설명</label><textarea class="form-control" name="description" id="input6"
+						rows="6" required placeholder="설명을 작성하세요"></textarea>
 					</div>
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<div>
+<!--  <label for="file-img">이미지</label> -->
+<!--  <input type="file" id="file-img" name="file" /> -->
+<!--  <div class="select_img"><img src="" /></div> -->
+ 
+<!--  <script> -->
+//   $("#file-img").change(function(){
+//    if(this.files && this.files[0]) {
+//     var reader = new FileReader;
+//     reader.onload = function(data) {
+//      $(".select_img img").attr("src", data.target.result).width(500);        
+//     }
+//     reader.readAsDataURL(this.files[0]);
+//    }
+//   });
+<!--  </script> -->
+</div>
+					<button type="submit" class="btn btn-primary">등록</button>
 				</form>
 			</div>
 			<div class="col-1 col-md-2"></div>

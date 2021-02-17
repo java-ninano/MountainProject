@@ -7,6 +7,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+	var root = '${root}';
+	var userno = '${authUser.no}';
+</script>
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -14,37 +18,39 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- <script src="https://kit.fontawesome.com/a076d05399.js"></script> -->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript"
+	src="${root }/resources/js/restaurant/LikeDislike.js"></script>
+
 <script>
 	$(document).ready(
 			function() {
 
-				var result = '${result}';
 				var message = '${message}';
-				//checkModal(result);
+				var message2 = '${message2}';
+				checkModal(message2);
 				checkModal2(message);
 
 				history.replaceState({}, null, null);
+				history.pushState(null, document.title, location.href);  // push 
+				window.addEventListener('popstate', function(event) {    //  뒤로가기 이벤트 등록
+				    // 특정 페이지로 가고싶다면 location.href = '';
+				   history.pushState(null, document.title, location.href);  // 다시 push함으로 뒤로가기 Block
+				   location.href = root + '/restaurant/list';
+				});
 
 				function checkModal2(message) {
 					if (message && history.state == null) {
-						$("#myModal .modal-body p").html(message);
-						$("#myModal").modal("show");
+						swal(message, "","success");
 					}
 				}
-
-				function checkModal(result) {
-					if (result === '' || history.state) {
-						return;
+				function checkModal(message2) {
+					if (message2 && history.state == null) {
+						swal(message2, "","warning");
 					}
-
-					if (parseInt(result) > 0) {
-						$("#myModal .modal-body p").html(
-								"게시글 " + result + "번이 등록되었습니다.");
-					}
-					$("#myModal").modal("show");
 				}
 				var actionForm = $("#actionForm");
 				$(".pagination a").click(
@@ -55,42 +61,56 @@
 									$(this).attr('href'));
 
 							actionForm.submit();
+
 						});
-				// 해야할 것
-				// 새로고침으로 카운트 반영
-				// 게시글 like 별로 클릭할 수 있게 변경
-				// modify 확인
-			
-				$(".like-img").click(function() {
-					var userno = 1;
+				
+				var removeForm = $("#removeForm");
+
+				$("#removeBtn").on('click', function(e) {
+				    e.preventDefault();
 					var resno = $(this).attr("data-resNo");
 					console.log(resno);
-					$(".like-img").prop("src", "${root}/resources/like_full.png");
-					$(".dislike-img").prop("src", "${root}/resources/dislike_empty.png");
-					$.ajax({
-						url : '${root}/restaurant/like',
-						type : 'post',
-						data : {'userno' : userno, 'resno': resno, 'likeno' : 1, 'dislikeno' : 0},
-						success : function(data) {
-							console.log("성공");
+					swal({
+						  title: "삭제 하시겠습니까?",
+						  icon: "warning",
+						  buttons: {
+							  confirm : {
+								  text : '확인',
+								  value : true,
+								  className : 'btn btn-danger'
+							  },
+							  cancle : {
+								  text : '취소',
+								  value : false,
+								  className : 'btn btn-secondary'
+							  }
+						  }
+						}).then((result) => {
+							console.log(result);
+							if(result) {
+								swal({
+									  title: resno + "번 게시물이 삭제되었습니다",
+									  icon: "success",
+									  buttons: {
+										  confirm : {
+											  text : '확인',
+											  value : true,
+											  className : 'btn btn-info'
+										  }
+									  }
+								
+								}).then((result) => {
+									console.log(result);
+									if(result) {
+										removeForm.submit();
+									}
+								});
 
-// 						}, error : function() {
-// 							console.log("실패");
-// 							alert("회원만 이용 가능합니다.");
-						}
-					});
-				});
-
-				$(".dislike-img").click(function() {
-					var userno = 1;
-					var resno = $(this).attr("data-resNo");
-					$(".dislike-img").prop("src", "${root}/resources/dislike_full.png");
-					$(".like-img").prop("src", "${root}/resources/like_empty2.png");
-					$.ajax({
-						url : '${root}/restaurant/like',
-						type : 'post',
-						data : {'userno' : userno, 'resno': resno, 'likeno' : 0, 'dislikeno' : 1},
-					});
+							} else {
+								swal.close();
+							}
+							
+						});
 				});
 				
 			});
@@ -109,6 +129,13 @@
 .col-md-8 {
 	float: left;
 }
+.swal-footer {
+	text-align: center;
+}
+.swal {
+    position : top-start;
+}
+
 </style>
 <title>Insert title here</title>
 </head>
@@ -117,14 +144,15 @@
 		<div class="row">
 			<div class="col-1 col-sm-2"></div>
 			<div class="col-10 col-sm-8 mt-3">
-
 				<form action="${root }/restaurant/list" id="searchForm"
 					class="form-inline my-2 my-lg-0 d-flex bd-highlight mb-3">
 					<div class="mr-auto p-2 bd-highlight">
 						<a href="${root }/restaurant/list"><button
-								class="btn btn-outline-info my-2 my-sm-0" type="button">목록</button></a>
+								class="btn btn-outline-info my-2 my-sm-0" type="button"><i class="far fa-list"></i>목록</button></a>
+								<c:if test="${authUser.manager == 1 }">
 						<a href="${root }/restaurant/register"><button
 								class="btn btn-outline-info my-2 my-sm-0" type="button">등록</button></a>
+								</c:if>
 					</div>
 					<select name="type" class="custom-select my-1 mr-sm-2 bd-highlight"
 						id="inlineFormCustomSelectPref">
@@ -143,11 +171,18 @@
 					<button class="btn btn-outline-info my-2 my-sm-0 p-2 bd-highlight"
 						type="submit">Search</button>
 				</form>
-				<c:forEach items="${list }" var="res">
+				<c:if test="${empty list}">
+
+				<span style="font-size: 2em; color: darkgray; text-align: center">
+				<i class="fas fa-exclamation-triangle"></i>검색한 결과가 없습니다.
+				</span></c:if>
+				<c:forEach items="${list }" var="res" varStatus="status">
+
+
 					<div class="card mb-3">
 						<div class="row no-gutters">
 							<div class="col-sm-4">
-								<img src="${root }/${res.img }" class="card-img" alt="..."
+								<img src="" class="card-img" alt="..."
 									style="width: 250px; height: 225px;">
 							</div>
 							<div class="col-sm-8">
@@ -155,18 +190,25 @@
 									<h5 class="card-title">${res.rname }</h5>
 									<p class="card-text">
 										<input type="hidden" name="resno" value="${res.no }"
-											id="resno" /> ${res.mname }<br> ${res.rloc }<br>
+											id="resno" /><c:out value="${res.mname }"/> <br> <c:out value="${res.rloc }"/><br>
 									</p>
 									<p class="card-text">
-										<small class="text-muted">${res.description }<br>${res.contact }</small><br>
+										<small class="text-muted"><c:out value="${res.description }"/><br><c:out value="${res.contact }"/></small><br>
 									</p>
-									<div class="d-flex justify-content-end align-items-center mb-1">
-<!-- 								 $(this).attr("data-resNo"); -->
-							<img data-resNo="${res.no }" class="like-img" src="${root }/resources/like_empty2.png" width="25px" height="25px"><span>&nbsp; ${res.likecnt } &nbsp;</span>
-		                    <img data-resNo="${res.no }" class="dislike-img" src="${root }/resources/dislike_empty.png" width="25px" height="25px"><span>&nbsp;${res.dislikecnt }</span>
+									<div class="d-flex justify-content-end align-items-center mb-1 likeDislike">
+										<!-- 								 $(this).attr("data-resNo"); -->
+
+										<img data-resNo="${res.no }" id="like-img${status.count }"
+											src="${root }/resources/like_empty2.png" width="25px"
+											height="25px"><span>&nbsp; ${res.likecnt }
+											&nbsp;</span> <img data-resNo="${res.no }"
+											id="dislike-img${status.count }"
+											src="${root }/resources/dislike_empty.png" width="25px"
+											height="25px"><span>&nbsp;${res.dislikecnt }</span>
 
 									</div>
-									<c:if test="${true }"> <!--  ${authUser.manager == 1} -->
+									<c:if test="${authUser.manager == 1}">
+										<!--  ${authUser.manager == 1} -->
 										<div class="d-flex justify-content-end">
 											<c:url value="/restaurant/modify" var="modifyLink">
 												<c:param name="no" value="${res.no }"></c:param>
@@ -179,10 +221,10 @@
 												<button class="btn btn-outline-info my-2 my-sm-0"
 													type="submit">수정</button>
 											</a>
-											<form action="${root }/restaurant/remove" method="post">
+											<form action="${root }/restaurant/remove" method="post" id="removeForm">
 												<input type="hidden" name="no" value="${res.no}">
 												<button class="btn btn-outline-info my-2 my-sm-0"
-													id="removeBtn" type="submit">삭제</button>
+													id="removeBtn" type="submit" data-resNo="${res.no }">삭제</button>
 											</form>
 										</div>
 									</c:if>

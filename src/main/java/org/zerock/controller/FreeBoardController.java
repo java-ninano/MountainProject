@@ -1,6 +1,7 @@
 package org.zerock.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.freeboard.FCriteria;
 import org.zerock.domain.freeboard.FPageDTO;
 import org.zerock.domain.freeboard.FreeBoardVO;
+import org.zerock.domain.member.MemberVO;
 import org.zerock.service.freeboard.FreeBoardService;
 
 import lombok.AllArgsConstructor;
@@ -43,38 +45,38 @@ public class FreeBoardController {
 //	}
 
 	@GetMapping("/list")
-	public void list(@ModelAttribute("cri") FCriteria cri, Model model) {
+	public void list(@ModelAttribute("cri") FCriteria cri, @ModelAttribute("vo")FreeBoardVO vo, @ModelAttribute("User") MemberVO User, Model model) {
 		model.addAttribute("list", service.getList(cri));
 		int total = service.getTotal(cri);
-		
-		log.info("total:::::::::"+ total);
+			
+		log.info("total:::::::::" + total);
 		model.addAttribute("pageMaker", new FPageDTO(cri, total));
-
-	
-		
+		model.addAttribute("cnt", total);
 		
 	}
-	
-
 
 	@GetMapping("/register")
 	@RequestMapping("/register")
-	public void register(FreeBoardVO vo,HttpSession session) {
-		// /freeboard/register.jsp에 session 얻어와서 member_no라는이름으로 memberVO객체를 SET해줌v-일단pass
-		
-		Object user = session.getAttribute("authUser");
+	public void register(FreeBoardVO vo) {
 
 	}
 
-
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@PostMapping("/register")
-	public String register(FreeBoardVO vo, Model model, RedirectAttributes rttr) {
-
+	public String register(@ModelAttribute("vo") FreeBoardVO vo, Model model, RedirectAttributes rttr, HttpSession session) {
+		// Session에 저장된 nickname을 User_nickname에저장
+		MemberVO User =(MemberVO) session.getAttribute("authUser");
+		vo.setUser_nickname(User.getNickname());
+		System.out.println("유저의 닉네임은"+vo.getUser_nickname());
+		/*
+		 * //값셋팅확인 String nick = vo.getUser_nickname(); log.info("nick셋팅은???"+nick);
+		 */
+		
+//		log.info(User.getName());
 		service.register(vo);
-
 		rttr.addFlashAttribute("result", vo.getNo());
-		rttr.addFlashAttribute("message", vo.getNo() + "번 글이 등록되었습니다.");
+		rttr.addFlashAttribute("message", vo.getUser_nickname() + "님의 글이 등록되었습니다.");
+
 
 		return "redirect:/freeboard/list";
 	}
@@ -84,18 +86,21 @@ public class FreeBoardController {
 		log.info("get method - no: " + no);
 		FreeBoardVO vo = service.get(no);
 		model.addAttribute("freeboard", vo);
-				
+		
+		/* 닉네임 test
+		 * FreeBoardVO vo2= new FreeBoardVO(); String nicks= vo2.getWriter();
+		 * model.addAttribute("nicks", nicks); log.info("nicks: " + nicks);
+		 */
+		
 		
 //		FCriteria cri = new FCriteria();
-//		model.addAttribute("cri", cri);
-		
-//
-//		String old_url = request.getHeader("referer");
-//		System.out.println(" get, 수정 ======> "+old_url);
+//		model.addAttribute("cri", cri);//위의 ModelAttribute와 같은것 !
+
 	}
 
 	@PostMapping("/modify")
 	public String modify(FreeBoardVO vo, @ModelAttribute("cri") FCriteria cri, RedirectAttributes rttr) {
+		
 		if (service.modify(vo)) {
 			rttr.addFlashAttribute("result", "success");
 			rttr.addFlashAttribute("message", vo.getNo() + "번 글이 수정되었습니다.");
@@ -103,14 +108,15 @@ public class FreeBoardController {
 
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
-//		rttr.addAttribute("type", cri.getType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
+//	 조회페이지에서의 검색처리 (수정,삭제는 컨트롤러에 redirect 방식으로 동작하므로 type, keyword 조건 같이 rttr에 포함
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 
 		return "redirect:/freeboard/list";
 	}
 
 	@PostMapping("/remove")
-	public String remove(@RequestParam("no") Long no,@ModelAttribute("cri") FCriteria cri, RedirectAttributes rttr) {
+	public String remove(@RequestParam("no") Long no, @ModelAttribute("cri") FCriteria cri, RedirectAttributes rttr) {
 
 		if (service.remove(no)) {
 			rttr.addFlashAttribute("result", "success");
@@ -119,8 +125,8 @@ public class FreeBoardController {
 
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
-//		rttr.addAttribute("type", cri.getType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 
 		return "redirect:/freeboard/list";
 	}
