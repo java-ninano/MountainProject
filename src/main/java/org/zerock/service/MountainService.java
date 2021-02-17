@@ -2,6 +2,7 @@ package org.zerock.service;
 
 import java.util.List;
 
+import org.zerock.domain.Mcriteria;
 import org.zerock.domain.FestivalVO;
 import org.zerock.domain.MountainVO;
 
@@ -9,17 +10,15 @@ public interface MountainService {
 
 	public void register(MountainVO mountain);
 	
-	public MountainVO get(Long no);
+	public List<MountainVO> getList(Mcriteria mcri);
 	
-	public boolean modify(MountainVO mountain);
+	public MountainVO get(Long no);
 	
 	public boolean remove(Long no);
 	
-	public List<MountainVO> getList();
-
+	public boolean modify(MountainVO mountain);
 	
-
-	
+	public int getTotal(Mcriteria mcri);
 
 	
 }

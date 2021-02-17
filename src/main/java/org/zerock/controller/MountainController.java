@@ -2,13 +2,19 @@
 package org.zerock.controller;
 
 
+
+
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.Mcriteria;
 import org.zerock.domain.MountainVO;
 import org.zerock.service.MountainService;
 
@@ -34,25 +40,43 @@ public class MountainController {
 	    
 		//등록 성공시 
 		rttr.addFlashAttribute("result",mountain.getNo());
-		rttr.addFlashAttribute("confirm", mountain.getNo() + "글 등록 성공!");
+		rttr.addFlashAttribute("message", mountain.getNo() + "글 등록 성공!");
 		
+		/*
+		//등록 실패시
+		 // redirect --> 사용자가 한번 더 요청 -->request 공유X 
+		// string --> 같은 요청으로 request 안에 든 객체 공유
+			
+		boolean result = false;
+		
+	   if(result) {
+		  
+		  return "/board/register";
+	    }
+		
+			
+		
+		*/
+		
+	
 		//등록이 끝난 후 목록으로
 		return "redirect:/board/list";
 	}
 	
 	// 산등록
 	@GetMapping("/register")
-	public void register() {
+	public void register(@ModelAttribute("mcri") Mcriteria mcri) {
 		
 	}
 
 	// 산 리스트
 	@GetMapping("/list")
-	public void list(Model model) {
+	public void list(Mcriteria mcri, Model model) {
+		List<MountainVO> list = service.getList(mcri);
 		
 		log.info("list");
 		
-		model.addAttribute("list", service.getList());
+		model.addAttribute("list", list);
 		
 		
 	}
@@ -66,47 +90,74 @@ public class MountainController {
 	/*
 	// 산 수정
 	@GetMapping("/modify")
-		public String modify(Long no, Model model) {
+		public void modify(Long no, Model model) {
 		    MountainVO vo = service.get(no);
 		    model.addAttribute("mountain", vo);
-			return "redirect:mountain/list";
+		
 		}
 	
 	
-	// 산읽기(/명소/축제)
-		@PostMapping("/read")
-		public void read(FestivalVO festival, Model model) {
-			
-			log.info("/read");
-			model.addAttribute("mountain", service.getList());
-			
-		}
-	*/
+	// 수정& 삭제 같이
+	@GetMapping({"/get", "/modify"})
+	public void get(Long no, Mcriteria mcri,  Model model) {
+		
+		log.info("/get or modify");
+		
+		MountainVO vo =service.get(no);
+		//service.get(no)
+		model.addAttribute("board", vo );
+	}
+	
 	// 산 수정(post)
 	@PostMapping("/modify")
-	public String modify(MountainVO mountain, RedirectAttributes rttr) {
+	public String modify(MountainVO mountain, Mcriteria mcri,  RedirectAttributes rttr) {
 		log.info("modify:" + mountain);
 		
 		if(service.modify(mountain)) {
 			rttr.addFlashAttribute("result", "success");
-			rttr.addFlashAttribute("message", "수정 완료");
+			rttr.addFlashAttribute("message", mountain.getNo() +"수정 완료");
 		}
+		
+		rttr.addAttribute("pageNum", mcri.getPageNum());
+		rttr.addAttribute("amount", mcri.getAmount());
+		rttr.addAttribute("type", mcri.getType());
+		rttr.addAttribute("keyword", mcri.getKeyword());
 		
 		return "redirect:/board/list";
 	}
 	
+	@PostMapping("/modify2")
+	public String modify2(MountainVO mountain, RedirectAttributes rttr) {
+		
+		if (service.modify(mountain)) {
+			rttr.addFlashAttribute("result", "success");
+			rttr.addAttribute("no", mountain.getNo());
+			rttr.addAttribute("a", "a");
+			rttr.addFlashAttribute("b", "b");
+		}
+		
+		return "redirect:/board/get";
+	}
+	
+	
 	
 	// 산 삭제
 	@PostMapping("/remove")
-	public String remove(Long no, RedirectAttributes rttr) {
+	public String remove(Long no,Mcriteria mcri, RedirectAttributes rttr) {
 		
 		if(service.remove(no) ) {
 			rttr.addAttribute("result", "success");
-			rttr.addFlashAttribute("message", "삭제 완료");
+			rttr.addFlashAttribute("message", no+ "삭제 완료");
 			
 		}
+		
+		rttr.addAttribute("pageNum", mcri.getPageNum());
+		rttr.addAttribute("amount", mcri.getAmount());
+		rttr.addAttribute("type", mcri.getType());
+		rttr.addAttribute("keyword", mcri.getKeyword());
+		
 		return "redirect:/board/list ";
 	}
-
+*/
 	
 }

@@ -3,6 +3,7 @@ package org.zerock.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.zerock.domain.Mcriteria;
 import org.zerock.domain.MountainVO;
 import org.zerock.mapper.MountainMapper;
 
@@ -13,41 +14,39 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @Log4j
 public class MountainServiceImpl implements MountainService {
-	
 	private MountainMapper mapper;
-
+	
 	@Override
 	public void register(MountainVO mountain) {
-		
-		log.info("register....:" + mountain);
-		
 		mapper.insertSelectKey(mountain);
 	}
 
 	@Override
-	public MountainVO get(Long no) {
-		return mapper.read(no);
+	public List<MountainVO> getList(Mcriteria mcri) {
+		return mapper.getListWithPaging(mcri);
 	}
 
 	@Override
-	public boolean modify(MountainVO mountain) {
-		
-		return mapper.update(mountain) ==1 ;
+	public MountainVO get(Long no) {
+		return mapper.read(no) ;
 	}
 
 	@Override
 	public boolean remove(Long no) {
-	
-		return mapper.delete(no) ==1 ;
+		// TODO Auto-generated method stub
+		return mapper.delete(no) ==1;
 	}
 
 	@Override
-	public List<MountainVO> getList() {
-		log.info("list....:");
-		
-		return mapper.getList();
-		
+	public boolean modify(MountainVO mountain) {
+		return mapper.update(mountain) ==1;
 	}
+
+	@Override
+	public int getTotal(Mcriteria mcri) {
+		return mapper.getTotalCount(mcri);
+	}
+	
 	
 
 	 
