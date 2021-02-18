@@ -9,6 +9,8 @@ public class FestivalVO {
 	private String eName;
 	private String description;
 	private int month;
-	private Long mountain_no;
+	private int mountain_no;
+	
+	
 	
 }

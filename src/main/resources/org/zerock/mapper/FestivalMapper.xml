@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="org.zerock.mapper.FestivalMapper">
+  
+  <!-- 게시글 목록 -->
+  <select id="getList" resultType="org.zerock.domain.festival.FestivalVO">
+  <![CDATA[
+  select * from festival where no> 0
+  
+  ]]>
+  </select>
+ 
+ <!-- 게시글 작성 -->
+ <insert id="insert">
+ insert into festival (no, eName, description, month, mountain_no )
+ values(seq_festival.nextval, #{eName}, #{description}, #{month}, #{ mountain_no})
+ </insert>
+  
+  <!-- 게시글 SelectKey --> 
+  <insert id="insertSelectKey">
+  <selectKey keyProperty="no" order="BEFORE" resultType="long">
+  select seq_festival.nextval from dual
+   </selectKey>
+   
+   insert into festival(no, eName, description, month, mountain_no)
+   values (#{no}, #{eName}, #{description}, #{month},#{mountain_no})
+  </insert>
+ 
+  <!-- 게시글 상세보기-->
+  <select id="read" resultType="org.zerock.domain.festival.FestivalVO">
+  select * from festival where no =#{no}
+  </select>
+  
+  <!-- 게시글 조회수 증가 처리하기
+  <update id="increaseViewcnt">
+  UPDATE festival set viewcnt = viewcnt +1 WHERE no =#{no}
+  </update>
+   -->
+   
+  <!-- 게시글 수정 -->
+  <update id="update">
+  update festival
+  set
+  eName  =#{eName},
+  description = #{description},
+  mountain_no = #{ mountain_no}
+  where 
+  no =#{no}
+  </update>
+  
+  <!-- 게시글 삭제 -->
+  <delete id="delete">
+  delete from festival where no =#{no}
+  </delete>
+  
+  <!-- 산별 축제조회 -->
+  <select id="search">
+  select * from festival  where  mountain_no
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
