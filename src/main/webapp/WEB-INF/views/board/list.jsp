@@ -17,47 +17,62 @@
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 	<!-- addFlash ==> 상황에 따른 메세지 -->
 	
-<title>Mountain List Page</title>
+<title>Insert title here</title>
 </head>
 <body>
 <div class="container-sm">
 <div class="row">
       <div class="col-12 col-sm-6 offset-sm-3">  
       <h1>Mountain List Page</h1>
-      
-      <c:set var="board" value="1">
-<div class="card" style="width: 18rem;">
-  <img src="${root }/resources/img/mountain/Buk.jpg" class="" alt="....">
-  <div class="card-body">
-    <h1 class="card-title">북한산(Bukhansan)</h1>
-    
-    <table>
-    <thead>
-        <tr>
-          <th>#No</th>
-          <th>Name</th>
-          <th>Location</th>
-          <th>height</th>
-          <th>status</th>
-        </tr>
-      </thead>
+      <table>
       <tbody>
-    <c:forEach var="mountain" items="${list }" >
-    <td><c:out value="${mountain.no }" /></td>
-    <td><c:out value="${mountain.MName }"/></td>
-    <td><c:out value="${mountain.MLoc }"/></td>
-    <td><c:out value="${mountain.height }"/></td>
-    <td><c:out value="${mountain.status }" /></td>
-    </c:forEach>
-    <a href="${root }/board/get.jsp" class="btn btn-primary">Go More Information</a>
-  </div>
-</div>
-</c:set>
-</tbody>
-</table>
+      <c:forEach var="mountain" items="${list}"  varStatus="status">
+       <c:if test="${status.count % 3 == 1 }"> 
+             <tr>
+                <td>
+                 <div class="card" style="width: 18rem;">
+                 <img src="${root }/resources/img/mountain/Buk.jpg" class="card-img-top" alt="...">
+                 <div class="card-body">
+                 <h1 class="card-title">북한산(Bukhansan)</h1>
+                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <!-- <a href="${root}/board/get.jsp" class="btn btn-primary">Go somewhere</a> -->
+               </div>
+              </div>
+                <td>
+          </c:if>
 
- </div>
- </div>
+         <c:if test="${status.count % 3 == 2 }"> 
+                <td>
+                  <div class="card" style="width: 18rem;">
+                 <img src="${root }/resources/img/mountain/Acha.jpg" class="card-img-top" alt="...">
+                 <div class="card-body">
+                 <h5 class="card-title">아차산(Achasan)</h5>
+                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="${root}/board/get.jsp" class="btn btn-primary">Go somewhere</a>
+               </div>
+               </div>
+                <td>
+          </c:if>
+      
+          <c:if test="${status.count % 3 == 0 }"> 
+                <td>
+                    <div class="card" style="width: 18rem;">
+                 <img src="${root }/resources/img/mountain/Do.jpg" class="card-img-top" alt="...">
+                 <div class="card-body">
+                 <h5 class="card-title">도봉산(Dobongsan)</h5>
+                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="${root}/board/get.jsp" class="btn btn-primary">Go somewhere</a>
+               </div>
+               </div>
+                <td>
+             <tr>
+          </c:if>
+         
+      </c:forEach>
+      </tbody>
+</table>
+</div>
+</div>
 </div>
 </body>
 </html>
