@@ -2,9 +2,9 @@ package org.zerock.service.mountain;
 
 import java.util.List;
 
-import org.zerock.domain.Mountain.Mcriteria;
-import org.zerock.domain.Mountain.MountainVO;
 import org.zerock.domain.festival.FestivalVO;
+import org.zerock.domain.mountain.Mcriteria;
+import org.zerock.domain.mountain.MountainVO;
 
 public interface MountainService {
 

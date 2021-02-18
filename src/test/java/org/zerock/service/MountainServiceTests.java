@@ -11,8 +11,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.zerock.domain.Mountain.Mcriteria;
-import org.zerock.domain.Mountain.MountainVO;
+import org.zerock.domain.mountain.Mcriteria;
+import org.zerock.domain.mountain.MountainVO;
 import org.zerock.mapper.MountainMapper;
 import org.zerock.service.mountain.MountainService;
 

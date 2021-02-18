@@ -1,4 +1,4 @@
-package org.zerock.domain.Mountain;
+package org.zerock.domain.mountain;
 
 import lombok.Data;
 

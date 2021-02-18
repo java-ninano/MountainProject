@@ -3,8 +3,8 @@ package org.zerock.service.mountain;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.zerock.domain.Mountain.Mcriteria;
-import org.zerock.domain.Mountain.MountainVO;
+import org.zerock.domain.mountain.Mcriteria;
+import org.zerock.domain.mountain.MountainVO;
 import org.zerock.mapper.MountainMapper;
 
 import lombok.AllArgsConstructor;
