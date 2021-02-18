@@ -2,8 +2,8 @@ package org.zerock.mapper;
 
 import java.util.List;
 
-import org.zerock.domain.Mcriteria;
-import org.zerock.domain.MountainVO;
+import org.zerock.domain.Mountain.Mcriteria;
+import org.zerock.domain.Mountain.MountainVO;
 
 public interface MountainMapper {
 

@@ -4,31 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.MountainMapper">
 
-<sql id="Mcriteria">
-<where>
-		<foreach item="type" collection="typeArr" separator="OR">
-			<choose>
-				<when test="type == 'T'.toString()">
-					title LIKE '%' || #{keyword} || '%' <!-- 연결 연산자 : || -->
-				</when>
-				<when test="type == 'C'.toString()">
-					content LIKE '%' || #{keyword} || '%' 
-				</when>
-				<when test="type == 'W'.toString()">
-					writer LIKE '%' || #{keyword} || '%' 
-				</when>
-			</choose>
-		</foreach>
-	   </where>
-
-</sql>
-<select id="getList" resultType="org.zerock.domain.MountainVO">
+<select id="getList" resultType="org.zerock.domain.mountain.MountainVO">
 <![CDATA[
 		select * from mountain where no > 0
 ]]>			
 	</select>
 	
-	<select id="getListWithPaging" resultType="org.zerock.domain.MountainVO">
+	<select id="getListWithPaging" resultType="org.zerock.domain.mountain.MountainVO">
 	<![CDATA[
 	SELECT 
 	no, mName, mLoc,height,status
@@ -41,14 +23,6 @@
 	mountain
 	
 	]]>
-	
-	<include refid="Mcriteria"></include>
-	
-	<![CDATA[
-	 )
-	WHERE
-	 rn BETWEEN (#{pageNum} - 1) * #{amount} + 1 AND #{pageNum} * #{amount}
-]]>		
 	</select>
 	
 <insert id="insert">
@@ -65,7 +39,7 @@ insert into mountain (no, mName, mLoc, height,status)
 values (#{no},  #{mName},#{mLoc}, #{height}, #{status} )
 </insert> 
 
-<select id="read" resultType="org.zerock.domain.MountainVO">
+<select id="read" resultType="org.zerock.domain.mountain.MountainVO">
 select * from mountain where no = #{no}
 </select>
 
@@ -83,10 +57,5 @@ set
     where no = #{no}
    
 </update>
-
-<select id="getTotalCount" resultType="int">
-SELECT count(*) FROM mountain
-<include refid="Mcriteria"></include>
-</select>
 	
 </mapper>	

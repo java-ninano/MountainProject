@@ -1,0 +1,18 @@
+fasterxml 2.11.3
+
+Store data : 20GB 무료
+Create Bucket: Create
+
+점 세개 - view object details - url path
+
+
+개인 정보
+api keys
+
+
+[DEFAULT]
+user=ocid1.user.oc1..aaaaaaaanuyfcl2n4izvpbxgujolgjczlrl47c4sc3cf4qhoaop4ysnbfoca
+fingerprint=c6:68:14:fb:21:e2:e7:f1:d5:9b:45:57:28:3d:e2:76
+tenancy=ocid1.tenancy.oc1..aaaaaaaa6mzyqdmffcgqswdjqnkokvxnotiszuclcc6f2bogngjauggralkq
+region=ap-seoul-1
+key_file=<path to your private keyfile> # TODO

@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.domain.Mcriteria;
-import org.zerock.domain.MountainVO;
-import org.zerock.service.MountainService;
-
+import org.zerock.domain.Mountain.Mcriteria;
+import org.zerock.domain.Mountain.MountainVO;
+import org.zerock.service.mountain.MountainService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
