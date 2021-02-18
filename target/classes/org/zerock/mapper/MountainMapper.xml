@@ -39,7 +39,7 @@ insert into mountain (no, mName, mLoc, height,status)
 values (#{no},  #{mName},#{mLoc}, #{height}, #{status} )
 </insert> 
 
-<select id="read" resultType="org.zerock.domain.mountain.mountainVO">
+<select id="read" resultType="org.zerock.domain.mountain.MountainVO">
 select * from mountain where no = #{no}
 </select>
 
