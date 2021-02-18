@@ -36,4 +36,8 @@ $(function(){
 		location.href = root + '/notice/list';
 	});
 	
+	$('.fa-ellipsis-v').click(function(){
+		
+	});
+	
 });

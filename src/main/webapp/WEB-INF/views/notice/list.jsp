@@ -85,6 +85,12 @@ var isManager = ('${authUser.manager}' == 1);
 				      <td>${category }</td>
 				      <td>${notice.title } 
 				      	<c:if test="${notice.reply eq 1 }"><small class="text-success">${notice.replycnt }</small></c:if> <%-- 댓글 개수 --%>
+				      	<jsp:useBean id="date" class="java.util.Date" />						
+						<fmt:parseNumber var="nowtime" value="${date.time}" integerOnly="true" />
+						<fmt:parseNumber var="regtime" value="${notice.regdate.time}" integerOnly="true" />
+				      	<c:if test="${((nowtime - regtime) / (1000*60*60) - 9 ) / 24  < 7}">
+				      		<span class="badge badge-danger">New</span> <%-- 7일 미만 --%>
+				      	</c:if>
 				      </td>
 				      <td>${regdate }</td>
 				      <td>${notice.cnt }</td>
