@@ -45,7 +45,8 @@
   set
   eName  =#{eName},
   description = #{description},
-  mountain_no = #{ mountain_no}
+  month =#{month},
+  mountain_no = #{mountain_no}
   where 
   no =#{no}
   </update>

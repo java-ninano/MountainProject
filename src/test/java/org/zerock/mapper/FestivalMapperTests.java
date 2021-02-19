@@ -34,7 +34,7 @@ public class FestivalMapperTests {
 	@Test
 	public void testInsert() {
 		FestivalVO festival = new FestivalVO();
-		festival.setEName("아차산 해맞이 축제");
+		festival.setEname("아차산 해맞이 축제");
 		festival.setDescription("아차산의 해맞이 축제는 서울에서 가장 먼저 해가 뜨는곳으로 일출을 서울에서 가장 먼저 볼 수 있으며, "
 				+ "신규행사로 느린우체통 행사, 드론비행 행사 등이 있습니다. ");
 		festival.setMonth(1);
@@ -54,7 +54,7 @@ public class FestivalMapperTests {
 	@Test
 	public void testInsertSelectKey() {
 		FestivalVO festival = new FestivalVO();
-		festival.setEName("아차산 해맞이 축제");
+		festival.setEname("아차산 해맞이 축제");
 		festival.setDescription("아차산의 해맞이 축제는 서울에서 가장 먼저 해가 뜨는곳으로 일출을 서울에서 가장 먼저 볼 수 있으며, "
 				+ "신규행사로 느린우체통 행사, 드론비행 행사 등이 있습니다. ");
 		festival.setMonth(1);
@@ -69,7 +69,7 @@ public class FestivalMapperTests {
 	@Test
 	public void testRead() {
 		FestivalVO festival = new FestivalVO();
-		festival.setEName("아차산 해맞이 축제");
+		festival.setEname("아차산 해맞이 축제");
 		festival.setDescription("아차산의 해맞이 축제는 서울에서 가장 먼저 해가 뜨는곳으로 일출을 서울에서 가장 먼저 볼 수 있으며, "
 				+ "신규행사로 느린우체통 행사, 드론비행 행사 등이 있습니다. ");
 		festival.setMonth(1);
@@ -85,7 +85,7 @@ public class FestivalMapperTests {
 	@Test
 	public void testDelete() {
 		FestivalVO festival = new FestivalVO();
-		festival.setEName("아차산 해맞이 축제");
+		festival.setEname("아차산 해맞이 축제");
 		festival.setDescription("아차산의 해맞이 축제는 서울에서 가장 먼저 해가 뜨는곳으로 일출을 서울에서 가장 먼저 볼 수 있으며, "
 				+ "신규행사로 느린우체통 행사, 드론비행 행사 등이 있습니다. ");
 		festival.setMonth(1);
@@ -93,15 +93,15 @@ public class FestivalMapperTests {
 		
 		mapper.insertSelectKey(festival);
 		
-		int cnt = mapper.delete(festival.getNo());
-		
-		log.info(cnt);
+		//int cnt = mapper.delete(festival.getNo());
+		Long no =297L;
+		mapper.delete(no);
 	}
 	
 	@Test
 	public void testUpdate() {
 		FestivalVO festival = new FestivalVO();
-		festival.setEName("아차산 해맞이 축제");
+		festival.setEname("아차산 해맞이 축제");
 		festival.setDescription("아차산의 해맞이 축제는 서울에서 가장 먼저 해가 뜨는곳으로 일출을 서울에서 가장 먼저 볼 수 있으며, "
 				+ "신규행사로 느린우체통 행사, 드론비행 행사 등이 있습니다. ");
 		festival.setMonth(1);
@@ -109,15 +109,17 @@ public class FestivalMapperTests {
 		
 		mapper.insertSelectKey(festival);
 		
-		festival.setEName("도봉산 산사 축제");
+		festival.setEname("도봉산 산사 축제");
 		festival.setDescription("도봉산의 특성을 잘 살린 솔바람 가요제, 산사음악회와 사찰음식전, "
 				+ "구민등산대회 등 구민들의 참여로 다채로운 행사가 펼쳐진다");
 		festival.setMonth(10);
 		festival.setMountain_no(41);
 		
-		int cnt =mapper.update(festival);
+		//int cnt = mapper.update(festival);
 		
-		FestivalVO updateVO=mapper.read(festival.getNo());
+		
+		
+		FestivalVO updateVO= mapper.read(festival.getNo());
 			
 	}
 	

@@ -37,7 +37,7 @@ public class MountainServiceTests {
 	}
 	
 	@Test
-	public void testRegiter() {
+	public void testRegister() {
 		MountainVO mountain = new MountainVO();
 	    mountain.setMName("서울에 있는 산인뎁쇼");
 	    mountain.setMLoc("서울시 도봉구에서 시작되어있는 산");
