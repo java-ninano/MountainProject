@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.MountainMapper">
 
-
 	<sql id="MCriteria">
 		<where>
 			<if test="keyword != null">
@@ -14,7 +13,7 @@
 		</where>
 	</sql>
 	
-
+	
 	<select id="getTotalCount" resultType="int">
 		SELECT count(*) FROM mountain
 		<include refid="MCriteria"></include>
@@ -25,7 +24,7 @@
 			SELECT seq_mountain.nextval FROM dual
 		</selectKey>
 
-		INSERT INTO mountain (no, mname, mLoc, height, status, description)
+		INSERT INTO mountain (no, mname, mloc, height, status, description)
 		VALUES (#{no}, #{mname}, #{mloc}, #{height}, #{status}, #{description})
 	</insert>
 
@@ -35,7 +34,7 @@
 
 	<update id="update">
 		UPDATE mountain
-		SET mname = #{mname, jdbcType = VARCHAR2},
+		SET mname = #{mname},
 			mloc = #{mloc},
 			height = #{height},
 			status = #{status},
@@ -75,4 +74,25 @@
 	]]>
 	</select>
 
+
+	<!-- for CONQUEST table -->
+	<select id="getMnameList" resultType="org.zerock.domain.mountain.MnameVO">
+		SELECT no, mname FROM mountain
+		ORDER BY mname
+	</select>
+	
+	<select id="getConqListbyMem" parameterType="long" resultType="org.zerock.domain.mountain.ConqStickerVO">
+		SELECT mountain_no, mname, sum(conquestcnt) conquestcnt
+		FROM 
+		(
+			SELECT mountain_no, conquestcnt, mname
+			FROM conquest c JOIN mountain m 
+			ON c.mountain_no = m.no 
+			WHERE c.member_no = #{user_no}
+			ORDER BY m.mname
+		)
+		GROUP BY mountain_no, mname
+		ORDER BY mname
+	</select>
+	
 </mapper>	

@@ -20,23 +20,27 @@ var root = '${root}';
 var result = '${result}';
 </script>
 <script src="${root }/resources/js/mountain/get.js"></script>
+<link rel="shortcut icon" href="#">
 <title>산산산</title>
 </head>
 <body>
 <div class="container-fluid my-5">
 	<div class="row">
-		<div class="col-12 col-sm-6 offset-sm-3">
-			<h3 id="mname" class="text-center mb-5">${mountain.mname }</h3>
+<!-- 		<div class="col-12 col-sm-6 offset-sm-3"> -->
+		<div class="col-12 col-md-6 offset-md-3">
+			<form id="modifyForm" method="post" class="my-2">
+				<div class="form-group d-flex justify-content-center align-items-center">
+					<input class="form-control text-center" name="mname" id="mname" value="${mountain.mname }" required readonly>
+				</div>
+				
+				<m:miniNav></m:miniNav>
 			
-			<m:miniNav></m:miniNav>
-			
-			<form method="post" class="my-5">
 				<input type="hidden" name="no" id="no" value="${mountain.no }" >
 				<img id="main_image" src="${root }/resources/img/mountain/${mountain.mname }.jpg" alt="${mountain.mname }">
 				
-				<div class="form-group mt-5">
+				<div class="form-group mt-3">
 					<label for="height">해발고도: </label>
-					<input type="number" class="form-control" name="height" id="height" value="${mountain.height }" required >
+					<input type="number" class="form-control" name="height" id="height" value="${mountain.height }" required readonly>
 					<span>m</span>
 				</div>
 	
@@ -60,17 +64,17 @@ var result = '${result}';
 				    </textarea>					
 				</div>
 				
-				<div class="form-group mt-3">
+				<div class="form-group mt-4 d-flex align-items-center">
 					<img alt="map_icon" src="${root }/resources/img/mountain/location.png"> <br>
 					<input type="text" class="form-control" name="mloc" id="mloc" value="${mountain.mloc }" required readonly>
 				</div>
 			</form>
 			<hr>
 			<a href="${root }/list" class="btn btn-success">목록</a>
-			<button class="btn btn-primary float-right">수정</button>
-			<button id="removeBtn" class="btn btn-danger float-right">삭제</button>
-			<button class="btn btn-secondary float-right">취소</button>
-			<button id="submitBtn" class="btn btn-success float-right">등록</button>
+			<button id="removeBtn" class="btn btn-danger float-right ml-1">삭제</button>
+			<button id="modifyBtn" class="btn btn-primary float-right">수정</button>
+			<button id="submitBtn" class="btn btn-success float-right ml-1">등록</button>
+			<button id="cancelBtn" class="btn btn-secondary float-right">취소</button>
 		</div>
 		
 		<hr>

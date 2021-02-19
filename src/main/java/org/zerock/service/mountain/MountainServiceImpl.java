@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.domain.mountain.ConqStickerVO;
 import org.zerock.domain.mountain.MCriteria;
+import org.zerock.domain.mountain.MnameVO;
 import org.zerock.domain.mountain.MountainVO;
 import org.zerock.mapper.MountainMapper;
 
@@ -48,6 +50,17 @@ public class MountainServiceImpl implements MountainService {
 	@Override
 	public List<MountainVO> getList(MCriteria mcri) {
 		return mapper.getListWithPaging(mcri);
+	}
+	
+	// for CONQUEST table
+	@Override
+	public List<MnameVO> getMnameList() {
+		return mapper.getMnameList();
+	}
+	
+	@Override
+	public List<ConqStickerVO> getConqListbyMem(Long user_no) {
+		return mapper.getConqListbyMem(user_no);
 	}
 	
 }

@@ -10,7 +10,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.zerock.domain.mountain.ConqStickerVO;
 import org.zerock.domain.mountain.MCriteria;
+import org.zerock.domain.mountain.MnameVO;
 import org.zerock.domain.mountain.MountainVO;
 
 import lombok.Setter;
@@ -27,10 +29,11 @@ public class MountainMapperTests {
 	@Test
 	public void testInsertSelectKey() {
 		MountainVO mountain = new MountainVO();
-		mountain.setMname("산");
+		mountain.setMname("산20");
 		mountain.setMloc("서울특별시");
 		mountain.setHeight(240);
 		mountain.setStatus(0);
+		mountain.setDescription("설명");
 
 		int before = mapper.getTotalCount(new MCriteria());
 
@@ -50,7 +53,8 @@ public class MountainMapperTests {
 		mountain.setMloc("서울");
 		mountain.setHeight(667);
 		mountain.setStatus(0);
-
+		mountain.setDescription("설명");
+		
 		mapper.insertSelectKey(mountain);
 
 		MountainVO readMountain = mapper.read(mountain.getNo());
@@ -64,26 +68,20 @@ public class MountainMapperTests {
 	public void testUpdate() {
 		MountainVO mountain = new MountainVO();
 
-		mountain.setNo(262L);
-		mountain.setMname("변경한 산이름이걸랑요");
+		mountain.setMname("산이름이걸랑요");
 		mountain.setMloc("서울시 관악구입니다");
 		mountain.setHeight(500);
 		mountain.setStatus(1);
+		mountain.setDescription("설명");
 
 		mapper.insertSelectKey(mountain);
 
-		/*
-		 * mountain.setMName("새로운 산이걸랑요?"); mountain.setMLoc("서울특별시입니다");
-		 * mountain.setHeight(240); mountain.setStatus(0);
-		 */
+		mountain.setMname("변경산");
+		
+		int cnt = mapper.update(mountain);
 
-		/*
-		 * mountain.setMName("변경한 산이름이지요"); mountain.setMLoc("서울시 관악");
-		 * mountain.setHeight(500); mountain.setStatus(1);
-		 */
-
-		assertEquals(mapper.update(mountain), 1);
-
+		assertEquals(1, cnt);
+		mapper.read(mountain.getNo());
 	}
 
 	@Test
@@ -93,6 +91,7 @@ public class MountainMapperTests {
 		mountain.setMloc("서울시 ");
 		mountain.setHeight(240);
 		mountain.setStatus(0);
+		mountain.setDescription("설명");
 
 		mapper.insertSelectKey(mountain);
 
@@ -118,5 +117,18 @@ public class MountainMapperTests {
 		
 		//list.forEach(mountain -> log.info("번호:" + mountain.getNo()));
 	}
-
+	
+	
+	// for CONQUEST table
+	@Test
+	public void testGetMnameList() {
+		List<MnameVO> list = mapper.getMnameList();
+		log.info(list);
+	}
+	
+	@Test
+	public void testGetConqListbyMem() {
+		List<ConqStickerVO> list = mapper.getConqListbyMem(245L);
+		log.info(list);
+	}
 }

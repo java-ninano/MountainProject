@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -53,11 +55,13 @@ public class MountainController {
 		// /views/get.jsp | // /views/modify.jsp
 	}
 	
-	@PostMapping("/modify")
-	public ResponseEntity<String> modify(MountainVO mountain, HttpSession session){
+	@PostMapping(value = "/modify",
+				 consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)// @RequestBody !!!!!!!!!!!
+	public ResponseEntity<String> modify(@RequestBody MountainVO mountain, HttpSession session){// req의 body가 자바 객체로 변환
+		System.out.println("어디? " + mountain);
 		if (service.modify(mountain)) {
 			session.setAttribute("result", "modSuccess");
-			return new ResponseEntity<>("modSuccess", HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} 
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

@@ -13,7 +13,7 @@ $(function(){
 		var no = Number($('#no').val());
 		var data = {
 			no: no,
-			mname: $('#mname').text(),
+			mname: $('#mname').val(),
 			mloc: $('#mloc').val(),
 			height: Number($('#height').val()),
 			status: Number($('#status').val()),
@@ -26,6 +26,8 @@ $(function(){
 			data: JSON.stringify(data)
 		}).done(function(){		  
 		  location.replace(root + '/get?no=' + no);		  
+		}).fail(function(er){
+			console.log(er);
 		});
 	});
 
@@ -50,5 +52,30 @@ $(function(){
 	   });
 	});	
 
+
+	$('#cancelBtn').hide();
+	$('#submitBtn').hide();
+
+	$('#modifyBtn').click(function(){// 입산여부도 수정하자!
+		$(this).hide();
+		$('#removeBtn').hide();
+		
+		$('#cancelBtn').show();
+		$('#submitBtn').show();
+		
+		$('#modifyForm input').removeAttr('readonly');
+		$('#modifyForm textarea').removeAttr('readonly');
+	});
+	
+	$('#cancelBtn').click(function(){
+		$(this).hide();
+		$('#submitBtn').hide();
+
+		$('#modifyBtn').show();
+		$('#removeBtn').show();
+		
+		$('#modifyForm input').attr('readonly', true);	
+		$('#modifyForm textarea').attr('readonly', true);	
+	});
 	
 });

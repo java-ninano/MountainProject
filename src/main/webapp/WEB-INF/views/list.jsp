@@ -42,7 +42,7 @@ var result = '${result}';
 		                 	<img src="${root }/resources/img/mountain/${mountain.mname}.jpg" class="card-img-top" alt="${mountain.mname }">
 		                 	<div class="card-body">
 		                 		<h4 class="card-title">${mountain.mname } (AchaSan)</h4>
-		                 		<p class="card-text">${mountain.description }</p>
+		                 		<p class="card-text">${mountain.mloc }에 있는 해발고도 ${mountain.height }m의 산</p>
 		                		<a href="${root}/get?no=${mountain.no}" class="btn btn-success">Go Into Detail</a>
 		               		</div>
 	              		</div>
