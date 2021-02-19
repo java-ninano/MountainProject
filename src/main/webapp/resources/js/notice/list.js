@@ -26,7 +26,7 @@ $(function(){
 			  title: "Removed",
 			  text: "공지가 삭제되었습니다.",
 			  icon: "success",
-			  button: "close",
+			  button: "close"
 			});
 			
 		}

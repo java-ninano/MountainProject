@@ -35,17 +35,6 @@ var user_no = '${authUser.no}';
 			<h3 class="text-center">공지/이벤트</h3>
 			<br>
 			<form id="removeForm" action="${root }/notice/remove?no=${notice.no}" method="post">
-			<%--
-			  <div class="form-group">
-			    <label for="no">글 번호</label>
-			    <input type="text" class="form-control" name="no" id="no" value="${notice.no}" readonly>
-			  </div>
-			  <div class="form-group">
-			    <label for="regdate">작성일</label>
-			    <fmt:formatDate var="regdate" value="${notice.regdate }" pattern="yyyy-MM-dd HH:mm" />
-			    <input type="text" class="form-control" name="regdate" id="regdate" value="${regdate}" readonly>
-			  </div>  
-			 --%>
 			  <div>
 			  	<fmt:formatDate var="regdate" value="${notice.regdate }" pattern="yyyy-MM-dd HH:mm" />
 			  	<span>No. ${notice.no }</span>

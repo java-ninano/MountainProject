@@ -2,25 +2,23 @@ package org.zerock.mapper;
 
 import java.util.List;
 
-import org.zerock.domain.mountain.Criteria;
+import org.zerock.domain.mountain.MCriteria;
 import org.zerock.domain.mountain.MountainVO;
 
 public interface MountainMapper {
 
-	public List<MountainVO> getList();
-	
-	public void insert(MountainVO mountain);
+	public int getTotalCount(MCriteria mcri);
 	
 	public void insertSelectKey(MountainVO mountain);
-	
-	public int delete(Long no);
-	
-	public int update(MountainVO mountain);
-
-	public List<MountainVO> getListWithPaging(Criteria cri);
 
 	public MountainVO read(Long no);
 
-	
-	
+	public int update(MountainVO mountain);
+
+	public int delete(Long no);
+
+	public List<MountainVO> getList();
+
+	public List<MountainVO> getListWithPaging(MCriteria mcri);
+
 }

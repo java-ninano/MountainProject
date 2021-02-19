@@ -31,12 +31,10 @@ CREATE TABLE MOUNTAIN (
   mLoc VARCHAR2(200) NOT NULL,
   height NUMBER DEFAULT 0 NOT NULL,
   status NUMBER(1) DEFAULT 0 NOT NULL,
+  description VARCHAR2(5000) NOT NULL,
   PRIMARY KEY (no),
   CONSTRAINT mountain_status_ck CHECK (status IN (0,1))
 );
-
-INSERT INTO mountain (mname, mloc, height, status)
-VALUES ('도봉산', '위치', 1300, 2);
 
 -- -----------------------------------------------------
 -- Table `FREEBOARD`

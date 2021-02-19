@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+#main_image {
+	width: 100%;
+}
+
+#height, #description, #mloc {
+	border: none;
+	border-radius: 0px;
+	background-color: white;
+}
+
+#height:focus, #description:focus, , #mloc:focus {
+    border: none;
+    box-shadow: none;
+    background-color: white;
+}
+
+#height {
+	display: inline-block;
+	width: 11%;
+}
