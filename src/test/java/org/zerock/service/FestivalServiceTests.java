@@ -82,6 +82,7 @@ public class FestivalServiceTests {
 	
 	@Test
 	public void testUpdate() {
+		
 		FestivalVO vo = new FestivalVO();
 		vo.setEname("북한산 효 축제");
 		vo.setDescription("북한산과 아웃도어를 테마로 시작된 축제로 한옥마을과 북한산성 마을 일대에서 "
@@ -90,17 +91,34 @@ public class FestivalServiceTests {
 		vo.setMountain_no(291);
 		service.register(vo);
 		
+		FestivalVO up = new FestivalVO();
+		up.setNo(vo.getNo());
+		up.setEname("관악산 철쭉제");
+		up.setDescription("강감찬 장군의 역사 속 업적을 기리는 관악구 축제");
+		up.setMonth(5);
+		up.setMountain_no(61);
+		
+		/*
 		FestivalVO update = mapper.read(vo.getNo());
 		assertEquals("관악산 철쭉제", update.getEname());
 		assertEquals("강감찬 장군의 역사 속 업적을 기리는 관악구 축제", update.getDescription());
 		assertEquals(5, update.setMonth());
 		update.setMountain_no(61);
 		update.setNo(11);
+		*/
+		assertTrue(service.modify(up));
 		
-		assertTrue(service.modify(update));
+		FestivalVO up2 = service.read(vo.getNo());
+		assertEquals("관악산 철쭉제",up2.getEname());
+		assertEquals("강감찬 장군의 역사 속 업적을 기리는 관악구 축제", up2.getDescription());
+		assertEquals(5, up2.getMonth());
+		assertEquals(61, up2.getMountain_no());
+		
 		
 		log.info("MODIFY RESULT: "+ service.modify(vo));
 	
+		
+		
 		
 	}
 }

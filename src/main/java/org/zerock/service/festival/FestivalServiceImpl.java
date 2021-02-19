@@ -19,13 +19,12 @@ public class FestivalServiceImpl implements FestivalService{
 	@Override
 	public void register(FestivalVO festival) {
 		mapper.insertSelectKey(festival);
+		
 	}
 
-
 	@Override
-	public boolean modify(FestivalVO vo) {
-		
-		return mapper.update(vo) ==1 ;
+	public FestivalVO read(int no) {
+		return mapper.read(no);
 	}
 
 	@Override
@@ -34,13 +33,19 @@ public class FestivalServiceImpl implements FestivalService{
 		return mapper.getList();
 	}
 
-
 	@Override
 	public boolean remove(int no) {
 		
-		return mapper.delete(no);
+		return mapper.delete(no) ==1;
 	}
 
+	@Override
+	public boolean modify(FestivalVO festival) {
+		
+		return mapper.update(festival) ==1;
+	}
+
+	
 
 	
 

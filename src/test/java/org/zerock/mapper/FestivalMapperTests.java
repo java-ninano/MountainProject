@@ -1,5 +1,6 @@
 package org.zerock.mapper;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.domain.festival.FestivalVO;
+import org.zerock.domain.mountain.MountainVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -22,7 +24,7 @@ public class FestivalMapperTests {
 	@Setter(onMethod_ =@Autowired )
 	private FestivalMapper mapper;
 	
-	//전체 목록 가져오기
+	//게시글 list 가져오기
 	@Test
 	public void testGetList() {
 		List<FestivalVO> list =mapper.getList();
@@ -40,12 +42,9 @@ public class FestivalMapperTests {
 		festival.setMonth(1);
 		festival.setMountain_no(297);
 		
-		int before=mapper.getList().size();
-		
 		mapper.insert(festival);
 		
-		int after=mapper.getList().size();
-		
+	
 		log.info(festival);
 		
 	}
@@ -60,14 +59,19 @@ public class FestivalMapperTests {
 		festival.setMonth(1);
 		festival.setMountain_no(297);
 		
+		int before = mapper.getList().size();
+		
 		mapper.insertSelectKey(festival);
 		
 		int after = mapper.getList().size();
+		
+		assertEquals(before+1,after);
 		
 	}
 	
 	@Test
 	public void testRead() {
+		/*
 		FestivalVO festival = new FestivalVO();
 		festival.setEname("아차산 해맞이 축제");
 		festival.setDescription("아차산의 해맞이 축제는 서울에서 가장 먼저 해가 뜨는곳으로 일출을 서울에서 가장 먼저 볼 수 있으며, "
@@ -75,15 +79,20 @@ public class FestivalMapperTests {
 		festival.setMonth(1);
 		festival.setMountain_no(297);
 		
+		
 		mapper.insertSelectKey(festival);
 		
 		FestivalVO readfestival = mapper.read(festival.getNo());
-	
+	*/
 		
+		FestivalVO festival = mapper.read(71);
+		
+		log.info(festival);
 	}
 	
 	@Test
 	public void testDelete() {
+		/*
 		FestivalVO festival = new FestivalVO();
 		festival.setEname("아차산 해맞이 축제");
 		festival.setDescription("아차산의 해맞이 축제는 서울에서 가장 먼저 해가 뜨는곳으로 일출을 서울에서 가장 먼저 볼 수 있으며, "
@@ -96,6 +105,9 @@ public class FestivalMapperTests {
 		//int cnt = mapper.delete(festival.getNo());
 		Long no =297L;
 		mapper.delete(no);
+		*/
+		
+	log.info("delete count: " +mapper.delete(11));
 	}
 	
 	@Test
@@ -107,22 +119,13 @@ public class FestivalMapperTests {
 		festival.setMonth(1);
 		festival.setMountain_no(297);
 		
-		mapper.insertSelectKey(festival);
-		
-		festival.setEname("도봉산 산사 축제");
-		festival.setDescription("도봉산의 특성을 잘 살린 솔바람 가요제, 산사음악회와 사찰음식전, "
-				+ "구민등산대회 등 구민들의 참여로 다채로운 행사가 펼쳐진다");
-		festival.setMonth(10);
-		festival.setMountain_no(41);
-		
-		//int cnt = mapper.update(festival);
-		
-		
-		
-		FestivalVO updateVO= mapper.read(festival.getNo());
-			
-	}
+		FestivalVO update = new FestivalVO();
+		update.setNo(13);
+		update.setDescription("새로고침");
+		update.setMonth(8);
+		update.setMountain_no(61);
 	
+	}
 	
 	
 }

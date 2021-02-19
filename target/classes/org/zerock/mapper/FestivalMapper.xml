@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
   <mapper namespace="org.zerock.mapper.FestivalMapper">
   
   <!-- 게시글 목록 -->
@@ -11,21 +12,21 @@
   
   ]]>
   </select>
- 
+
  <!-- 게시글 작성 -->
  <insert id="insert">
- insert into festival (no, eName, description, month, mountain_no )
- values(seq_festival.nextval, #{eName}, #{description}, #{month}, #{ mountain_no})
+ insert into festival (no, ename, description, month, mountain_no )
+ values(seq_festival.nextval, #{ename}, #{description}, #{month}, #{ mountain_no})
  </insert>
   
   <!-- 게시글 SelectKey --> 
   <insert id="insertSelectKey">
-  <selectKey keyProperty="no" order="BEFORE" resultType="long">
+  <selectKey keyProperty="no" order="BEFORE" resultType="int">
   select seq_festival.nextval from dual
    </selectKey>
    
-   insert into festival(no, eName, description, month, mountain_no)
-   values (#{no}, #{eName}, #{description}, #{month},#{mountain_no})
+   insert into festival(no, ename, description, month, mountain_no)
+   values (#{no}, #{ename}, #{description}, #{month},#{mountain_no})
   </insert>
  
   <!-- 게시글 상세보기-->
@@ -43,7 +44,7 @@
   <update id="update">
   update festival
   set
-  eName  =#{eName},
+  eName =#{ename},
   description = #{description},
   month =#{month},
   mountain_no = #{mountain_no}
@@ -58,43 +59,10 @@
   
   <!-- 산별 축제조회 -->
   <select id="search">
-  select * from festival  where  mountain_no
+  select * from festival  where  mountain_no >0
   </select>
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   </mapper>
