@@ -1,0 +1,106 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var appRoot = "${root}";
+var no = ${festival.no};
+
+</script>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container-sm">
+		<div class="row">
+			<div class="col-12 col-sm-6 offset-sm-3">
+				<h1>게시물 보기</h1>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-12 col-sm-6 offset-sm-3">
+
+				<div class="form-group">
+					<label for="input3">번호</label> <input class="form-control"
+						type="text" id="input3" readonly value="${board.bno }" />
+				</div>
+
+				<div class="form-group">
+					<label for="input1">제목</label> <input readonly
+						value='<c:out value="${board.title }" />' type="text"
+						class="form-control" id="input1">
+				</div>
+
+				<div class="form-group">
+					<label for="textarea1">내용</label>
+					<textarea readonly class="form-control" id="textarea1" rows="3"><c:out
+							value="${board.content }" /></textarea>
+				</div>
+		<div class="form-group">
+					<label for="input2">작성자</label> <input readonly
+						value='<c:out value="${board.writer }" />' type="text"
+						class="form-control" id="input2">
+				</div>
+		
+		   
+        <c:forEach items="${list}" var="festivalVO">
+          <tr>
+          <td>${festivalVO.no }</td>
+          <td>${festivalVO.ename }</td>
+          <td>${festivalVO.description }</td>
+          <td>${festivalVO.month }</td>
+          <td>${festivalVO.mountain_no }</td>
+            </tr>
+        </c:forEach>
+      	<a href="${modifyLink }" class="btn btn-secondary"> 수정 </a>
+		
+		
+		</div>
+		</div>
+		</div>
+		
+		<%-- modal 수정 form --%>
+	<div class="modal fade" id="modify-reply-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">수정 / 삭제</h5>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="reply-input2" class="col-form-label"> 댓글 </label> <input
+							type="text" class="form-control" id="reply-input2">
+					</div>
+					<div class="form-group">
+						<label for="replyer-input2" class="col-form-label"> 작성자 </label> <input
+							type="text" class="form-control" id="replyer-input2">
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+					<button id="reply-modify-button" type="button" class="btn btn-primary">수정</button>
+					<button id="reply-delete-button" type="button" class="btn btn-danger">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

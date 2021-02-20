@@ -4,14 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
   <mapper namespace="org.zerock.mapper.FestivalMapper">
+  <sql id="Fcriteria">
+  <where>
+  <if test="keyword !=null">
+  eName  LIKE '%' || #{keyword} || '%'
+  OR description LIKE '%' || #{keyword} || '%'
+  </if>
+  </where>
+  </sql>
   
   <!-- 게시글 목록 -->
   <select id="getList" resultType="org.zerock.domain.festival.FestivalVO">
   <![CDATA[
   select * from festival where no> 0
-  
+  ORDER BY no DESC
   ]]>
   </select>
+  
+  <select id="getListWithPaging" resultType="org.zerock.domain.festival.FestivalVO">
+  <![CDATA[
+  SELECT no, ename, description, month, mountain_no  
+  FROM
+  (
+  SELECT 
+  ROW_NUMBER() OVER (ORDER BY no DESC) rn,
+  no, ename,description, month,mountain_no
+  FROM
+  festival
+  ]]>
+  <include refid="Fcriteria"></include>
+  <![CDATA[
+	 	)
+	WHERE
+		rn BETWEEN (#{curPage} - 1) * #{amount} + 1 AND #{curPage} * #{amount}
+	]]>
+	</select>
+  
 
  <!-- 게시글 작성 -->
  <insert id="insert">
@@ -57,10 +85,10 @@
   delete from festival where no =#{no}
   </delete>
   
-  <!-- 산별 축제조회 -->
-  <select id="search">
-  select * from festival  where  mountain_no >0
-  </select>
+  <select id="getTotalCount" resultType="int">
+		SELECT count(*) FROM festival
+		<include refid="Fcriteria"></include>
+	</select>
   
   
   
