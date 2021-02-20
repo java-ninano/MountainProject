@@ -3,6 +3,7 @@ package org.zerock.service.festival;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.zerock.domain.festival.Fcriteria;
 import org.zerock.domain.festival.FestivalVO;
 import org.zerock.mapper.FestivalMapper;
 
@@ -46,8 +47,20 @@ public class FestivalServiceImpl implements FestivalService{
 	}
 
 	@Override
-	public FestivalVO get(Long no) {
+	public FestivalVO get(int no) {
 		return mapper.get(no);
+	}
+
+	@Override
+	public List<FestivalVO> getList(Fcriteria cri) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getTotal(Fcriteria cri) {
+	
+		return mapper.getTotalCount(cri);
 	}
 
 	

@@ -2,6 +2,7 @@ package org.zerock.mapper;
 
 import java.util.List;
 
+import org.zerock.domain.festival.Fcriteria;
 import org.zerock.domain.festival.FestivalVO;
 import org.zerock.domain.mountain.MountainVO;
 
@@ -28,7 +29,10 @@ public interface FestivalMapper {
 	public int update(FestivalVO festival);
 
 
-	public FestivalVO get(Long no);
+	public FestivalVO get(int no);
+
+
+	public int getTotalCount(Fcriteria cri);
 	
 	/*
 	// 산별 축제조회

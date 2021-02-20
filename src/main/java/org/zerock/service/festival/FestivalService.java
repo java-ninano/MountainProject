@@ -2,6 +2,7 @@ package org.zerock.service.festival;
 
 import java.util.List;
 
+import org.zerock.domain.festival.Fcriteria;
 import org.zerock.domain.festival.FestivalVO;
 
 public interface FestivalService {
@@ -11,12 +12,16 @@ public interface FestivalService {
 	public FestivalVO read(int no);
 	
 	public List<FestivalVO> getList();
+	
+	public List<FestivalVO> getList(Fcriteria cri);
 
 	public boolean remove(int no);
 	
 	public boolean modify(FestivalVO festival);
 
-	public FestivalVO get(Long no);
+	public FestivalVO get(int no);
+	
+	public int getTotal(Fcriteria cri);
 	
 	
 	
