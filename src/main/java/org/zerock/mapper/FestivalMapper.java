@@ -26,6 +26,9 @@ public interface FestivalMapper {
 	
 	// 게시글 수정 
 	public int update(FestivalVO festival);
+
+
+	public FestivalVO get(Long no);
 	
 	/*
 	// 산별 축제조회

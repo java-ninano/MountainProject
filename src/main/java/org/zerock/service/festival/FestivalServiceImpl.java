@@ -45,6 +45,13 @@ public class FestivalServiceImpl implements FestivalService{
 		return mapper.update(festival) ==1;
 	}
 
+	@Override
+	public FestivalVO get(Long no) {
+		return mapper.get(no);
+	}
+
+	
+
 	
 
 	

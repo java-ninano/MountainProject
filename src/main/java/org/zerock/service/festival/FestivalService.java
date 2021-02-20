@@ -15,6 +15,8 @@ public interface FestivalService {
 	public boolean remove(int no);
 	
 	public boolean modify(FestivalVO festival);
+
+	public FestivalVO get(Long no);
 	
 	
 	
