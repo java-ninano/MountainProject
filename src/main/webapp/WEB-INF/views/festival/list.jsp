@@ -2,6 +2,7 @@
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,6 +63,7 @@ $(document).ready(function() {
 <title>Insert title here</title>
 </head>
 <body>
+<u:topNav/>
 <div class="container-sm">
 <div class="row">
  <div class="col-12 col-sm-6 offset-sm-3">
