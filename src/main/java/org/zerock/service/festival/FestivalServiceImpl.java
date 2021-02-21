@@ -37,24 +37,25 @@ public class FestivalServiceImpl implements FestivalService{
 	@Override
 	public boolean remove(int no) {
 		
+		log.info("remove... :" + no);
 		return mapper.delete(no) ==1;
 	}
 
 	@Override
 	public boolean modify(FestivalVO festival) {
 		
-		return mapper.update(festival) ==1;
+		return (int) mapper.update(festival) ==1;
 	}
 
 	@Override
 	public FestivalVO get(int no) {
+		log.info("get..."+no);
 		return mapper.get(no);
 	}
 
 	@Override
 	public List<FestivalVO> getList(Fcriteria cri) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.getListPaging(cri);
 	}
 
 	@Override

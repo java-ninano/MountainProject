@@ -36,6 +36,11 @@ public class FestivalServiceTests {
 	}
 	
 	@Test
+	public void testGet() {
+		log.info(service.get(79));
+	}
+	
+	@Test
 	public void testRegister() {
 		FestivalVO festival = new FestivalVO();
 		festival.setEname("북한산 효 축제");
@@ -70,7 +75,7 @@ public class FestivalServiceTests {
 		festival.setDescription("북한산과 아웃도어를 테마로 시작된 축제로 한옥마을과 북한산성 마을 일대에서 "
 				+ "북한산 한문화를 체험할 수 있는 축제이다.    ");
 		festival.setMonth(9);
-		festival.setMountain_no(291);
+		festival.setMountain_no(80);
 		
 		service.register(festival);
 		

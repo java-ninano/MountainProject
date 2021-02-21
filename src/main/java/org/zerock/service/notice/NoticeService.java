@@ -18,7 +18,7 @@ public interface NoticeService {
 	//public boolean modifyCnt(Long no);
 	
 	public boolean modify(NoticeVO notice);
-	
+		
 	public boolean remove(Long no);
 	
 	public List<NoticeVO> getList();

@@ -58,7 +58,7 @@
   </insert>
  
   <!-- 게시글 상세보기-->
-  <select id="read" resultType="org.zerock.domain.festival.FestivalVO">
+  <select id="get" resultType="org.zerock.domain.festival.FestivalVO">
   select * from festival where no =#{no}
   </select>
   

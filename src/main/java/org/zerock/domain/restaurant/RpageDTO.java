@@ -1,6 +1,11 @@
-package org.zerock.domain.festival;
+package org.zerock.domain.restaurant;
 
-public class FpageDTO {
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString
+public class RpageDTO {
 	private int startPage;
 	private int endPage;
 
@@ -9,9 +14,9 @@ public class FpageDTO {
 
 	private int total;
 
-	private Fcriteria cri;
-	
-	public FpageDTO(Fcriteria cri, int total) {
+	private Rcriteria cri;
+
+	public RpageDTO(Rcriteria cri, int total) {
 		this.cri = cri;
 		this.total = total;
 		

@@ -22,44 +22,74 @@
 <div class="container-sm">
 		<div class="row">
 			<div class="col-12 col-sm-6 offset-sm-3">
-				<h1>게시물 작성</h1>
+				<h1>Board Register</h1>
 			</div>
 		</div>
 		
 		<div class="row">
-			<div class="col-12 col-lg-6 offset-lg-3">
-
-       <!-- 20210216 파일 업로드시 추가사항 -->
-				<form method="post" enctype="multipart/form-data"<%-- action="${pageContext.request.contextPath }/board/register" --%>
-		>
-					<div class="form-group">
-						<label for="input1">제목</label> <input name="title" type="text"
-							class="form-control" id="input1" placeholder="제목을 입력하세요.">
+			<div class="col-12 col-sm-6 offset-sm-3">
+			<form action="${root}/festival/register"  method="post" name="register">
+                 
+                 <div class="form-group">
+               <label for="input1">산 이름 </label>
+               <select name="ename" class="custom-select my-1 mr-sm-2 bd-highlight" id="input1" required/><br/>
+                            <option>북한산</option>
+							<option>도봉산</option>
+							<option>수락산</option>
+							<option>인왕산</option>
+							<option>아차산</option>
+							<option>관악산</option>
+                 </select>
+                 </div>
+                 
+                 <div class="form-group">
+						<label for="input2">설명</label><textarea class="form-control" name="description" id="input2"
+						rows="6" required placeholder="설명을 작성하세요"></textarea>
 					</div>
-
-					<div class="form-group">
-						<label for="textarea1">내용</label>
-						<textarea name="content" class="form-control" id="textarea1"
-							rows="3"></textarea>
-					</div>
-					
-                      <div class="form-group">
-						<label for="input3">파일</label> <input name="file" type="file"
-						   accept="image/*"
-							class="form-control" id="input3"">
-					</div>
-
-
-					<div class="form-group">
-						<label for="input2">작성자</label> <input name="writer" type="text"
-							class="form-control" id="input2" placeholder="이름을 입력하세요.">
-					</div>
-
-					<button type="submit" class="btn btn-primary">Submit</button>
-				</form>
-			</div>
+                 
+                 <div class="form-group">
+               <label for=input3>축제가 있는 달</label>
+               <select name="month" class="custom-select my-1 mr-sm-2 bd-highlight" id="input1" required/><br/>
+                            <option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+                 </select>
+                  </div>
+                    <!-- 산 번호를 어찌 읽어 오지?.... --> 
+        <div class="form-group">
+               <label>산 번호 </label>
+               <input type="number" name="mountain_no"  placeholder="산 축제가 있는 산 번호를 입력하세요"  required/> <br/>
+                  </div>
+                 
+                   <p>
+                 <a href="/mountain/festival/list">게시물 목록</a> <br/>
+                 <!-- <a href="/mountain/festival/register">게시물 작성</a> -->
+                 </p>
+                 
+                 
+                 	<button type="submit" class="btn btn-primary">Submit</button>
+                 	  </form>
+                 </div>
 		</div>
 	</div>
 
 </body>
-</html>
+</html>	
+                 	
+                 	
+                 	
+                 	
+                    
+				
+				
+			
+			

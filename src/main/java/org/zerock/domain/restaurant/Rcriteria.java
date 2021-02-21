@@ -1,4 +1,4 @@
-package org.zerock.domain.festival;
+package org.zerock.domain.restaurant;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,17 +7,17 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class Fcriteria {
+public class Rcriteria {
 	private int pageNo;
 	private int amount;
 	private String type;
 	private String keyword;
-	
-	public Fcriteria() {
+
+	public Rcriteria() {
 		this(1, 5);
 	}
 
-	public Fcriteria(int pageNo, int amount) {
+	public Rcriteria(int pageNo, int amount) {
 		this.pageNo = pageNo;
 		this.amount = amount;
 	}

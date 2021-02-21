@@ -67,6 +67,8 @@ $(document).ready(function() {
  <div class="col-12 col-sm-6 offset-sm-3">
 			
 	 <table class="table table-striped table-hover">
+	 <h1>Board List Page</h1>
+	  
       <thead>
         <tr>
           <th>#No</th>
@@ -122,7 +124,7 @@ $(document).ready(function() {
   </div>
 </div>
 
-
+ 
 <div class="container-sm mt-3">
 	<div class="row justify-content-center">
 		<nav aria-label="Page navigation example">

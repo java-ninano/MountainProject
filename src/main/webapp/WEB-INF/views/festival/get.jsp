@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+e<%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +25,7 @@ var no = ${festival.no};
 <title>Insert title here</title>
 </head>
 <body>
+<u:topNav/>
 <div class="container-sm">
 		<div class="row">
 			<div class="col-12 col-sm-6 offset-sm-3">
@@ -34,28 +36,53 @@ var no = ${festival.no};
 		<div class="row">
 			<div class="col-12 col-sm-6 offset-sm-3">
 
+
 				<div class="form-group">
-					<label for="input3">번호</label> <input class="form-control"
-						type="text" id="input3" readonly value="${board.bno }" />
+					<label for="input1">산 이름</label> <input name="ename" class="form-control"
+						type="text" id="input1" readonly value="${festival.no }" />
 				</div>
 
 				<div class="form-group">
-					<label for="input1">제목</label> <input readonly
-						value='<c:out value="${board.title }" />' type="text"
-						class="form-control" id="input1">
+					<label for="input2">소개</label> <input readonly
+						value='<c:out value="${festival.description }" />' type="text"
+						class="form-control" id="input2" >
 				</div>
-
+                
+				
+		    <div class="form-group">
+					<label for="input3">행사 시기</label> <input readonly
+						value='<c:out value="${festival .month }" />' type="number"
+						class="form-control" id="input3">
+				</div>
+				
 				<div class="form-group">
-					<label for="textarea1">내용</label>
-					<textarea readonly class="form-control" id="textarea1" rows="3"><c:out
-							value="${board.content }" /></textarea>
+					<label for="input4">산 번호</label> <input readonly
+						value='<c:out value="${festival .mountain_no }" />' type="number"
+						class="form-control" id="input4">
 				</div>
-		<div class="form-group">
-					<label for="input2">작성자</label> <input readonly
-						value='<c:out value="${board.writer }" />' type="text"
-						class="form-control" id="input2">
-				</div>
+				<c:url value="/festival/modify" var="modifyLink">
+				<c:param name="no" value="${festival.no }"></c:param>
+				<c:param name="pageNum" value="${cri.pageNum }"></c:param>
+				<c:param name="amount" value="${cri.amount }"></c:param>
+				</c:url>
+		       <a href="${modifyLink }" class="btn btn-outline-success"> 수정 </a>
+		     
+		  <a href="/mountain/festival/list" class="btn btn-outline-success">게시물 목록</a> <br/>
 		
+		 <!--  
+		        <c:url value="/festival/list" var="listLink">
+				<c:param name="no" value="${festival.no }"></c:param>
+				<c:param name="pageNum" value="${cri.pageNum  }"></c:param>
+				<c:param name="amount" value="${cri.amount  }"></c:param>
+				</c:url>
+				
+				<a href='${listLink }' class="btn btn-outline-success"> 목록보기 </a>
+		-->
+		
+		
+		
+		
+		<!--  
 		   
         <c:forEach items="${list}" var="festivalVO">
           <tr>
@@ -67,7 +94,7 @@ var no = ${festival.no};
             </tr>
         </c:forEach>
       	<a href="${modifyLink }" class="btn btn-secondary"> 수정 </a>
-		
+		-->
 		
 		</div>
 		</div>

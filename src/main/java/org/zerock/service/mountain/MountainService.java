@@ -2,23 +2,28 @@ package org.zerock.service.mountain;
 
 import java.util.List;
 
-import org.zerock.domain.festival.FestivalVO;
-import org.zerock.domain.mountain.Mcriteria;
+import org.zerock.domain.mountain.ConqStickerVO;
+import org.zerock.domain.mountain.MCriteria;
+import org.zerock.domain.mountain.MnameVO;
 import org.zerock.domain.mountain.MountainVO;
 
 public interface MountainService {
 
-	public void register(MountainVO mountain);
+	public int getTotal(MCriteria mcri);
 	
-	public List<MountainVO> getList(Mcriteria mcri);
+	public void register(MountainVO mountain);
 	
 	public MountainVO get(Long no);
 	
-	public boolean remove(Long no);
-	
 	public boolean modify(MountainVO mountain);
-	
-	public int getTotal(Mcriteria mcri);
 
+	public boolean remove(Long no);
+
+	public List<MountainVO> getList(MCriteria mcri);
+	
+	// for CONQUEST table
+	public List<MnameVO> getMnameList();
+	
+	public List<ConqStickerVO> getConqListbyMem(Long user_no);
 	
 }

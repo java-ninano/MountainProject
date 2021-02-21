@@ -55,16 +55,14 @@ public class FestivalController {
 		log.info("list");
 	}
 	
-	// 수정& 삭제 같이
+	// get => no/ modify
 		@GetMapping({"/get", "/modify"})
-		public void get(@RequestParam("no")int no, @ModelAttribute("cri")Fcriteria mcri,  Model model) {
-			
-			log.info("get method -no:" +no);
-			log.info("/get");
+		public void get(@RequestParam("no")int no, Model model) {
+			log.info("/get or modify");
 			
 			FestivalVO vo =service.get(no);	
 			//service.get(no)
-			model.addAttribute("festival", vo );
+			model.addAttribute("festival",vo);
 		}
 	
 	// 수정
@@ -79,8 +77,15 @@ public class FestivalController {
 		
 		rttr.addAttribute("pageNum", cri.getPageNo());
 		rttr.addAttribute("amount", cri.getAmount());
-
+        
+		boolean count = service.modify(festival);
+		
+		if(count) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		
 		return "redirect:/festival/list";
+	
 	}
 	
 	// 삭제
@@ -90,6 +95,7 @@ public class FestivalController {
 		
 		log.info("remove: " +no);
 		
+		
 		if(service.remove(no)) {
 			rttr.addFlashAttribute("result", "success");
 			rttr.addFlashAttribute("message", "글 삭제");
@@ -98,7 +104,7 @@ public class FestivalController {
 		rttr.addAttribute("pageNum", cri.getPageNo());
 		rttr.addAttribute("amount", cri.getAmount());
 		
-		return "redirect:/festival/list ";
+		return "redirect:/festival/list";
 	}
 	
 	

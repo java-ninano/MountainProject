@@ -10,7 +10,7 @@ import org.zerock.domain.mountain.MountainVO;
 public interface FestivalMapper {
 	// 게시물 리스트 
 	public List<FestivalVO> getList();
-	
+    public List<FestivalVO> getListPaging(Fcriteria cri);
 	
 	// 게시물 작성
 	public void insert(FestivalVO festival);
@@ -33,12 +33,11 @@ public interface FestivalMapper {
 
 
 	public int getTotalCount(Fcriteria cri);
-	
-	/*
-	// 산별 축제조회
-    public void search(int mountain_no);
 
-	*/
+
+
+	
+	
 
 	
 

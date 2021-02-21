@@ -1,6 +1,5 @@
 package org.zerock.controller;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Map;
@@ -14,11 +13,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.zerock.domain.mountain.MountainVO;
 import org.zerock.mapper.MountainMapper;
@@ -99,8 +96,8 @@ public class MountainControllerTests {
 	@Test
 	public void testModify() throws Exception{
 		MountainVO mountain = new MountainVO();
-		mountain.setMName("이름");
-		mountain.setMLoc("서울시 동작구");
+		mountain.setMname("이름");
+		mountain.setMloc("서울시 동작구");
 		mountain.setHeight(480);
 		mountain.setStatus(0);
 		
