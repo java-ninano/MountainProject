@@ -52,6 +52,11 @@ public class MountainServiceImpl implements MountainService {
 		return mapper.getListWithPaging(mcri);
 	}
 	
+	@Override
+	public boolean existMname(String mname) {
+		return mapper.existMname(mname) == 1;
+	}
+	
 	// for CONQUEST table
 	@Override
 	public List<MnameVO> getMnameList() {

@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -23,13 +24,16 @@ var result = '${result}';
 <body>
 <div class="container-fluid my-5">
 	<div class="row">
-		<div class="col-12 col-sm-8 offset-sm-2">  
+<!-- 		<div class="col-12 col-sm-8 offset-sm-2"> -->
+		<div class="col-12 col-md-8 offset-md-2">  
       		<h3 class="text-center">산산산들</h3>
       		<br>
-      		<form id="search" class="d-flex justify-content-center align-items-center">
+      		<form id="search" class="d-flex justify-content-end align-items-center">
       			<input class="form-control mr-sm-1" type="search" name="keyword" value="${pages.cri.keyword }" placeholder="Search">
-		    	<button class="btn btn-outline-success my-2"><i class="fas fa-search"></i></button>
+		    	<button class="btn btn-outline-success my-2 mr-5"><i class="fas fa-search"></i></button>
+		    	<a href="${root }/register" class="btn btn-outline-success ml-5">산 등록</a>
       		</form>
+
 	      	<table>
 	      		<tbody>
 	      		  <c:forEach var="mountain" items="${list}" varStatus="status">
@@ -46,7 +50,6 @@ var result = '${result}';
 		                		<a href="${root}/get?no=${mountain.no}" class="btn btn-success">Go Into Detail</a>
 		               		</div>
 	              		</div>
-		        	 
 		        	</td>
 			      
 			        <c:if test="${status.count % 3 == 0 }">
@@ -56,7 +59,8 @@ var result = '${result}';
 				</tbody>
 			</table>
 			
-<!-- 			페이지네이션 처리 -->
+		<!-- 페이지네이션 처리 -->
+		
 		</div>
 	</div>
 </div>

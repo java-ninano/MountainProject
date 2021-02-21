@@ -41,7 +41,12 @@ public class MountainController {
 	}
 	
 	@PostMapping("/register")
-	public String register(MountainVO mountain, RedirectAttributes rttr) {
+	public String register(MountainVO mountain, Model model, RedirectAttributes rttr) {
+		if(service.existMname(mountain.getMname())) {// 같은 산 이름이 존재
+			model.addAttribute("result", "failed");
+			model.addAttribute("mountain", mountain);
+			return "register";
+		}
 		service.register(mountain);
 		rttr.addFlashAttribute("result", "regSuccess");
 		

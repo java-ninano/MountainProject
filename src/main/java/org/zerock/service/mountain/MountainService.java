@@ -21,9 +21,11 @@ public interface MountainService {
 
 	public List<MountainVO> getList(MCriteria mcri);
 	
+	public boolean existMname(String mname);
+
 	// for CONQUEST table
 	public List<MnameVO> getMnameList();
 	
 	public List<ConqStickerVO> getConqListbyMem(Long user_no);
-	
+
 }

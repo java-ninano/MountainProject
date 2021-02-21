@@ -16,5 +16,9 @@ table td {
 }
 
 #search button {
-	width: 5%;
+	width: 10%;
+}
+
+#search a {
+	float: right;
 }
