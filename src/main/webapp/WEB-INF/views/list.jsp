@@ -48,13 +48,13 @@ var available = '${available}';
 		        	<td>
 						<div class="card">
 						
+						 <%--
 		                 	<img src="${root }/resources/img/mountain/${mountain.mname}.jpg" class="card-img-top" 
 		                 		alt="${mountain.mname }" onerror="this.src = '${root }/resources/img/mountain/default.png';">
-						 
-						 <%--
-		                 	<img src="${staticPath }/${mountain.filename}" class="card-img-top img-fluid" 
-		                 		alt="${mountain.filename }" onerror="this.src = '${root }/resources/img/mountain/default.png';">	
 						  --%>
+						 
+		                 	<img src="${staticPath }/${mountain.filename}" class="card-img-top img-fluid" 
+		                 		alt="${mountain.filename }" onerror="this.src='${root }/resources/img/mountain/default.png';">	
 		                 		
 		                 	<div class="card-body">
 		                 		<h4 class="card-title">${mountain.mname } (AchaSan)</h4>

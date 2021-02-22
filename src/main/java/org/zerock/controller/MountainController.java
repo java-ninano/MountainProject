@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,17 +26,14 @@ import org.zerock.service.file.FileUpService;
 import org.zerock.service.mountain.MountainService;
 
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 
 @Controller
 @AllArgsConstructor
 @RequestMapping("/*")
 public class MountainController {
 
-	@Setter(onMethod_ = @Autowired)
 	private MountainService service;
 	
-	@Setter(onMethod_ = @Autowired)
 	private FileUpService fileupSvc;
 	
 	
@@ -61,15 +57,27 @@ public class MountainController {
 		// only manager
 		if(user != null && ((MemberVO) user).getManager() == 1 ) {
 			if(service.existMname(mountain.getMname())) {// 같은 산 이름이 존재
-				model.addAttribute("result", "failed");
+				System.out.println("ex 1");
+				model.addAttribute("result", "notUnique");
 				model.addAttribute("mountain", mountain);
-				return "register";
-			}
+				return "/register";// 함수 안 벗어나고 아래 코드를 계속 실행하네...? (insert->error)
+			} 
+			
+			if (!mountain.getMname().matches("^[가-힣]+산$")) {
+				System.out.println("ex 2");
+				model.addAttribute("result", "wrongPattern");
+				model.addAttribute("mountain", mountain);
+				return "/register";
+			} 
+			
+			// 등록하고 에러페이지(mname unique 걸림) 넘어가 .............
+			// 파일 첨부 여부와 상관 없이, unique 에러페이지 넘어가는데 저장은 돼 
+			System.out.println("ex 3");
 			service.register(mountain);
 			rttr.addFlashAttribute("result", "regSuccess");
 			
 			// image upload
-			mountain.setFilename("");
+			//mountain.setFilename("");// sql null값 방지
 			service.register(mountain);// no 얻어서 파일 이름 지정 위해
 			
 			if(file != null) {
@@ -83,6 +91,7 @@ public class MountainController {
 				}
 			}
 			
+				
 		}
 		
 		return "redirect:/list";

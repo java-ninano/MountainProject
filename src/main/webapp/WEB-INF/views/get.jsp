@@ -42,9 +42,14 @@ var isManager = ('${authUser.manager}' == 1);
 				<m:miniNav></m:miniNav>
 			
 				<input type="hidden" name="no" id="no" value="${mountain.no }" >
+				<%--
 				<img id="main_image" src="${root }/resources/img/mountain/${mountain.mname }.jpg" 
 					alt="${mountain.mname }" onerror="this.src = '${root }/resources/img/mountain/default.png';">
-				
+				--%>
+				<img src="${staticPath }/${mountain.filename}" class="card-img-top img-fluid" 
+		            alt="${mountain.filename }" onerror="this.src='${root }/resources/img/mountain/default.png';">	
+		                 	
+		                 	
 				<div class="form-group mt-3">
 					<label for="height">해발고도: </label>
 					<input type="number" class="form-control" name="height" id="height" value="${mountain.height }" required readonly>

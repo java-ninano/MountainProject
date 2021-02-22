@@ -36,6 +36,10 @@ CREATE TABLE MOUNTAIN (
   CONSTRAINT mountain_status_ck CHECK (status IN (0,1))
 );
 
+-- for image upload
+ALTER TABLE mountain
+ADD filename VARCHAR2(200);
+
 -- -----------------------------------------------------
 -- Table `FREEBOARD`
 -- -----------------------------------------------------
@@ -254,6 +258,8 @@ CREATE TABLE CONQUEST (
   no NUMBER,
   member_no NUMBER NOT NULL,
   mountain_no NUMBER NOT NULL,
-  condate DATE DEFAULT sysdate NOT NULL
+  conquestcnt NUMBER NOT NULL,
+  condate DATE DEFAULT sysdate NOT NULL,
+  PRIMARY KEY(no)
 );
 

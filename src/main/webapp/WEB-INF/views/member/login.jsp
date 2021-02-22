@@ -17,52 +17,8 @@
   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-<script>
-	$(document).ready(function() {
-		
-		$('#idNull').hide();
-		$('#pwNull').hide();
-		
-		$("#loginButton").click(function() {
-			$('#idNull').hide(); 
-			$('#pwNull').hide();
-			
-	//	e.preventDefault(); submit 버튼의 기본 기능(submit) 을 막음!
-		var inputId = $('#inputId').val();
-		var inputPw = $('#inputPw').val();
-			
-		if (inputId == '') {
-			$('#idNull').show();
-		}
-		
-		if (inputPw == '') {
-			$('#pwNull').show();
-		}
-		
-		if (inputId == '' || inputPw == '') {
-			return;
-		} else {
-			$('#idNull').hide();
-			$('#pwNull').hide();
-		}
-		
-			$.ajax("/mountain/member/login", {
-				type: "post",
-				data: {inputId:inputId, inputPw:inputPw}
-			
-			}).fail(function() {
-				console.log("등록 실패");
 
-					 alert("아이디 또는 비밀번호를 확인해주세요.");
-				
-			}).done(function(data, status, xhr) {
-				console.log("등록 성공");
-				window.location.href="/mountain/index.jsp";				
-		
-			});
-		});  
-    });
-</script>
+<script type="text/javascript" src="${root }/resources/js/member/login.js"></script>
 
 <title>산산산</title>
 </head>
@@ -70,29 +26,43 @@
 
 <m:topNav />
 
-  <div class="form-group row">
-    <label for="inputId" class="col-sm-2 col-form-label">아이디</label>
-    <div class="col-sm-10">
-      <input type="text" name="id" class="form-control" id="inputId" >
- 	<small class="form-text" style="color: tomato" id="idNull" >
- 			아이디를 입력해주세요.
-    </small>
-    </div>
+로그인 된 아이디 : ${authUser.id } <br>
+로그인 된 NO : ${authUser.no }
 
-  </div>
-  
-  <div class="form-group row">
-    <label for="inputPw" class="col-sm-2 col-form-label">비밀번호</label>
-    <div class="col-sm-10">
-      <input type="password" name="password" class="form-control" id="inputPw" >
-   	  <small class="form-text" style="color: tomato" id="pwNull" >
-      		비밀번호를 입력해주세요.
-  	  </small>
-    </div>
-  </div>
-  
-   <button class="btn btn-primary" id="loginButton" >로그인</button>
-  
-
+<div class="container-sm">
+	<div class="row">
+		<div class="col-12 col-sm-6 offset-sm-3">
+			<h3 class="text-center pt-5 pb-4">회원 가입</h3>
+			<form name="loginForm">
+				<c:if test="${notFoundUser }">
+				<small class="form-text" style="color: tomato" >
+					일정 시간이 지나 로그아웃 되었습니다. 다시 로그인을 해주세요.
+				</small>
+				</c:if>
+			
+				<div class="form-group row">
+					<label for="inputId" class="col-sm-2 col-form-label">아이디</label>
+					<div class="col-sm-10">
+						<input type="text" name="id" class="form-control" id="inputId" >
+						<small class="form-text" style="color: tomato" id="idNull" >
+							아이디를 입력해주세요.
+						</small>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label for="inputPw" class="col-sm-2 col-form-label">비밀번호</label>
+					<div class="col-sm-10">
+						<input type="password" name="password" class="form-control" id="inputPw" >
+						<small class="form-text" style="color: tomato" id="pwNull" >
+							비밀번호를 입력해주세요.
+						</small>
+					</div>
+				</div>
+				<button class="btn btn-primary" id="loginButton" >로그인</button>
+			</form>
+		</div>
+	</div>
+</div>	
 </body>
 </html>

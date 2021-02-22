@@ -24,8 +24,8 @@
 			SELECT seq_mountain.nextval FROM dual
 		</selectKey>
 
-		INSERT INTO mountain (no, mname, mloc, height, status, description)
-		VALUES (#{no}, #{mname}, #{mloc}, #{height}, #{status}, #{description})
+		INSERT INTO mountain (no, mname, mloc, height, status, description, filename) <!-- null 허용 -->
+		VALUES (#{no}, #{mname}, #{mloc}, #{height}, #{status}, #{description}, #{filename, jdbcType=VARCHAR})
 	</insert>
 
 	<select id="read" resultType="org.zerock.domain.mountain.MountainVO">
@@ -38,7 +38,8 @@
 			mloc = #{mloc},
 			height = #{height},
 			status = #{status},
-			description = #{description}
+			description = #{description},
+			filename = #{filename, jdbcType=VARCHAR} <!-- null 허용 -->
 		WHERE no = #{no}
 	</update>
 
@@ -55,12 +56,12 @@
 
 	<select id="getListWithPaging" resultType="org.zerock.domain.mountain.MountainVO">
 	<![CDATA[
-	SELECT no, mname, mloc, height, status, description
+	SELECT no, mname, mloc, height, status, description, filename
 	FROM 
 		(
 		SELECT
 			ROW_NUMBER() OVER (ORDER BY no DESC) rn,
-			no, mname, mloc, height, status, description
+			no, mname, mloc, height, status, description,filename
 		FROM 
 			mountain
 	]]>

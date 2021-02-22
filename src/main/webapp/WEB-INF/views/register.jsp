@@ -25,7 +25,7 @@ var result = '${result}';
 	<div class="row">
 		<div class="col-12 col-sm-6 offset-sm-3">
 			<h3 class="text-center">산 정보 등록</h3>
-			<form id="registerForm" method="post">
+			<form id="registerForm" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="mname">이름</label>
 					<input type="text" class="form-control" name="mname" id="mname" value="${mountain.mname }" required placeholder="산 이름을 입력하세요.">
@@ -64,6 +64,11 @@ var result = '${result}';
 				<div class="form-group">
 					<label for="description">상세설명</label>
 				    <textarea class="form-control" name="description" id="description" rows="3" required>${mountain.description }</textarea>					
+				</div>
+				
+				<div class="form-group">
+					<label for="file">파일</label>
+					<input class="form-control" type="file" accept="image/*" name="file" id="file">
 				</div>
 				<button id="submitBtn" class="btn btn-success float-right">등록</button>
 				<a href="javascript:history.go(-1);" class="btn btn-secondary float-left">취소</a>
