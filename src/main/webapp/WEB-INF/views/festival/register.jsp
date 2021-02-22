@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- MOBILE최적화 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -15,7 +17,7 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" data-auto-replace-svg="nest"></script>
 
 <title>Insert title here</title>
 </head>
@@ -49,9 +51,17 @@
 						rows="6" required placeholder="설명을 작성하세요"></textarea>
 					</div>
                  
+                 
+                      <div class="form-group">
+						<label for="input3">파일</label> <input name="file" type="file"
+						   accept="image/*"
+							class="form-control" id="input3">
+					</div>
+                 
+                 
                  <div class="form-group">
-               <label for=input3>축제가 있는 달</label>
-               <select name="month" class="custom-select my-1 mr-sm-2 bd-highlight" id="input1" required/><br/>
+               <label for=input4>축제가 있는 달</label>
+               <select name="month" class="custom-select my-1 mr-sm-2 bd-highlight" id="input4" required/><br/>
                             <option>1</option>
 							<option>2</option>
 							<option>3</option>
@@ -69,7 +79,7 @@
                     <!-- 산 번호를 어찌 읽어 오지?.... --> 
         <div class="form-group">
                <label>산 번호 </label>
-               <input type="number" name="mountain_no"  placeholder="산 축제가 있는 산 번호를 입력하세요"  required/> <br/>
+              <input hidden="hidden" name="${mountain_no }" class="custom-select my-1 mr-sm-2 bd-highlight" id="input4" required/><br/>
                   </div>
                  
                    <p>

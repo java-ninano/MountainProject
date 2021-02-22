@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- MOBILE최적화 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -15,7 +17,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" data-auto-replace-svg="nest"></script>
 
 <script type="text/javascript">
 //버튼에 따라서 다른동작을 하게끔 설정
@@ -68,7 +70,7 @@ $(document).ready(function(){
 <div class="col-12 col-sm-6 offset-sm-3">
 <h1>Board Modify Page</h1>
 
-<form action="${root}/festival/modify"  method="post" name="modify">
+<form action="${root}/festival/modify"  method="post" name="modify" enctype="Multipart/form-data">
 
 <input type="hidden" name="no" value="${param.no }">
 
@@ -109,7 +111,7 @@ class="custom-select my-1 mr-sm-2 bd-highlight" id="input3" required>
 <option>11</option>
 <option>12</option>
 </select>
-</div>	
+</div>
 	           <!--   <form action="${root}/festival/modify" method="post">-->
 	            <c:url value="/festival/modify" var="modifyLink">
 				<c:param name="no" value="${festival.no}"></c:param>

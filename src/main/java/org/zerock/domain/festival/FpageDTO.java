@@ -1,5 +1,12 @@
 package org.zerock.domain.festival;
 
+
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString
+
 public class FpageDTO {
 	private int startPage;
 	private int endPage;
@@ -11,11 +18,12 @@ public class FpageDTO {
 
 	private Fcriteria cri;
 	
+	
 	public FpageDTO(Fcriteria cri, int total) {
 		this.cri = cri;
 		this.total = total;
 		
-		this.endPage = (int) Math.ceil(cri.getPageNo() / 5.0) * 5;
+		this.endPage = (int) Math.ceil(cri.getPageNum() / 5.0) * 5;
 		this.startPage = endPage - 4;
 		
 		int realEnd = (int) Math.ceil(total * 1.0 / cri.getAmount());

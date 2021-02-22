@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- MOBILE최적화 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -15,7 +17,8 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" data-auto-replace-svg="nest"></script>
+
 <script>
 $(document).ready(function() {
 	
@@ -81,16 +84,28 @@ $(document).ready(function() {
         </tr>
       </thead>
       
+ 
       
       <tbody>
         <c:forEach items="${list}" var="festivalVO">
           <tr>
           <td>${festivalVO.no }</td>
           <td>${festivalVO.ename }</td>
-          <td>${festivalVO.description }</td>
+          <td>
+            <c:url value="/festival/get" var="festivalLink">
+            <c:param value="${festivalVO.no }" name="no" />
+             <c:param value="${pageMaker.cri.pageNum }" name="pageNum" />
+             <c:param value="${pageMaker.cri.amount }" name="amount" />
+             <c:param value="${pageMaker.cri.type }" name="type" />
+             <c:param value="${pageMaker.cri.keyword }" name="keyword" />
+            </c:url>
+          <a href="${festivalLink }"> <!-- link, var ==>href로 -->
+	           <c:out value="${festivalVO.description}" />
+  			 </a>
+  			 </td>
           <td>${festivalVO.month }</td>
           <td>${festivalVO.mountain_no }</td>
-          
+
           <!--  
             <c:url value="/festival/get" var="festivalLink">
             <c:param value="${pageMaker.cri.pageNum }" name="pageNum" />
@@ -133,7 +148,7 @@ $(document).ready(function() {
 		  <ul class="pagination">
 		  
 		  	<c:if test="${pageMaker.prev }">
-		  		<c:url value="/board/list" var="prevLink">
+		  		<c:url value="/festival/list" var="prevLink">
 		  			<c:param value="${pageMaker.startPage -1 }" name="pageNum" />
 		  			<c:param value="${pageMaker.cri.amount }" name="amount" />
 		  			<c:param name="type" value="${pageMaker.cri.type }"/>
@@ -147,7 +162,7 @@ $(document).ready(function() {
 		    
 		    <c:forEach var="num" begin="${pageMaker.startPage }"
 		    					 end="${pageMaker.endPage }">
-		    	<c:url value="/board/list" var="pageLink" >
+		    	<c:url value="/festival/list" var="pageLink" >
 		    		<c:param name="pageNum" value="${num }" />
 		    		<c:param name="amount" value="${pageMaker.cri.amount }" />
 		    		<c:param name="type" value="${pageMaker.cri.type }"/>
@@ -160,7 +175,7 @@ $(document).ready(function() {
 		    </c:forEach>
 		    
 		    <c:if test="${pageMaker.next }">
-		    	<c:url value="/board/list" var="nextLink">
+		    	<c:url value="/festival/list" var="nextLink">
 		    		<c:param name="pageNum" value="${pageMaker.endPage +1 }"/>
 		    		<c:param name="amount" value="${pageMaker.cri.amount }" />
 		    		<c:param name="type" value="${pageMaker.cri.type }"/>

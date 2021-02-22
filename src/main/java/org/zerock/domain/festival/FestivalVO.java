@@ -10,6 +10,7 @@ public class FestivalVO {
 	private String description;
 	private int month;
 	private int mountain_no;
+	//private String filename;
 	
 	
 	

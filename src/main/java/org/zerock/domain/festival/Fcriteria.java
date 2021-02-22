@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 public class Fcriteria {
-	private int pageNo;
+	private int pageNum;
 	private int amount;
 	private String type;
 	private String keyword;
@@ -17,8 +17,8 @@ public class Fcriteria {
 		this(1, 5);
 	}
 
-	public Fcriteria(int pageNo, int amount) {
-		this.pageNo = pageNo;
+	public Fcriteria(int pageNum, int amount) {
+		this.pageNum = pageNum;
 		this.amount = amount;
 	}
 
@@ -29,4 +29,9 @@ public class Fcriteria {
 			return type.split("");
 		}
 	}
+	
+	
+	
+	
+	
 }
