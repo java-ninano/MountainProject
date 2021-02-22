@@ -18,6 +18,9 @@
 <script>
 var result = '${result}';
 var src = '${root }/resources/img/mountain/';
+
+var isManager = ('${authUser.manager}' == 1);
+var available = '${available}';
 </script>
 <script src="${root }/resources/js/mountain/list.js"></script>
 <title>산산산</title>
@@ -32,7 +35,7 @@ var src = '${root }/resources/img/mountain/';
       		<form id="search" class="d-flex justify-content-end align-items-center">
       			<input class="form-control mr-sm-1" type="search" name="keyword" value="${pages.cri.keyword }" placeholder="Search">
 		    	<button class="btn btn-outline-success my-2 mr-5"><i class="fas fa-search"></i></button>
-		    	<a href="${root }/register" class="btn btn-outline-success ml-5">산 등록</a>
+		    	<a href="${root }/register" id="newMountain" class="btn btn-outline-success ml-5">산 등록</a>
       		</form>
 
 	      	<table>
@@ -44,8 +47,15 @@ var src = '${root }/resources/img/mountain/';
 
 		        	<td>
 						<div class="card">
+						
 		                 	<img src="${root }/resources/img/mountain/${mountain.mname}.jpg" class="card-img-top" 
 		                 		alt="${mountain.mname }" onerror="this.src = '${root }/resources/img/mountain/default.png';">
+						 
+						 <%--
+		                 	<img src="${staticPath }/${mountain.filename}" class="card-img-top img-fluid" 
+		                 		alt="${mountain.filename }" onerror="this.src = '${root }/resources/img/mountain/default.png';">	
+						  --%>
+		                 		
 		                 	<div class="card-body">
 		                 		<h4 class="card-title">${mountain.mname } (AchaSan)</h4>
 		                 		<p class="card-text">${mountain.mloc }에 있는 해발고도 ${mountain.height }m의 산</p>
@@ -108,5 +118,7 @@ var src = '${root }/resources/img/mountain/';
 </div>
 <%-- 삭제 성공 결과 삭제 --%>
 <c:remove var="result"/>
+<%-- 접근 금지 결과 삭제 --%>
+<c:remove var="available"/>
 </body>
 </html>

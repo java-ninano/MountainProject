@@ -17,6 +17,15 @@ $(function(){
 		});
 	}
 	
+	if(available == 'notPermitted') {
+		swal({
+		  	title: "Not Allowed",
+		  	text: "관리자만 이용 가능합니다.",
+		  	icon: "warning",
+		  	button: "close"
+		});
+	}
+	
 	/*검색창에 포커스 맞춰져 있을 때 엔터치면 검색*/
 	$('#search input').keydown(function(key) {
 		if (key.keyCode == 13) {
@@ -24,8 +33,12 @@ $(function(){
 		}
 	});
 	
-	/*
-	$('img').error(function(){
-	}).attr('src', src + '/default.png');*/
+	if(!isManager){
+		$('#newMountain').hide();
+	}
+	
+	
+/*	$('img').error(function(){
+	}).attr('src', src + '/default.png'); */
 	
 })

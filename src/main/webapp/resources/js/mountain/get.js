@@ -1,5 +1,7 @@
 $(function(){
 
+	var curMname = $('#mname').val();// 변경 전 이름
+	
 	if (result == 'modSuccess') {
 		swal({
 			title: "Modified",
@@ -11,6 +13,20 @@ $(function(){
 	
 	/* 수정 */
 	$('#submitBtn').click(function(){
+		/* 산 이름 pattern 체크 */
+		var mname = $('#mname').val();
+		var reg = /^[가-힣]+산$/;
+		
+		if (!mname.match(reg)){
+			swal({
+				title: "Not available",
+				text: "산 이름을 정확히 작성해주세요.",
+				icon: "warning",
+				button: "close"
+			});
+			return ;
+		}
+		
 		var status = 0;
 		const st = $('[name="status"]');
 		if( st[1].checked ) {
@@ -20,24 +36,40 @@ $(function(){
 		var no = Number($('#no').val());
 		var data = {
 			no: no,
-			mname: $('#mname').val(),
+			mname: mname,
 			mloc: $('#mloc').val(),
 			height: Number($('#height').val()),
 			status: status,
 			description: $('#description').val()
 		};
 		
-		$.ajax(root + '/modify?curPage=' + curPage + '&amount=' + amount + '&keyword=' + keyword, 
-		{
+		/* 산 이름 UNIQUE 체크 */
+		if(curMname != mname){// mname 변경하는 경우
+			$.ajax(root + '/check', {
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(data)
+			}).fail(function(){
+				swal({
+					title: "Not available",
+					text: "이미 존재하는 산 이름입니다.",
+					icon: "warning",
+					button: "close"
+				});
+			});
+		}
+		
+		
+	//$.ajax(root + '/modify?curPage=' + curPage + '&amount=' + amount + '&keyword=' + keyword, 
+		$.ajax(root + '/modify', {
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(data)
-		}).done(function(){	
+		}).done(function(){
 		  location.replace(root + '/get?no=' + no + '&curPage=' + curPage + '&amount=' + amount + '&keyword=' + keyword);		  
-		}).fail(function(er){
-			console.log(er);
 		});
 	});
+
 
 	/* 삭제 */
 	$('#removeBtn').click(function(){
@@ -72,6 +104,7 @@ $(function(){
 	$('#submitBtn').hide();
 	$('#statusForm').hide();
 
+	/* 수정 버튼 클릭 */
 	$('#modifyBtn').click(function(){// 입산여부도 수정하자!
 		$(this).hide();
 		$('#removeBtn').hide();
@@ -86,7 +119,9 @@ $(function(){
 		$('#statusForm').show();
 	});
 	
+	/* 취소 버튼 클릭 */
 	$('#cancelBtn').click(function(){
+	/*
 		$(this).hide();
 		$('#submitBtn').hide();
 
@@ -98,6 +133,14 @@ $(function(){
 		
 		$('#statusView').show();
 		$('#statusForm').hide();
+	*/	
+		
+		location.reload();// form값 되돌리기
 	});
+
+	if(!isManager) {
+		$('#modifyBtn').hide();
+		$('#removeBtn').hide();
+	}
 	
 });

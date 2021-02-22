@@ -75,7 +75,9 @@
 	</select>
 
 	<select id="existMname" parameterType="String" resultType="int">
-		SELECT count(*) FROM mountain WHERE mname = #{mname} 
+		SELECT count(*) 
+		FROM mountain 
+		WHERE mname = #{mname}
 	</select>
 
 

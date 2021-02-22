@@ -1,5 +1,7 @@
 $(function(){
-	$('#mname').focusout(function(){
+	$('#submitBtn').click(function(e){
+		e.preventDefault();
+		
 		var mname = $('#mname').val();
 		var reg = /^[가-힣]+산$/;
 		
@@ -10,6 +12,8 @@ $(function(){
 				icon: "warning",
 				button: "close"
 			});
+		} else {
+			$('#registerForm').submit();
 		}
 	});
 

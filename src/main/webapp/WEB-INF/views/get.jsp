@@ -22,6 +22,8 @@ var result = '${result}';
 var curPage = '${cri.curPage}';
 var amount = '${cri.amount}';
 var keyword = '${cri.keyword}';
+
+var isManager = ('${authUser.manager}' == 1);
 </script>
 <script src="${root }/resources/js/mountain/get.js"></script>
 <link rel="shortcut icon" href="#">
