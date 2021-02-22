@@ -53,17 +53,17 @@ public class MountainController {
 		return "redirect:/list";
 	}
 
-	@GetMapping({"/get", "/modify"})
-	public void get(@RequestParam("no") Long no, Model model) {// @RequestParam("no") 매개변수 매핑
+	@GetMapping("/get")
+	public void get(@RequestParam("no") Long no, 
+			@ModelAttribute("cri") MCriteria cri, Model model) {// @RequestParam("no") 매개변수 매핑
 		MountainVO mountain = service.get(no);
 		model.addAttribute("mountain", mountain);
-		// /views/get.jsp | // /views/modify.jsp
+		// /views/get.jsp
 	}
 	
 	@PostMapping(value = "/modify",
 				 consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)// @RequestBody !!!!!!!!!!!
 	public ResponseEntity<String> modify(@RequestBody MountainVO mountain, HttpSession session){// req의 body가 자바 객체로 변환
-		System.out.println("어디? " + mountain);
 		if (service.modify(mountain)) {
 			session.setAttribute("result", "modSuccess");
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -75,7 +75,7 @@ public class MountainController {
 	public ResponseEntity<String> remove(@RequestParam Long no, HttpSession session){
 		if (service.remove(no)) {
 			session.setAttribute("result", "delSuccess");
-			return new ResponseEntity<>("delSuccess", HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} 
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

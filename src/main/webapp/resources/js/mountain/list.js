@@ -1,4 +1,4 @@
-$(function(){console.log(result);
+$(function(){
 	if(result == 'regSuccess') {
 		swal({
 		  title: "Registered",
@@ -24,5 +24,8 @@ $(function(){console.log(result);
 		}
 	});
 	
+	/*
+	$('img').error(function(){
+	}).attr('src', src + '/default.png');*/
 	
 })

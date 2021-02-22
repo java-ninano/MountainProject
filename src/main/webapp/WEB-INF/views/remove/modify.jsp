@@ -17,7 +17,7 @@
 <title>산산산</title>
 </head>
 <body>
-<div class="container-sm my-5"">
+<div class="container-sm my-5">
 	<div class="row">
 		<div class="col-12 col-sm-6 offset-sm-3">
 			<h3 class="text-center">산 정보 수정</h3>

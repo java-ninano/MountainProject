@@ -17,6 +17,7 @@
 <link rel="stylesheet" type="text/css" href="${root }/resources/css/mountain/list.css">
 <script>
 var result = '${result}';
+var src = '${root }/resources/img/mountain/';
 </script>
 <script src="${root }/resources/js/mountain/list.js"></script>
 <title>산산산</title>
@@ -43,11 +44,18 @@ var result = '${result}';
 
 		        	<td>
 						<div class="card">
-		                 	<img src="${root }/resources/img/mountain/${mountain.mname}.jpg" class="card-img-top" alt="${mountain.mname }">
+		                 	<img src="${root }/resources/img/mountain/${mountain.mname}.jpg" class="card-img-top" 
+		                 		alt="${mountain.mname }" onerror="this.src = '${root }/resources/img/mountain/default.png';">
 		                 	<div class="card-body">
 		                 		<h4 class="card-title">${mountain.mname } (AchaSan)</h4>
 		                 		<p class="card-text">${mountain.mloc }에 있는 해발고도 ${mountain.height }m의 산</p>
-		                		<a href="${root}/get?no=${mountain.no}" class="btn btn-success">Go Into Detail</a>
+		                 		<c:url var="getUrl" value="/get">
+					    		  <c:param name="no">${mountain.no}</c:param>
+					    		  <c:param name="curPage">${cri.curPage }</c:param>
+					    		  <c:param name="amount">${cri.amount }</c:param>
+					    		  <c:param name="keyword">${cri.keyword }</c:param>
+					    	    </c:url>
+		                		<a href="${getUrl }" class="btn btn-success">Go Into Detail</a>
 		               		</div>
 	              		</div>
 		        	</td>
@@ -59,7 +67,41 @@ var result = '${result}';
 				</tbody>
 			</table>
 			
-		<!-- 페이지네이션 처리 -->
+			<!-- 페이지네이션 처리 -->
+			<nav aria-label="Page navigation example">
+			  <ul class="pagination justify-content-center">
+			    <c:if test="${not pages.prev }"><c:set var="prevDisabled" value="disabled" /></c:if>
+			    <li class="page-item ${prevDisabled }">
+			      <c:url var="prevUrl" value="/list">
+		    		<c:param name="curPage">${pages.startPage-1 }</c:param>
+		    		<c:param name="amount">${cri.amount }</c:param>
+		    		<c:param name="keyword">${cri.keyword }</c:param>
+		    	  </c:url>
+			      <a class="page-link" href="${prevUrl }">Previous</a>
+			    </li>
+			    
+			    <c:forEach var="page" begin="${pages.startPage }" end="${pages.endPage }">
+			    	<c:url var="pageUrl" value="/list">
+			    		<c:param name="curPage">${page }</c:param>
+			    		<c:param name="amount">${cri.amount }</c:param>
+			    		<c:param name="keyword">${cri.keyword }</c:param>
+			    	</c:url>
+			    	<c:if test="${page eq cri.curPage }"><c:set var="active" value="active" /></c:if>
+				    <li class="page-item ${active }"><a class="page-link" href="${pageUrl }">${page }</a></li>			    
+				    <c:remove var="active"/>
+			    </c:forEach>
+					    
+				<c:if test="${not pages.next }"><c:set var="nextDisabled" value="disabled" /></c:if>
+			    <li class="page-item ${nextDisabled }">
+			      <c:url var="nextUrl" value="/list">
+		    		<c:param name="curPage">${pages.endPage+1 }</c:param>
+		    		<c:param name="amount">${cri.amount }</c:param>
+		    		<c:param name="keyword">${cri.keyword }</c:param>
+		    	  </c:url>
+			      <a class="page-link" href="${nextUrl }">Next</a>
+			    </li>
+			  </ul>
+			</nav>
 		
 		</div>
 	</div>

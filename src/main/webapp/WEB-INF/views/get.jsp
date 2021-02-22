@@ -18,6 +18,10 @@
 <script>
 var root = '${root}';
 var result = '${result}';
+
+var curPage = '${cri.curPage}';
+var amount = '${cri.amount}';
+var keyword = '${cri.keyword}';
 </script>
 <script src="${root }/resources/js/mountain/get.js"></script>
 <link rel="shortcut icon" href="#">
@@ -36,7 +40,8 @@ var result = '${result}';
 				<m:miniNav></m:miniNav>
 			
 				<input type="hidden" name="no" id="no" value="${mountain.no }" >
-				<img id="main_image" src="${root }/resources/img/mountain/${mountain.mname }.jpg" alt="${mountain.mname }">
+				<img id="main_image" src="${root }/resources/img/mountain/${mountain.mname }.jpg" 
+					alt="${mountain.mname }" onerror="this.src = '${root }/resources/img/mountain/default.png';">
 				
 				<div class="form-group mt-3">
 					<label for="height">해발고도: </label>
@@ -44,17 +49,28 @@ var result = '${result}';
 					<span>m</span>
 				</div>
 	
-				<div>
+				<div id="statusView">
 					<label for="status0">현재 상태: </label>
 				  	<c:if test="${mountain.status == 0 }">
-				  		<c:set var="status" value="입산 가능"></c:set>
+				  		<c:set var="status0" value="checked" />
 				  		<span>입산 가능</span>
 				  	</c:if>
 				  	<c:if test="${mountain.status == 1 }">
-				  		<c:set var="status" value="입산 불가"></c:set>
+				  		<c:set var="status1" value="checked" />
 						<span>입산 불가</span>
 				  	</c:if>
-				  	<input type="hidden" name="status" id="status" value="${mountain.status }" required readonly>
+				</div>
+		
+				<div id="statusForm" class="form-group">
+				  	<label for="status0">입산여부</label>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="status" id="status0" value="0" ${status0 }>
+					  <label class="form-check-label" for="status0">가능</label>
+					</div>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="status" id="status1" value="1" ${status1 }>
+					  <label class="form-check-label" for="status1">불가능</label>
+					</div>
 				</div>
 		
 				<div class="form-group mt-3">
@@ -70,7 +86,12 @@ var result = '${result}';
 				</div>
 			</form>
 			<hr>
-			<a href="${root }/list" class="btn btn-success">목록</a>
+			<c:url var="listUrl" value="/list">
+    		  <c:param name="curPage">${cri.curPage }</c:param>
+    		  <c:param name="amount">${cri.amount }</c:param>
+    		  <c:param name="keyword">${cri.keyword }</c:param>
+    	    </c:url>
+			<a href="${listUrl }" class="btn btn-success">목록</a>
 			<button id="removeBtn" class="btn btn-danger float-right ml-1">삭제</button>
 			<button id="modifyBtn" class="btn btn-primary float-right">수정</button>
 			<button id="submitBtn" class="btn btn-success float-right ml-1">등록</button>
