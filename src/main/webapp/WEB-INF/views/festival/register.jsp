@@ -40,7 +40,7 @@ $(document).ready(function() {
 		
 		<div class="row">
 			<div class="col-12 col-sm-6 offset-sm-3">
-			<form action="${root}/festival/register"  method="post" name="register">
+			<form action="${root}/festival/register"  method="post" name="register" enctype="Multipart/form-data" >
                  
                  <div class="form-group">
                <label for="input1">산 이름 </label>
@@ -86,7 +86,7 @@ $(document).ready(function() {
 						rows="6" required placeholder="설명을 작성하세요"></textarea>
 					</div>
                  
-                 
+                   
                       <div class="form-group">
 						<label for="input3">파일</label> <input name="file" type="file"
 						   accept="image/*"
@@ -129,10 +129,17 @@ $(document).ready(function() {
 						 <label for="input2">산 번호 </label>
 						<select name="mountain_no" class="custom-select my-1 mr-sm-2 bd-highlight" id="register-select2">
   	<c:forEach items="${list}" var="MnameVO">
-  		<option class="dropdown-item" value="${MnameVO.no }">${MnameVO.no }</option>
+  		<option class="dropdown-item" value="${MnameVO.no}">${MnameVO.no}</option>
     </c:forEach>
-</select>				
-				
+</select>	
+<!--  
+                   <div class="form-group">
+						<label for="input3">파일</label> <input name="file" type="file"
+						   accept="image/*"
+							class="form-control" id="input3">
+					</div>
+
+	-->
 				
 						
 		<%-- 		<c:forEach items="${list}" var="MnameVO">

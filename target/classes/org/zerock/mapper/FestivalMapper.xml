@@ -46,8 +46,7 @@
 	<!-- 게시글 작성 -->
 	<insert id="insert">
 		insert into festival (no, ename, description, month, mountain_no )
-		values(seq_festival.nextval, #{ename}, #{description}, #{month}, #{
-		mountain_no}) 
+		values(seq_festival.nextval, #{ename}, #{description}, #{month}, #{mountain_no}) 
 	</insert>
 
 	<!-- 게시글 SelectKey -->
@@ -56,8 +55,8 @@
 			select seq_festival.nextval from dual
 		</selectKey>
 
-		insert into festival(no, ename, description, month, mountain_no)
-		values (#{no}, #{ename}, #{description}, #{month},#{mountain_no})
+		insert into festival(no, ename, description, month, mountain_no, filename)
+		values (#{no}, #{ename}, #{description}, #{month},#{mountain_no}, #{filename, jdbcType=VARCHAR})
 	</insert>
 
 	<!-- 게시글 상세보기 -->
@@ -76,7 +75,8 @@
 		eName =#{ename},
 		description = #{description},
 		month =#{month},
-		mountain_no = #{mountain_no}
+		mountain_no = #{mountain_no},
+		filename=  #{filename, jdbcType=VARCHAR}
 		where
 		no =#{no}
 	</update>

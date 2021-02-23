@@ -41,7 +41,7 @@ var no = ${festival.no};
 
 				<div class="form-group">
 					<label for="input1">산 이름</label> <input name="ename" class="form-control"
-						type="text" id="input1" readonly value="${festival.no }" />
+						type="text" id="input1" readonly value="${festival.ename }"/>
 				</div>
 
 				<div class="form-group">
@@ -56,10 +56,24 @@ var no = ${festival.no};
 						value='<c:out value="${festival .month }" />' type="number"
 						class="form-control" id="input3">
 				</div>
+				<!-- 2021.02.23 추가-->
+					<div>
+				<img alt="" class="img-fluid"src="/static/${festival.filename}">
+				</div>
+				 
 				
+				 <!-- 2021.02.23 추가 
+				 <div class="card mb-3">
+						<div class="row">
+							<div class="col-sm-4 d-flex align-items-center">
+								<img src="${staticPath }/${festival.filename}" class="card-img img-fluid"
+									style="width: 180px; height: 185px;">
+							</div>
+				 --> 
+				 
 				<div class="form-group">
 					<label for="input4">산 번호</label> <input readonly
-						value='<c:out value="${festival .mountain_no }" />' type="number"
+						value='<c:out value="${festival .mountain_no}" />' type="number"
 						class="form-control" id="input4">
 				</div>
 				<c:url value="/festival/modify" var="modifyLink">

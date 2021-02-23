@@ -118,6 +118,14 @@ class="custom-select my-1 mr-sm-2 bd-highlight" id="input3" required>
 				<c:param name="pageNum" value="${cri.pageNum }"></c:param>
 				<c:param name="amount" value="${cri.amount }"></c:param>
 				</c:url>
+				
+				<!-- 수정에서 안뜸!!!! -->
+				 <div class="form-group">
+						<label for="input3">파일</label> <input name="file" type="file"
+						   accept="image/*"
+							class="form-control" id="input3">
+					</div>
+					  
 				<div style="float:left; margin-right:10px; ">
 		       <a href="${modifyLink }" ><button type="submit" class="btn btn-primary"> 수정</button> </a>
 		         </div>
