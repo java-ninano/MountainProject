@@ -27,28 +27,19 @@ $(function(){
 			return ;
 		}
 		
-		var status = 0;
+/*		var status = 0;
 		const st = $('[name="status"]');
 		if( st[1].checked ) {
 			status = 1;
 		}
-
-		var no = Number($('#no').val());
-		var data = {
-			no: no,
-			mname: mname,
-			mloc: $('#mloc').val(),
-			height: Number($('#height').val()),
-			status: status,
-			description: $('#description').val()
-		};
+*/
 		
 		/* 산 이름 UNIQUE 체크 */
 		if(curMname != mname){// mname 변경하는 경우
 			$.ajax(root + '/check', {
 				type: 'POST',
 				contentType: 'application/json',
-				data: JSON.stringify(data)
+				data: mname
 			}).fail(function(){
 				swal({
 					title: "Not available",
@@ -59,12 +50,14 @@ $(function(){
 			});
 		}
 		
-		
-	//$.ajax(root + '/modify?curPage=' + curPage + '&amount=' + amount + '&keyword=' + keyword, 
+		var no = Number($('#no').val());
 		$.ajax(root + '/modify', {
 			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify(data)
+			data: new FormData($('#modifyForm')[0]),
+			enctype: 'multipart/form-data',
+			contentType : false,
+	        processData : false,
+			cache: false
 		}).done(function(){
 		  location.replace(root + '/get?no=' + no + '&curPage=' + curPage + '&amount=' + amount + '&keyword=' + keyword);		  
 		});
@@ -100,9 +93,12 @@ $(function(){
 	});	
 
 
+	/* 버튼 숨기기 */
 	$('#cancelBtn').hide();
 	$('#submitBtn').hide();
 	$('#statusForm').hide();
+
+	$('#upload').hide();
 
 	/* 수정 버튼 클릭 */
 	$('#modifyBtn').click(function(){// 입산여부도 수정하자!
@@ -117,24 +113,12 @@ $(function(){
 		
 		$('#statusView').hide();
 		$('#statusForm').show();
+		
+		$('#upload').show();
 	});
 	
 	/* 취소 버튼 클릭 */
 	$('#cancelBtn').click(function(){
-	/*
-		$(this).hide();
-		$('#submitBtn').hide();
-
-		$('#modifyBtn').show();
-		$('#removeBtn').show();
-		
-		$('#modifyForm input').attr('readonly', true);	
-		$('#modifyForm textarea').attr('readonly', true);
-		
-		$('#statusView').show();
-		$('#statusForm').hide();
-	*/	
-		
 		location.reload();// form값 되돌리기
 	});
 

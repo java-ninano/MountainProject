@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="#">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -42,13 +43,16 @@ var isManager = ('${authUser.manager}' == 1);
 				<m:miniNav></m:miniNav>
 			
 				<input type="hidden" name="no" id="no" value="${mountain.no }" >
-				<%--
-				<img id="main_image" src="${root }/resources/img/mountain/${mountain.mname }.jpg" 
-					alt="${mountain.mname }" onerror="this.src = '${root }/resources/img/mountain/default.png';">
-				--%>
-				<img src="${staticPath }/${mountain.filename}" class="card-img-top img-fluid" 
-		            alt="${mountain.filename }" onerror="this.src='${root }/resources/img/mountain/default.png';">	
-		                 	
+				
+				<c:choose>
+				    <c:when test="${empty mountain.filename }">
+						<c:set var="src" value="${root }/resources/img/mountain/default.png" />
+				    </c:when>
+				    <c:otherwise>
+				    	<c:set var="src" value="${staticPath }/${mountain.filename}" />
+				    </c:otherwise>
+				</c:choose>
+				<img src="${src }" class="card-img-top img-fluid" alt="${mountain.filename }" >	
 		                 	
 				<div class="form-group mt-3">
 					<label for="height">해발고도: </label>
@@ -82,16 +86,24 @@ var isManager = ('${authUser.manager}' == 1);
 		
 				<div class="form-group mt-3">
 					<label for="description">상세설명</label>
-				    <textarea class="form-control" name="description" id="description" rows="3" required readonly>
-				    	${mountain.description }
-				    </textarea>					
+				    <textarea class="form-control" name="description" id="description" rows="3" required readonly>${mountain.description }</textarea>					
 				</div>
 				
 				<div class="form-group mt-4 d-flex align-items-center">
 					<img alt="map_icon" src="${root }/resources/img/mountain/location.png"> <br>
 					<input type="text" class="form-control" name="mloc" id="mloc" value="${mountain.mloc }" required readonly>
 				</div>
+
+				<div id="upload"  class="form-group">
+					<label for="file">파일</label>
+				    <div class="fileDrop p-5">
+				        <p class="text-center"><i class="fa fa-paperclip"></i>첨부파일을 드래그해주세요.</p>
+				    </div>
+					<input class="form-control" type="file" accept="image/*" name="file" id="file" value=${mountain.filename }>
+				</div>
+				${mountain.filename }
 			</form>
+			
 			<hr>
 			<c:url var="listUrl" value="/list">
     		  <c:param name="curPage">${cri.curPage }</c:param>

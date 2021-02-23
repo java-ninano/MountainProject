@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+<link rel="shortcut icon" href="#">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -52,12 +53,18 @@ var available = '${available}';
 		                 	<img src="${root }/resources/img/mountain/${mountain.mname}.jpg" class="card-img-top" 
 		                 		alt="${mountain.mname }" onerror="this.src = '${root }/resources/img/mountain/default.png';">
 						  --%>
-						 
-		                 	<img src="${staticPath }/${mountain.filename}" class="card-img-top img-fluid" 
-		                 		alt="${mountain.filename }" onerror="this.src='${root }/resources/img/mountain/default.png';">	
+						 	<c:choose>
+							    <c:when test="${empty mountain.filename }">
+									<c:set var="src" value="${root }/resources/img/mountain/default.png" />
+							    </c:when>
+							    <c:otherwise>
+							    	<c:set var="src" value="${staticPath }/${mountain.filename}" />
+							    </c:otherwise>
+							</c:choose>
+		                 	<img src="${src }" class="card-img-top img-fluid" alt="${mountain.filename }">	
 		                 		
 		                 	<div class="card-body">
-		                 		<h4 class="card-title">${mountain.mname } (AchaSan)</h4>
+		                 		<h4 class="card-title">${mountain.mname }</h4>
 		                 		<p class="card-text">${mountain.mloc }에 있는 해발고도 ${mountain.height }m의 산</p>
 		                 		<c:url var="getUrl" value="/get">
 					    		  <c:param name="no">${mountain.no}</c:param>

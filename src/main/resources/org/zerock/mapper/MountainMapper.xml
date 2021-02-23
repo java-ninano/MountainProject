@@ -38,8 +38,10 @@
 			mloc = #{mloc},
 			height = #{height},
 			status = #{status},
-			description = #{description},
-			filename = #{filename, jdbcType=VARCHAR} <!-- null 허용 -->
+			description = #{description}
+			<if test="filename != null">
+			, filename = #{filename, jdbcType=VARCHAR} <!-- null 허용 -->
+			</if> 
 		WHERE no = #{no}
 	</update>
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.member.MemberVO;
 import org.zerock.domain.mountain.MCriteria;
@@ -57,29 +58,20 @@ public class MountainController {
 		// only manager
 		if(user != null && ((MemberVO) user).getManager() == 1 ) {
 			if(service.existMname(mountain.getMname())) {// 같은 산 이름이 존재
-				System.out.println("ex 1");
 				model.addAttribute("result", "notUnique");
 				model.addAttribute("mountain", mountain);
-				return "/register";// 함수 안 벗어나고 아래 코드를 계속 실행하네...? (insert->error)
+				return "/register";
 			} 
 			
 			if (!mountain.getMname().matches("^[가-힣]+산$")) {
-				System.out.println("ex 2");
 				model.addAttribute("result", "wrongPattern");
 				model.addAttribute("mountain", mountain);
 				return "/register";
 			} 
 			
-			// 등록하고 에러페이지(mname unique 걸림) 넘어가 .............
-			// 파일 첨부 여부와 상관 없이, unique 에러페이지 넘어가는데 저장은 돼 
-			System.out.println("ex 3");
-			service.register(mountain);
-			rttr.addFlashAttribute("result", "regSuccess");
-			
-			// image upload
-			//mountain.setFilename("");// sql null값 방지
 			service.register(mountain);// no 얻어서 파일 이름 지정 위해
 			
+			// image upload
 			if(file != null) {
 				mountain.setFilename("mountain_" + mountain.getNo() + "_" + file.getOriginalFilename());
 				service.modify(mountain);
@@ -90,7 +82,8 @@ public class MountainController {
 					e.printStackTrace();
 				}
 			}
-				
+			
+			rttr.addFlashAttribute("result", "regSuccess");
 		}
 		
 		return "redirect:/list";
@@ -105,14 +98,37 @@ public class MountainController {
 		// /views/get.jsp			
 	}
 	
-	@PostMapping(value = "/modify",
-				 consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)// @RequestBody !!!!!!!!!!!
-	public ResponseEntity<String> modify(@RequestBody MountainVO mountain, HttpSession session){// req의 body가 자바 객체로 변환
+	@PostMapping(value = "/modify")// @RequestBody !!!!!!!!!!!
+	public ResponseEntity<String> modify(MountainVO mountain, 
+			HttpSession session, MultipartFile file){// req의 body가 자바 객체로 변환
 		Object user = session.getAttribute("authUser");
+		/*
+		List<MultipartFile> list = request.getFiles("file");
+		for(MultipartFile file : list) {
+			System.out.println("what: " + file);
+		}*/
 		
 		// only manager
 		if(user != null && ((MemberVO) user).getManager() == 1 ) {
+			
 			if (service.modify(mountain)) {
+				
+				// image re-upload
+				if(file != null && file.getSize() > 0) {
+					// 이전 이미지 삭제 필요
+					// List<MultipartFile> fileList = request.getFiles("file");
+					//MultipartFile file = request.getFiles("file").get(0);
+					
+					mountain.setFilename("mountain_" + mountain.getNo() + "_" + file.getOriginalFilename());
+					service.modify(mountain);
+					
+					try {
+						fileupSvc.transfer(file, mountain.getFilename());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
 				session.setAttribute("result", "modSuccess");
 				return new ResponseEntity<>(HttpStatus.OK);
 			} 
@@ -122,8 +138,8 @@ public class MountainController {
 	
 	@PostMapping(value = "/check",
 				 consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<String> duplicateCheck(@RequestBody MountainVO mountain) {
-		if(service.existMname(mountain.getMname())) {// 같은 산 이름이 존재
+	public ResponseEntity<String> duplicateCheck(@RequestBody String mname) {
+		if(service.existMname(mname)) {// 같은 산 이름이 존재
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(HttpStatus.OK);

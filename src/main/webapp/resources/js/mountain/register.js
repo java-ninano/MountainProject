@@ -17,4 +17,15 @@ $(function(){
 		});
 	}
 
+//	$('#upload').on('drop', function(e){
+//        if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
+//            e.preventDefault();
+//            e.stopPropagation();
+            /*UPLOAD FILES HERE*/
+//            upload(e.originalEvent.dataTransfer.files);
+//        }
+//    });
+
+    
+    
 });

@@ -1,0 +1,45 @@
+$.ajax()
+contentType 서버에 데이터 보낼때 이 타입 사용
+data 서버로 보내지는 데이터
+dataType 서버로부터 받고 싶은 데이터 타입
+
+
+
+화)_______________________
+
+
+-*** 맛집 불러오고 get에 navbar js 작업!!!!1***@@@@@@
+
+*register, modify에 주소 api 긁어오기
+
+(design)-* 리스트 카드도 안 예뻐서 바꾸고 싶어!
+
+(design)-* 관리자 로그인 안 하면 버튼 사라져서 모양 난리나네,, 리스트
+
+(design)-* 검색했을 때 이미지 개수에 따라서 그림 크기가 달라짐 ㅠㅠㅠ
+
+
+
+- <썸네일 설정>
+
+
+수)________________________
+
+-*** nav에 -> 맛집, 축제, 지도, (등산코스) 불러오기 
+
+-*** 등산코스 테이블 얼른 작업!!!!!!
+
+-- 날씨 api (카톡 참고)
+
+- (영문 변경 함수 사용하자...) 
+
+
+목)________________________
+
+- 저녁 ppt 작업 (6시 전에 작업 끝내기)
+
+
+
+col-md-9.col-xl-8.py-md-3.pl-md-5.bd-content
+
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>

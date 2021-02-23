@@ -229,7 +229,16 @@
 		  <artifactId>oci-java-sdk-objectstorage</artifactId>
 		  <version>1.30.0</version>
 		</dependency>
-				
+			
+		<!-- file drag&drop -->
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+<!-- 
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>
+ -->					
 	</dependencies>
     <build>
         <plugins>
