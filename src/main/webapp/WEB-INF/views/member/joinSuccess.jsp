@@ -17,6 +17,7 @@
 <script
   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<link rel="stylesheet" type="text/css" href="${root }/resources/css/font.css">
 
 <title>산산산</title>
 </head>

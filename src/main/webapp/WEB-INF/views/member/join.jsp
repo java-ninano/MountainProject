@@ -18,6 +18,7 @@
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 주소 api -->
 <script type="text/javascript" src="${root }/resources/js/member/join.js"></script>
+<link rel="stylesheet" type="text/css" href="${root }/resources/css/font.css">
 
 <title>산산산</title>
 </head>

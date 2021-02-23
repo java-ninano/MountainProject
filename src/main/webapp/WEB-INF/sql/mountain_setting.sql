@@ -76,9 +76,18 @@ CREATE TABLE COURSE (
   PRIMARY KEY (no),
   CONSTRAINT course_level_ck CHECK (difficulty IN ('low', 'medium', 'high'))
  );
-
-INSERT INTO course (difficulty, time, points, mountain_no)
-VALUES ('low', '1시간', '정상', 1);
+ 
+ -----> 수정
+CREATE TABLE COURSE (
+  no NUMBER,
+  course VARCHAR2(500) NOT NULL,
+  coursename VARCHAR2(100) NOT NULL,
+  difficulty VARCHAR2(45) NOT NULL,
+  time VARCHAR2(45) NOT NULL, -- form: __H __M
+  mountain_no NUMBER NOT NULL,
+  PRIMARY KEY (no),
+  CONSTRAINT course_level_ck CHECK (difficulty IN ('low', 'medium', 'high'))
+ );
 
 -- -----------------------------------------------------
 -- Table `WISH`
@@ -181,12 +190,10 @@ CREATE TABLE FESTIVAL (
   description VARCHAR2(1000) NOT NULL,
   month NUMBER NOT NULL,
   mountain_no NUMBER NOT NULL,
+  filename VARCHAR2(200),
   PRIMARY KEY (no),
   CONSTRAINT festival_month_ck CHECK (month BETWEEN 1 AND 12)
 );
-
-INSERT INTO festival (ename, description, month, mountain_no)
-VALUES ('도봉산 축제', '신나는 축제', 13, 1);
 
 
 -- -----------------------------------------------------

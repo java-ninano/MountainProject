@@ -72,7 +72,7 @@ public class MountainController {
 			service.register(mountain);// no 얻어서 파일 이름 지정 위해
 			
 			// image upload
-			if(file != null) {
+			if(file != null && file.getSize() > 0) {
 				mountain.setFilename("mountain_" + mountain.getNo() + "_" + file.getOriginalFilename());
 				service.modify(mountain);
 				

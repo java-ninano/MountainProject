@@ -24,7 +24,7 @@
 	margin:0px 50px 0px 50px;
 	}
 </style>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
 	<div class="collapse navbar-collapse" id="navbarSupportedContent1">
 	
 		  <c:if test="${empty sessionScope.authUser }">
@@ -46,7 +46,6 @@
 		    	 <li class="nav-item">
 		      		 <a class="nav-link" href="${root }/member/myHome">마이홈</a>
 		   		 </li>
-		     
 		   		 <li class="nav-item">
 		    		<a class="nav-link" href="${root }/member/logout">로그아웃</a>
 		    	 </li>
@@ -55,8 +54,8 @@
 	</div>
 </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<div class="collapse navbar-collapse ml-5" id="navbarSupportedContent2">
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-0 m-0">
+	<div class="collapse navbar-collapse ml-5 p-0" id="navbarSupportedContent2">
 		<a class="navbar-brand" href="${root }/index.jsp">
 			<img src="<spring:url value='/resources/img/mountainLogo.png' />" class="center-block mb-3" height="170" width="auto" alt="마운팀">
 		</a>
@@ -69,7 +68,7 @@
 	</div>
 </nav> 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-0 m-0">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -89,10 +88,10 @@
 		        </div>
 			</li>
 	  	    <li class="nav-item">
-	       		<a class="nav-link" href=""><b>산 축제</b></a>
+	       		<a class="nav-link" href="${root }/festival/list"><b>산 축제</b></a>
 	   	  	</li>
 	  	    <li class="nav-item">
-	       		<a class="nav-link" href=""><b>산 명소</b></a>
+	       		<a class="nav-link" href="${root }/place/list"><b>산 명소</b></a>
 	   	  	</li>
 	  	    <li class="nav-item">
 	       		<a class="nav-link" href="${root }/restaurant/list"><b>맛집게시판</b></a>

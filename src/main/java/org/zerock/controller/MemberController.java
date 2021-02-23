@@ -1,6 +1,7 @@
 package org.zerock.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -10,16 +11,22 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.conquest.ConquestVO;
 import org.zerock.domain.member.MEmailDTO;
 import org.zerock.domain.member.MLocDTO;
 import org.zerock.domain.member.MemberVO;
+import org.zerock.domain.mountain.ConqStickerVO;
+import org.zerock.domain.mountain.MnameVO;
+import org.zerock.service.conquest.ConquestService;
 import org.zerock.service.member.MemberService;
+import org.zerock.service.mountain.MountainService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -31,6 +38,10 @@ import lombok.extern.log4j.Log4j;
 public class MemberController {
 
 	private MemberService service;
+	
+	private MountainService mountainService;
+
+	private ConquestService conqService;
 
 	// ##회원가입 - GET
 	@GetMapping("/join")
@@ -159,7 +170,23 @@ public class MemberController {
 				locDiv.locSplit(user.getLoc());
 				session.setAttribute("locDiv", locDiv);
 				
-
+				
+				/* 로그인 후 스티커판 insert */
+				List<MnameVO> list = conqService.getMnameList();
+				for(MnameVO m : list) {// db에 있는 산 리스트 돌려서
+					long member_no = user.getNo();
+					long mountain_no = m.getNo();
+					log.info(m);
+					if(conqService.checkCnt(member_no, mountain_no) == 0) {// Conquest table에 레코드 없으면
+						ConquestVO cvo = new ConquestVO();
+						cvo.setMember_no(member_no);
+						cvo.setMountain_no(mountain_no);
+						cvo.setConquestcnt(0);
+						conqService.addConquest(cvo);// conquestcnt 0으로 세팅해서 add(insert)
+					}
+				}
+				
+				
 				return new ResponseEntity<>("success", HttpStatus.OK);
 			}
 		}
@@ -213,12 +240,19 @@ public class MemberController {
 
 	// ##내 정보 보기
 	@GetMapping("/myHome")
-	public String myHome(HttpSession session, RedirectAttributes rttr) {
-		if (session.getAttribute("authUser") == null) {
+	public String myHome(HttpSession session, RedirectAttributes rttr, Model model) {
+		MemberVO vo = (MemberVO) session.getAttribute("authUser");
+		List<ConqStickerVO> list = null;
+		
+		if (vo == null) {
 			rttr.addFlashAttribute("notFoundUser", true);
 			// 세션에 로그인 정보가 없으면
 			return "redirect:/member/login";
+		} else {
+			list = mountainService.getConqListbyMem(vo.getNo());
+			model.addAttribute("list", list);
 		}
+		
 		return "/member/myHome";
 
 		// return "redirect:member/myHome";

@@ -1,7 +1,6 @@
 package org.zerock.mapper;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import java.util.List;
 
@@ -26,18 +25,18 @@ public class MemberMapperTests {
 	@Test
 	public void testGetList() {
 		List<MemberVO> list = mapper.getList();
-		assertNotEquals(list.size(), 0);
+		assertEquals(list.size(), 0);
 	}
 	
 	//회원 가입
 	@Test
 	public void testInsertSelectKey() {
 		MemberVO member = new MemberVO();
-		member.setId("hi200");
+		member.setId("hi");
 		member.setEmail("hyo@jin.com");
 		member.setPassword("123");
-		member.setName("hyojin00");
-		member.setNickname("hyojiny00");
+		member.setName("hyojin");
+		member.setNickname("hyojiny");
 		member.setLoc("home");
 		
 		int before = mapper.getList().size();
@@ -52,7 +51,7 @@ public class MemberMapperTests {
 	//회원 정보 읽기 - 아이디
 	@Test
 	public void testReadMemberId() {
-		MemberVO member = mapper.readMemberId("22");
+		MemberVO member = mapper.readMemberId("hi");
 		log.info(member);
 	}
 	

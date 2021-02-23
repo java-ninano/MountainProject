@@ -17,5 +17,5 @@ public interface RestaurantService {
 	public List<RestaurantVO> getList(Rcriteria cri);
 	
 	public int getTotal(Rcriteria cri);
-
+	
 }

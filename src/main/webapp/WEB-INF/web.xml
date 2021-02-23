@@ -16,6 +16,7 @@
 	
 	<listener>
 		<listener-class>org.zerock.listener.MountainListener</listener-class>
+		<listener-class>org.zerock.listener.VisiteSessionListener</listener-class>
 	</listener>
 
 	<!-- Processes application requests -->

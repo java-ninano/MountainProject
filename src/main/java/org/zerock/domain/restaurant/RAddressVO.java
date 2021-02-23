@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.Getter;
 
 @Data
-public class AddressVO {
+public class RAddressVO {
 	private String address1;
 	private String address2;
 

@@ -52,4 +52,99 @@
 				
 			});
 		});
+		
+		
+		
+		/* conquestcnt */
+		$(".sticker").each(function(index, item) {
+			var stickerNum = $(item).closest("table").find("[name=conquestcnt]").val();
+			
+			for (var i = 0; i < stickerNum; i++) {
+				switch (i % 3) {
+				case 0:
+					$(item).append('<div><img src="' + root + '/resources/img/conquest/mountain_black.png" /> </div>'  ); 
+					break;
+				case 1:
+					$(item).append('<div><img src="' + root + '/resources/img/conquest/mountain_yellow.png" /> </div>'  ); 
+					break;
+				case 2:
+					$(item).append('<div><img src="' + root + '/resources/img/conquest/mountain_blue.png" /> </div>'  ); 
+					break;
+				}
+				
+			}
+		});
+		
+		
+		
+		
+		
+		/* 카운트 ajax로 데이터 보내기 */
+		$(".up-btn").click(function(e) {
+			e.preventDefault();
+			updateConquest($(this).closest("form").serialize());//엘리멘트의 가장가까운 level만 변경
+		});
+		
+		
+		
+		
+		
 	});
+	
+	
+	
+/* update */
+function updateConquest(data, callback, error) {
+	console.log(JSON.stringify(data));
+	console.log(data);
+	
+	$.ajax({
+		type : "post",
+		url : root + "/Conquest/updateConquest", // 컨트롤러 매핑
+		//contentType: "application/json",// 이 타입으로 data를 보내겠다 컨트롤러에
+		data : data, // form data를 json
+		success : function(result, stauts, xhr) {
+			if (result) {
+				alert('정복횟수가 업데이트 되었습니다.' );
+		/* 	$('sticker' ).append('<div><img src='<c:out value="${root }/resources/img/conquest/mountain_black.png"/>' /> </div>'  );
+				  */
+			}
+		},
+		error : function(xhr, status, er) {
+			if (error) {
+				error(er);
+			}
+		}
+	});
+}
+
+
+
+/* 정복산 count */
+function Count(type, ths) {
+	var $input = $(ths).parents("td").find("input[name='conquestcnt']");// name을 찾아 $input에 넣음
+	var CCCount = Number($input.val()); //Number타입변환
+	var MCount = Number($(ths).parents("div").find("td.maxconquest").html());//maxconquest찾음
+	if (type == 'p') { //plus약자
+		if (CCCount < MCount)
+			$input.val(Number(CCCount) + 1);// MAX값보다 작을때 +
+	} else {
+		if (CCCount > 0)
+			$input.val(Number(CCCount) - 1); //입력값이 0이상일경우에 -
+	}
+	$(ths).closest('table').find('.sticker' ).empty();
+	for (var i = 0; i < $input.val(); i++) {
+		//$(ths).closest('table').find('.sticker' ).append('<div><img src="<c:out value="' + root + '/resources/img/conquest/mountain_black.png"/>" /> </div>'  ); 
+		switch (i % 3) {
+		case 0:
+			$(ths).closest('table').find('.sticker' ).append('<div><img src="' + root + '/resources/img/conquest/mountain_black.png" /> </div>'  );
+			break;
+		case 1:
+			$(ths).closest('table').find('.sticker' ).append('<div><img src="' + root + '/resources/img/conquest/mountain_yellow.png" /> </div>'  ); 
+			break;
+		case 2:
+			$(ths).closest('table').find('.sticker' ).append('<div><img src="' + root + '/resources/img/conquest/mountain_blue.png" /> </div>'  );
+			break;
+		}
+	}
+}

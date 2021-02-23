@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="m" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +29,8 @@ var user_no = '${authUser.no}';
 <title>산산산</title>
 </head>
 <body>
+<m:topNav></m:topNav>
+
 <div class="container-sm my-5">
 	<div class="row">
 		<div class="col-12 col-md-6 offset-md-3">

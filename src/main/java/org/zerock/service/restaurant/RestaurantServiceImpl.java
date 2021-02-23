@@ -34,7 +34,7 @@ public class RestaurantServiceImpl implements RestaurantService{
 
 	@Override
 	public boolean remove(Long no) {
-		return mapper.delete(no) == 1;
+		return mapper.delete(no) == 1 && mapper.deleteLikeResno(no) == 1;
 	}
 
 	@Override

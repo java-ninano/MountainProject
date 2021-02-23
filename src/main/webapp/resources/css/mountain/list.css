@@ -22,3 +22,20 @@ table td {
 #search a {
 	float: right;
 }
+
+.page-item.active .page-link {
+	background-color: #BCFF66;
+	border-color: #BCFF66;
+}
+
+.page-item a {
+	color: #BCFF66;
+}
+
+.page-link:hover {
+	color: #BCFF66;
+}
+
+tr {
+	width: 33%;
+}

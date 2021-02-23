@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="m" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="n" tagdir="/WEB-INF/tags/mountain"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +32,8 @@ var isManager = ('${authUser.manager}' == 1);
 <title>산산산</title>
 </head>
 <body>
+<m:topNav />
+
 <div class="container-fluid my-5">
 	<div class="row">
 <!-- 		<div class="col-12 col-sm-6 offset-sm-3"> -->
@@ -40,68 +43,70 @@ var isManager = ('${authUser.manager}' == 1);
 					<input class="form-control text-center" name="mname" id="mname" value="${mountain.mname }" required readonly>
 				</div>
 				
-				<m:miniNav></m:miniNav>
+				<n:miniNav></n:miniNav>
+				
+				<div id="nav_mountain" class="nav_body">
+					<input type="hidden" name="no" id="no" value="${mountain.no }" >
+					
+					<c:choose>
+					    <c:when test="${empty mountain.filename }">
+							<c:set var="src" value="${root }/resources/img/mountain/default.png" />
+					    </c:when>
+					    <c:otherwise>
+					    	<c:set var="src" value="${staticPath }/${mountain.filename}" />
+					    </c:otherwise>
+					</c:choose>
+					<img src="${src }" class="card-img-top img-fluid" alt="${mountain.filename }" >	
+			                 	
+					<div class="form-group mt-3">
+						<label for="height">해발고도: </label>
+						<input type="number" class="form-control" name="height" id="height" value="${mountain.height }" required readonly>
+						<span>m</span>
+					</div>
+		
+					<div id="statusView">
+						<label for="status0">현재 상태: </label>
+					  	<c:if test="${mountain.status == 0 }">
+					  		<c:set var="status0" value="checked" />
+					  		<span>입산 가능</span>
+					  	</c:if>
+					  	<c:if test="${mountain.status == 1 }">
+					  		<c:set var="status1" value="checked" />
+							<span>입산 불가</span>
+					  	</c:if>
+					</div>
 			
-				<input type="hidden" name="no" id="no" value="${mountain.no }" >
-				
-				<c:choose>
-				    <c:when test="${empty mountain.filename }">
-						<c:set var="src" value="${root }/resources/img/mountain/default.png" />
-				    </c:when>
-				    <c:otherwise>
-				    	<c:set var="src" value="${staticPath }/${mountain.filename}" />
-				    </c:otherwise>
-				</c:choose>
-				<img src="${src }" class="card-img-top img-fluid" alt="${mountain.filename }" >	
-		                 	
-				<div class="form-group mt-3">
-					<label for="height">해발고도: </label>
-					<input type="number" class="form-control" name="height" id="height" value="${mountain.height }" required readonly>
-					<span>m</span>
-				</div>
+					<div id="statusForm" class="form-group">
+					  	<label for="status0">입산여부</label>
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="status" id="status0" value="0" ${status0 }>
+						  <label class="form-check-label" for="status0">가능</label>
+						</div>
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="status" id="status1" value="1" ${status1 }>
+						  <label class="form-check-label" for="status1">불가능</label>
+						</div>
+					</div>
+			
+					<div class="form-group mt-3">
+						<label for="description">상세설명</label>
+					    <textarea class="form-control" name="description" id="description" rows="3" required readonly>${mountain.description }</textarea>					
+					</div>
+					
+					<div class="form-group mt-4 d-flex align-items-center">
+						<img alt="map_icon" src="${root }/resources/img/mountain/location.png"> <br>
+						<input type="text" class="form-control" name="mloc" id="mloc" value="${mountain.mloc }" required readonly>
+					</div>
 	
-				<div id="statusView">
-					<label for="status0">현재 상태: </label>
-				  	<c:if test="${mountain.status == 0 }">
-				  		<c:set var="status0" value="checked" />
-				  		<span>입산 가능</span>
-				  	</c:if>
-				  	<c:if test="${mountain.status == 1 }">
-				  		<c:set var="status1" value="checked" />
-						<span>입산 불가</span>
-				  	</c:if>
-				</div>
-		
-				<div id="statusForm" class="form-group">
-				  	<label for="status0">입산여부</label>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="radio" name="status" id="status0" value="0" ${status0 }>
-					  <label class="form-check-label" for="status0">가능</label>
+					<div id="upload"  class="form-group">
+						<label for="file">파일</label>
+					    <div class="fileDrop p-5">
+					        <p class="text-center"><i class="fa fa-paperclip"></i>첨부파일을 드래그해주세요.</p>
+					    </div>
+						<input class="form-control" type="file" accept="image/*" name="file" id="file" value=${mountain.filename }>
 					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="radio" name="status" id="status1" value="1" ${status1 }>
-					  <label class="form-check-label" for="status1">불가능</label>
-					</div>
-				</div>
-		
-				<div class="form-group mt-3">
-					<label for="description">상세설명</label>
-				    <textarea class="form-control" name="description" id="description" rows="3" required readonly>${mountain.description }</textarea>					
-				</div>
-				
-				<div class="form-group mt-4 d-flex align-items-center">
-					<img alt="map_icon" src="${root }/resources/img/mountain/location.png"> <br>
-					<input type="text" class="form-control" name="mloc" id="mloc" value="${mountain.mloc }" required readonly>
-				</div>
-
-				<div id="upload"  class="form-group">
-					<label for="file">파일</label>
-				    <div class="fileDrop p-5">
-				        <p class="text-center"><i class="fa fa-paperclip"></i>첨부파일을 드래그해주세요.</p>
-				    </div>
-					<input class="form-control" type="file" accept="image/*" name="file" id="file" value=${mountain.filename }>
-				</div>
-				${mountain.filename }
+					
+				</div>	
 			</form>
 			
 			<hr>

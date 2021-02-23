@@ -15,6 +15,8 @@
 
 </script>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="${root }/resources/css/font.css">
+
 <!-- MOBILE최적화 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
@@ -229,7 +231,7 @@
 					});
 </script>
 
-<title>~~~서울특별시 산 정보 웹사이트 입니다~~~</title>
+<title>산산산</title>
 
 <style>/* css */
 h4 {
@@ -242,7 +244,6 @@ h4 {
 	<m:topNav />
 	<div class="container mt-5 ">
 		<h4>글 보기</h4>
-		<p>세션 닉네임 = ${authUser.nickname }</p>
 	</div>
 	<div class="container-sm">
 

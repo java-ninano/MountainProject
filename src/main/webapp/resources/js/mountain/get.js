@@ -127,4 +127,36 @@ $(function(){
 		$('#removeBtn').hide();
 	}
 	
+	
+	
+	
+	
+	
+	/* navigation */
+	$('.nav #link1').click(function(){
+		$('.nav_body').hide();
+		$('#nav_mountain').show();
+	});
+	
+	$('.nav #link2').click(function(){
+		$('.nav_body').hide();
+		$('#nav_restaurant').show();
+	});
+	
+	$('.nav #link3').click(function(){
+		$('.nav_body').hide();
+		$('#nav_festival').show();
+	});
+	
+	$('.nav #link4').click(function(){
+		$('.nav_body').hide();
+		$('#nav_place').show();
+	});
+	
+	$('.nav #link5').click(function(){
+		$('.nav_body').hide();
+		$('#nav_map').show();
+	});
+	
+	
 });

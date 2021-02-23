@@ -49,7 +49,7 @@ public class MemberServiceTests {
 	//회원 정보 읽기 - 아이디 
 	@Test
 	public void testGetMemberId() {
-		MemberVO member = service.getMemberId("coco");
+		MemberVO member = service.getMemberId("hi");
 		
 		log.info(member);
 		

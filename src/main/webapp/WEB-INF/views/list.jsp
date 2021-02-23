@@ -2,6 +2,7 @@
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="m" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,10 +28,12 @@ var available = '${available}';
 <title>산산산</title>
 </head>
 <body>
+<m:topNav />
+
 <div class="container-fluid my-5">
 	<div class="row">
 <!-- 		<div class="col-12 col-sm-8 offset-sm-2"> -->
-		<div class="col-12 col-md-8 offset-md-2">  
+		<div class="col-12 col-md-8 offset-md-2 table-responsive">  
       		<h3 class="text-center">산산산들</h3>
       		<br>
       		<form id="search" class="d-flex justify-content-end align-items-center">
@@ -46,7 +49,7 @@ var available = '${available}';
 						<tr>
 		          	</c:if>
 
-		        	<td>
+		        	<td style="width:33%; height:100%; border: 1px solid red; padding: 1.25rem;"> <%-- css test --%>
 						<div class="card">
 						
 						 <%--
@@ -61,7 +64,7 @@ var available = '${available}';
 							    	<c:set var="src" value="${staticPath }/${mountain.filename}" />
 							    </c:otherwise>
 							</c:choose>
-		                 	<img src="${src }" class="card-img-top img-fluid" alt="${mountain.filename }">	
+		                 	<img src="${src }" class="card-img-top" alt="${mountain.filename }">	
 		                 		
 		                 	<div class="card-body">
 		                 		<h4 class="card-title">${mountain.mname }</h4>
