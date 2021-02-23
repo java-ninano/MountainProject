@@ -51,6 +51,7 @@ $(document).ready(function() {
 		}
 		$("#myModal").modal("show");
 	}
+	/*
 	var actionForm = $("#actionForm");
 	$(".pagination a").click(function(e) {
 		e.preventDefault();
@@ -59,7 +60,7 @@ $(document).ready(function() {
 		
 		actionForm.submit();
 		
-		});
+		});*/
 	});
 
 </script>
@@ -170,7 +171,7 @@ $(document).ready(function() {
 		    	</c:url>
 		    	<li class="page-item ${pageMaker.cri.pageNum eq num ? 'active' : '' }">
 		    	<!--<a class="page-link" href="${pageLink }">${num }</a> -->
-		    	  <a class="page-link" href="${num }">${num }</a>
+		    	  <a class="page-link" href="${pageLink }">${num }</a>
 		    	</li>
 		    </c:forEach>
 		    
@@ -191,6 +192,5 @@ $(document).ready(function() {
 	</div>
 </div>
 <c:remove var="result"/>
-
 </body>
 </html>
