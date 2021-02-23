@@ -118,13 +118,18 @@ class="custom-select my-1 mr-sm-2 bd-highlight" id="input3" required>
 				<c:param name="pageNum" value="${cri.pageNum }"></c:param>
 				<c:param name="amount" value="${cri.amount }"></c:param>
 				</c:url>
+				<div style="float:left; margin-right:10px; ">
 		       <a href="${modifyLink }" ><button type="submit" class="btn btn-primary"> 수정</button> </a>
+		         </div>
 		        </form>
-		      
+		     
 		      
 		     <!-- <a href="/mountain/festival/modify" class="btn btn-outline-success">수정</a> --> 
 		    <!-- mountain/festival/list ==> {{root}/festival/list -->
+		    <div style="float:left; margin-right:10px;">
 		     <a href="${root}/festival/list" class="btn btn-outline-success">게시물 목록</a> 
+		     </div>
+		     
 		     
 		     <form action="${root}/festival/remove" method="post">
 		     <input type="hidden" name="no" value="${param.no }">
