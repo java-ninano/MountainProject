@@ -16,6 +16,8 @@ import org.zerock.domain.festival.Fcriteria;
 import org.zerock.domain.festival.FestivalVO;
 import org.zerock.domain.festival.FpageDTO;
 import org.zerock.service.festival.FestivalService;
+import org.zerock.service.mountain.MountainService;
+import org.zerock.domain.mountain.MnameVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -27,12 +29,16 @@ import lombok.extern.log4j.Log4j;
 public class FestivalController {
 
 	private FestivalService service;
+	private MountainService mountainService;
 	
 	// 등록
 	@PostMapping("/register")
-	public String register(FestivalVO festival, RedirectAttributes rttr, Model model,MultipartFile file) {
+	public String register(FestivalVO festival, RedirectAttributes rttr, MultipartFile file) {
 		//  RedirectAttributes에서 제공하는 메소드: addFlashAttribute() -> 리다이렉트 이후 소멸
 		service.register(festival);
+		
+		
+//	임시mountainService.register(festival);
 		/*
 		//FileUpload
         if(file !=null) {
@@ -48,8 +54,9 @@ public class FestivalController {
 	}
 	
 	@GetMapping("/register")
-	public void register(@ModelAttribute("cri") Fcriteria cri) {
-		
+	public void register(@ModelAttribute("cri") Fcriteria cri, Model model) {
+		List<MnameVO> list = mountainService.getMnameList();
+		model.addAttribute("list",list);
 	}
 	
 	// 리스트

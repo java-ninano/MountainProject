@@ -47,7 +47,7 @@
 	<insert id="insert">
 		insert into festival (no, ename, description, month, mountain_no )
 		values(seq_festival.nextval, #{ename}, #{description}, #{month}, #{
-		mountain_no})
+		mountain_no}) 
 	</insert>
 
 	<!-- 게시글 SelectKey -->
@@ -98,6 +98,5 @@
 		WHERE no= #{no}
 
 	</select>
-
 
 </mapper>

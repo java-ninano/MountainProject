@@ -20,6 +20,14 @@
 <script src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" data-auto-replace-svg="nest"></script>
 
 <title>Insert title here</title>
+<script>
+$(document).ready(function() {
+	$("#register-select1").change(function() {
+		var value = $('option:selected', this).attr("data-no")
+		$("#register-select2").val(value);
+	});
+});
+</script>
 </head>
 <body>
 <u:topNav/>
@@ -36,14 +44,41 @@
                  
                  <div class="form-group">
                <label for="input1">산 이름 </label>
-               <select name="ename" class="custom-select my-1 mr-sm-2 bd-highlight" id="input1" required/><br/>
-                            <option>북한산</option>
+               
+               
+            <!--   <select name="ename"
+							class="custom-select my-1 mr-sm-2 bd-highlight"
+							id="input1">
+							<option>북한산</option>
 							<option>도봉산</option>
 							<option>수락산</option>
 							<option>인왕산</option>
 							<option>아차산</option>
 							<option>관악산</option>
-                 </select>
+						</select> -->
+<%--
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  	<select name="ename">
+	  	<c:forEach items="${list}" var="MnameVO">
+	  		<option class="dropdown-item" value="${MnameVO.ename }">${MnameVO.ename }</option>
+	    </c:forEach>
+  	</select>
+  </div>
+</div>
+ --%>		
+ 
+<select name="ename" class="custom-select my-1 mr-sm-2 bd-highlight" id='register-select1'>
+  	<c:forEach items="${list}" var="MnameVO" >
+  		<option class="dropdown-item" value="${MnameVO.mname }" data-no="${MnameVO.no }"> ${MnameVO.mname }</option>
+    </c:forEach>
+</select>				
+						
+			 
+        
                  </div>
                  
                  <div class="form-group">
@@ -61,27 +96,52 @@
                  
                  <div class="form-group">
                <label for=input4>축제가 있는 달</label>
-               <select name="month" class="custom-select my-1 mr-sm-2 bd-highlight" id="input4" required/><br/>
-                            <option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-							<option>9</option>
-							<option>10</option>
-							<option>11</option>
-							<option>12</option>
-                 </select>
+               <select name="month" class="custom-select my-1 mr-sm-2 bd-highlight" id="input4">
+                             <option>1</option>
+                             <option>2</option>
+                             <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+            
+               </select>
+              
                   </div>
-                    <!-- 산 번호를 어찌 읽어 오지?.... --> 
+                    <!-- 산 번호를 어찌 읽어 오지?.... 
         <div class="form-group">
-               <label>산 번호 </label>
-              <input hidden="hidden" name="${mountain_no }" class="custom-select my-1 mr-sm-2 bd-highlight" id="input4" required/><br/>
-                  </div>
-                 
+               <label for="input4">산 번호 </label>
+        <!--       <select name=" mountain_no"
+							class="custom-select my-1 mr-sm-2 bd-highlight"
+							id="input4">
+							<option> 291</option>
+							<option> 41</option>
+							<option> 44</option>
+							<option> 294</option>
+							<option> 297 </option>
+							<option> 61</option>
+						</select> -->
+						 <label for="input2">산 번호 </label>
+						<select name="mountain_no" class="custom-select my-1 mr-sm-2 bd-highlight" id="register-select2">
+  	<c:forEach items="${list}" var="MnameVO">
+  		<option class="dropdown-item" value="${MnameVO.no }">${MnameVO.no }</option>
+    </c:forEach>
+</select>				
+				
+				
+						
+		<%-- 		<c:forEach items="${list}" var="MnameVO">
+         	 <tr>
+          		<td>${MnameVO.no }</td> 
+            </tr>
+        </c:forEach>
+         --%>
+        
                    <p>
                  <a href="/mountain/festival/list">게시물 목록</a> <br/>
                  <!-- <a href="/mountain/festival/register">게시물 작성</a> -->
@@ -90,9 +150,11 @@
                  
                  	<button type="submit" class="btn btn-primary">Submit</button>
                  	  </form>
+                 	   </div> 
                  </div>
 		</div>
-	</div>
+	
+ 
 
 </body>
 </html>	

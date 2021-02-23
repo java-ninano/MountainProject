@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j;
 public class FestivalServiceImpl implements FestivalService{
 
 	private FestivalMapper mapper;
-
+	
 	@Override
 	public void register(FestivalVO festival) {
 		mapper.insertSelectKey(festival);

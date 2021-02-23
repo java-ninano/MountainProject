@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.zerock.domain.festival.Fcriteria;
 import org.zerock.domain.festival.FestivalVO;
-import org.zerock.domain.mountain.MountainVO;
+import org.zerock.domain.mountain.MnameVO;
 
 
 public interface FestivalMapper {
