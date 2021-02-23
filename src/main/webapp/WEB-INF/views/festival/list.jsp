@@ -54,6 +54,7 @@ $(document).ready(function() {
 	/*
 	var actionForm = $("#actionForm");
 	$(".pagination a").click(function(e) {
+		// 페이지네이션을 클릭하는 이벤트 발생후의 모든것 prevent
 		e.preventDefault();
 		
 		actionForm.find("[name='pageNum']").val($(this).attr('href'));
