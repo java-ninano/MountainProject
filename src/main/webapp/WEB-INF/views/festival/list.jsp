@@ -130,7 +130,7 @@ $(document).ready(function() {
            
             </tr>
         </c:forEach>
-                       
+                        
       </tbody>
       <a href="/mountain/festival/register" class="btn btn-outline-success">게시물 작성</a>
     </table>				
