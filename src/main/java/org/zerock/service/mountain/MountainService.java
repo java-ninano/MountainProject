@@ -2,6 +2,8 @@ package org.zerock.service.mountain;
 
 import java.util.List;
 
+import org.zerock.domain.festival.Fcriteria;
+import org.zerock.domain.festival.FestivalVO;
 import org.zerock.domain.mountain.ConqStickerVO;
 import org.zerock.domain.mountain.MCriteria;
 import org.zerock.domain.mountain.MnameVO;
